@@ -1,0 +1,16 @@
+/.idea/
+/.sass-cache/
+/css/
+/doc/
+/node_modules/
+/lib/keigai.map
+/lib/keigai.min.js
+/src/
+/test/
+/sass/
+.git
+.gitignore
+.jshintrc
+.travis.yml
+docstrap.json
+Gruntfile.js

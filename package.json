@@ -1,0 +1,48 @@
+{
+  "name": "retsu",
+  "description": "retsu is a lightweight Array library, providing familiar methods from ruby",
+  "version": "1.0.0",
+  "homepage": "http://avoidwork.github.io/retsu",
+  "author": {
+    "name": "Jason Mulligan",
+    "email": "jason.mulligan@avoidwork.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/avoidwork/retsu.git"
+  },
+  "bugs": {
+    "url": "https://github.com/avoidwork/retsu/issues"
+  },
+  "licenses": [
+    {
+      "type": "BSD-3",
+      "url": "https://raw.github.com/avoidwork/retsu/master/LICENSE"
+    }
+  ],
+  "main": "lib/retsu",
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-cli": "~0.1.6",
+    "grunt-exec": "~0.4",
+    "grunt-sed": "~0.1",
+    "grunt-contrib-concat": "~0.1.3",
+    "grunt-contrib-jshint": "~0.1",
+    "grunt-contrib-nodeunit": "~0.1.2",
+    "grunt-contrib-watch": "~0.2",
+    "grunt-jsdoc": "~0.5.1",
+    "ink-docstrap" : "~0.3.0"
+  },
+  "keywords": [
+    "array",
+    "utility",
+    "ruby"
+  ]
+}
