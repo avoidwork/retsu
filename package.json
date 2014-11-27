@@ -1,6 +1,6 @@
 {
   "name": "retsu",
-  "description": "retsu is a lightweight Array library, providing familiar methods from ruby",
+  "description": "retsu is an Array micro library focused on speed",
   "version": "1.0.0",
   "homepage": "http://avoidwork.github.io/retsu",
   "author": {

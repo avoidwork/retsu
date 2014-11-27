@@ -1,6 +1,6 @@
 # retsu
 
-retsu is a lightweight Array library, providing familiar methods.
+retsu is an Array micro library focused on speed.
 
 [![build status](https://secure.travis-ci.org/avoidwork/retsu.svg)](http://travis-ci.org/avoidwork/retsu)
 
