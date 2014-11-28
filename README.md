@@ -175,5 +175,5 @@ Returns an Array of unique indices of `obj`
 #### variance(obj)
 Finds the variance of an Array
 
-#### zip
-Converts any arguments to Arrays, then merges elements of `obj` with corresponding elements from each argument
+#### zip(obj, args)
+Converts `args` to Array, then merges elements of `obj` with corresponding elements from each argument
