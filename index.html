@@ -1,0 +1,329 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>retsu by avoidwork</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>retsu</h1>
+        <p>Array micro library focused on speed</p>
+
+        <p class="view"><a href="https://github.com/avoidwork/retsu">View the Project on GitHub <small>avoidwork/retsu</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/avoidwork/retsu/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/avoidwork/retsu/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/avoidwork/retsu">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h2>
+<a id="api" class="anchor" href="#api" aria-hidden="true"><span class="octicon octicon-link"></span></a>API</h2>
+
+<p>Examples are provided with the included documentation, found in <code>./doc</code>.</p>
+
+<h4>
+<a id="addobj-arg" class="anchor" href="#addobj-arg" aria-hidden="true"><span class="octicon octicon-link"></span></a>add(obj, arg)</h4>
+
+<p>Adds <code>arg</code> to <code>obj</code> if it is not found in <code>obj</code></p>
+
+<h4>
+<a id="binindexobj-arg" class="anchor" href="#binindexobj-arg" aria-hidden="true"><span class="octicon octicon-link"></span></a>binIndex(obj, arg)</h4>
+
+<p>Performs a binary search on <code>obj</code> (must be sorted) for <code>arg</code></p>
+
+<h4>
+<a id="castobj-keys" class="anchor" href="#castobj-keys" aria-hidden="true"><span class="octicon octicon-link"></span></a>cast(obj[, keys])</h4>
+
+<p>Returns an Object ( NodeList, etc. ) as an Array; if <code>keys</code> is true you will get the keys of the Object</p>
+
+<h4>
+<a id="chunkobj-size" class="anchor" href="#chunkobj-size" aria-hidden="true"><span class="octicon octicon-link"></span></a>chunk(obj, size)</h4>
+
+<p>Transforms an Array to a 2D Array of chunks</p>
+
+<h4>
+<a id="clearobj" class="anchor" href="#clearobj" aria-hidden="true"><span class="octicon octicon-link"></span></a>clear(obj)</h4>
+
+<p>Clears an Array without destroying it</p>
+
+<h4>
+<a id="cloneobj" class="anchor" href="#cloneobj" aria-hidden="true"><span class="octicon octicon-link"></span></a>clone(obj)</h4>
+
+<p>Shallow clones an Array</p>
+
+<h4>
+<a id="containsobj-arg" class="anchor" href="#containsobj-arg" aria-hidden="true"><span class="octicon octicon-link"></span></a>contains(obj, arg)</h4>
+
+<p>Determines if obj contains arg</p>
+
+<h4>
+<a id="collectobj-fn" class="anchor" href="#collectobj-fn" aria-hidden="true"><span class="octicon octicon-link"></span></a>collect(obj, fn)</h4>
+
+<p>Creates a new Array of the result of <code>fn</code> executed against every index of <code>obj</code></p>
+
+<h4>
+<a id="compactobj-diff" class="anchor" href="#compactobj-diff" aria-hidden="true"><span class="octicon octicon-link"></span></a>compact(obj[, diff])</h4>
+
+<p>Compacts a Array by removing <code>null</code> or <code>undefined</code> indices; returns <code>null</code> if <code>diff</code> is <code>true</code> and there is no difference</p>
+
+<h4>
+<a id="countobj-arg" class="anchor" href="#countobj-arg" aria-hidden="true"><span class="octicon octicon-link"></span></a>count(obj, arg)</h4>
+
+<p>Counts the occurrence of <code>arg</code> in <code>obj</code></p>
+
+<h4>
+<a id="diffobj1-obj2" class="anchor" href="#diffobj1-obj2" aria-hidden="true"><span class="octicon octicon-link"></span></a>diff(obj1, obj2)</h4>
+
+<p>Finds the difference between two Arrays</p>
+
+<h4>
+<a id="eachobj-fn" class="anchor" href="#eachobj-fn" aria-hidden="true"><span class="octicon octicon-link"></span></a>each(obj, fn)</h4>
+
+<p>Iterates <code>obj</code> and executes <code>fn</code> with arguments [<code>value</code>, <code>index</code>]; returning <code>false</code> from <code>fn</code> halts iteration</p>
+
+<h4>
+<a id="eachreverseobj-fn" class="anchor" href="#eachreverseobj-fn" aria-hidden="true"><span class="octicon octicon-link"></span></a>eachReverse(obj, fn)</h4>
+
+<p>Like <code>each()</code>, but in reverse</p>
+
+<h4>
+<a id="emptyobj" class="anchor" href="#emptyobj" aria-hidden="true"><span class="octicon octicon-link"></span></a>empty(obj)</h4>
+
+<p>Determines if an Array is empty</p>
+
+<h4>
+<a id="equalobj1-obj2" class="anchor" href="#equalobj1-obj2" aria-hidden="true"><span class="octicon octicon-link"></span></a>equal(obj1, obj2)</h4>
+
+<p>Determines if two Arrays are equal</p>
+
+<h4>
+<a id="fillobj-arg-start-offset" class="anchor" href="#fillobj-arg-start-offset" aria-hidden="true"><span class="octicon octicon-link"></span></a>fill(obj, arg[, start, offset])</h4>
+
+<p>Fills <code>obj</code> with the evalution of <code>arg</code>, optionally from <code>start</code> to <code>offset</code></p>
+
+<h4>
+<a id="firstobj" class="anchor" href="#firstobj" aria-hidden="true"><span class="octicon octicon-link"></span></a>first(obj)</h4>
+
+<p>Returns the first index</p>
+
+<h4>
+<a id="flatobj" class="anchor" href="#flatobj" aria-hidden="true"><span class="octicon octicon-link"></span></a>flat(obj)</h4>
+
+<p>Flattens a 2D Array</p>
+
+<h4>
+<a id="foreachobj-fn" class="anchor" href="#foreachobj-fn" aria-hidden="true"><span class="octicon octicon-link"></span></a>forEach(obj, fn)</h4>
+
+<p>Like <code>each()</code>, iterates <code>obj</code> and executes <code>fn</code> with arguments [<code>value</code>, <code>index</code>]; returning <code>false</code> from <code>fn</code> halts iteration</p>
+
+<h4>
+<a id="fromobjectobj" class="anchor" href="#fromobjectobj" aria-hidden="true"><span class="octicon octicon-link"></span></a>fromObject(obj)</h4>
+
+<p>Creates a 2D Array from an Object</p>
+
+<h4>
+<a id="indexobj-arg" class="anchor" href="#indexobj-arg" aria-hidden="true"><span class="octicon octicon-link"></span></a>index(obj, arg)</h4>
+
+<p>Facade of <code>indexOf()</code></p>
+
+<h4>
+<a id="indexedobj" class="anchor" href="#indexedobj" aria-hidden="true"><span class="octicon octicon-link"></span></a>indexed(obj)</h4>
+
+<p>Returns an Associative Array as an Indexed Array</p>
+
+<h4>
+<a id="intersectobj1-obj2" class="anchor" href="#intersectobj1-obj2" aria-hidden="true"><span class="octicon octicon-link"></span></a>intersect(obj1, obj2)</h4>
+
+<p>Finds the intersections between two Arrays</p>
+
+<h4>
+<a id="keepifobj-fn" class="anchor" href="#keepifobj-fn" aria-hidden="true"><span class="octicon octicon-link"></span></a>keepIf(obj, fn)</h4>
+
+<p>Resizes <code>obj</code> by keeping every index which <code>fn</code> evaluates to <code>true</code></p>
+
+<h4>
+<a id="keysobj" class="anchor" href="#keysobj" aria-hidden="true"><span class="octicon octicon-link"></span></a>keys(obj)</h4>
+
+<p>Returns the keys in an Associative Array, e.g. an Object</p>
+
+<h4>
+<a id="keysortobj-clause" class="anchor" href="#keysortobj-clause" aria-hidden="true"><span class="octicon octicon-link"></span></a>keySort(obj, clause)</h4>
+
+<p>Sorts an Array based on key values, like an SQL ORDER BY clause</p>
+
+<h4>
+<a id="lastobj-offset" class="anchor" href="#lastobj-offset" aria-hidden="true"><span class="octicon octicon-link"></span></a>last(obj[, offset])</h4>
+
+<p>Returns the last index of the Array, with an optional <code>offset</code> from the end to retrieve a range</p>
+
+<h4>
+<a id="limitobj-start-offset" class="anchor" href="#limitobj-start-offset" aria-hidden="true"><span class="octicon octicon-link"></span></a>limit(obj, start, offset)</h4>
+
+<p>Returns a limited range of indices from the Array</p>
+
+<h4>
+<a id="maxobj" class="anchor" href="#maxobj" aria-hidden="true"><span class="octicon octicon-link"></span></a>max(obj)</h4>
+
+<p>Finds the maximum value in an Array</p>
+
+<h4>
+<a id="meanobj" class="anchor" href="#meanobj" aria-hidden="true"><span class="octicon octicon-link"></span></a>mean(obj)</h4>
+
+<p>Finds the mean of an Array</p>
+
+<h4>
+<a id="medianobj" class="anchor" href="#medianobj" aria-hidden="true"><span class="octicon octicon-link"></span></a>median(obj)</h4>
+
+<p>Finds the median value of an Array</p>
+
+<h4>
+<a id="mergeobj1-obj2" class="anchor" href="#mergeobj1-obj2" aria-hidden="true"><span class="octicon octicon-link"></span></a>merge(obj1, obj2)</h4>
+
+<p>Merges <code>obj2</code> into <code>obj1</code>, excluding duplicate indices</p>
+
+<h4>
+<a id="minobj" class="anchor" href="#minobj" aria-hidden="true"><span class="octicon octicon-link"></span></a>min(obj)</h4>
+
+<p>Finds the minimum value in an Array</p>
+
+<h4>
+<a id="mingleobj1-obj2" class="anchor" href="#mingleobj1-obj2" aria-hidden="true"><span class="octicon octicon-link"></span></a>mingle(obj1, obj2)</h4>
+
+<p>Mingles Arrays and returns a 2D Array, corresponding index positions are paired</p>
+
+<h4>
+<a id="modeobj" class="anchor" href="#modeobj" aria-hidden="true"><span class="octicon octicon-link"></span></a>mode(obj)</h4>
+
+<p>Finds the mode value of an Array</p>
+
+<h4>
+<a id="rangeobj" class="anchor" href="#rangeobj" aria-hidden="true"><span class="octicon octicon-link"></span></a>range(obj)</h4>
+
+<p>Finds the range of the Array</p>
+
+<h4>
+<a id="rassocobj-arg" class="anchor" href="#rassocobj-arg" aria-hidden="true"><span class="octicon octicon-link"></span></a>rassoc(obj, arg)</h4>
+
+<p>Searches a 2D Array <code>obj</code> for the first match of <code>arg</code> as a second index</p>
+
+<h4>
+<a id="rejectobj-fn" class="anchor" href="#rejectobj-fn" aria-hidden="true"><span class="octicon octicon-link"></span></a>reject(obj, fn)</h4>
+
+<p>Returns Array containing the items in <code>obj</code> for which <code>fn</code> is not true</p>
+
+<h4>
+<a id="removeobj-start-end" class="anchor" href="#removeobj-start-end" aria-hidden="true"><span class="octicon octicon-link"></span></a>remove(obj, start, end)</h4>
+
+<p>Removes indices from an Array without recreating it</p>
+
+<h4>
+<a id="removeifobj-fn" class="anchor" href="#removeifobj-fn" aria-hidden="true"><span class="octicon octicon-link"></span></a>removeIf(obj, fn)</h4>
+
+<p>Deletes every index of <code>obj</code> for which <code>fn</code> evaluates to true</p>
+
+<h4>
+<a id="removewhileobj-fn" class="anchor" href="#removewhileobj-fn" aria-hidden="true"><span class="octicon octicon-link"></span></a>removeWhile(obj, fn)</h4>
+
+<p>Deletes indices of <code>obj</code> until <code>fn</code> evaluates to false</p>
+
+<h4>
+<a id="replaceobj1-obj2" class="anchor" href="#replaceobj1-obj2" aria-hidden="true"><span class="octicon octicon-link"></span></a>replace(obj1, obj2)</h4>
+
+<p>Replaces the contents of <code>obj1</code> with <code>obj2</code></p>
+
+<h4>
+<a id="restobj-offset" class="anchor" href="#restobj-offset" aria-hidden="true"><span class="octicon octicon-link"></span></a>rest(obj[, offset])</h4>
+
+<p>Returns the "rest" of <code>obj</code>, <code>offset</code> defaults to 1</p>
+
+<h4>
+<a id="rindexobj-arg" class="anchor" href="#rindexobj-arg" aria-hidden="true"><span class="octicon octicon-link"></span></a>rindex(obj, arg)</h4>
+
+<p>Finds the last index of <code>arg</code> in <code>obj</code></p>
+
+<h4>
+<a id="rotateobj-arg" class="anchor" href="#rotateobj-arg" aria-hidden="true"><span class="octicon octicon-link"></span></a>rotate(obj, arg)</h4>
+
+<p>Returns new Array with <code>arg</code> moved to the first index</p>
+
+<h4>
+<a id="seriesstart-end-offset" class="anchor" href="#seriesstart-end-offset" aria-hidden="true"><span class="octicon octicon-link"></span></a>series(start, end[, offset])</h4>
+
+<p>Generates a series Array</p>
+
+<h4>
+<a id="sort" class="anchor" href="#sort" aria-hidden="true"><span class="octicon octicon-link"></span></a>sort()</h4>
+
+<p>Sorts the Array by parsing values, to be used with <code>[].sort()</code></p>
+
+<h4>
+<a id="sortedobj" class="anchor" href="#sortedobj" aria-hidden="true"><span class="octicon octicon-link"></span></a>sorted(obj)</h4>
+
+<p>Sorts <code>obj</code> using <code>sort</code></p>
+
+<h4>
+<a id="splitobj-arg" class="anchor" href="#splitobj-arg" aria-hidden="true"><span class="octicon octicon-link"></span></a>split(obj, arg)</h4>
+
+<p>Splits an Array by divisor <code>arg</code>, e.g. <code>retsu.split(new Array(100), 21)</code></p>
+
+<h4>
+<a id="stddevobj" class="anchor" href="#stddevobj" aria-hidden="true"><span class="octicon octicon-link"></span></a>stddev(obj)</h4>
+
+<p>Finds the standard deviation of an Array</p>
+
+<h4>
+<a id="sumobj" class="anchor" href="#sumobj" aria-hidden="true"><span class="octicon octicon-link"></span></a>sum(obj)</h4>
+
+<p>Gets the summation of an Array</p>
+
+<h4>
+<a id="takeobj-n" class="anchor" href="#takeobj-n" aria-hidden="true"><span class="octicon octicon-link"></span></a>take(obj, n)</h4>
+
+<p>Takes the first <code>n</code> indices from <code>obj</code></p>
+
+<h4>
+<a id="toobjectobj" class="anchor" href="#toobjectobj" aria-hidden="true"><span class="octicon octicon-link"></span></a>toObject(obj)</h4>
+
+<p>Casts an Array to Object</p>
+
+<h4>
+<a id="totalobj" class="anchor" href="#totalobj" aria-hidden="true"><span class="octicon octicon-link"></span></a>total(obj)</h4>
+
+<p>Gets the total keys in an Array</p>
+
+<h4>
+<a id="uniqueobj" class="anchor" href="#uniqueobj" aria-hidden="true"><span class="octicon octicon-link"></span></a>unique(obj)</h4>
+
+<p>Returns an Array of unique indices of <code>obj</code></p>
+
+<h4>
+<a id="varianceobj" class="anchor" href="#varianceobj" aria-hidden="true"><span class="octicon octicon-link"></span></a>variance(obj)</h4>
+
+<p>Finds the variance of an Array</p>
+
+<h4>
+<a id="zip" class="anchor" href="#zip" aria-hidden="true"><span class="octicon octicon-link"></span></a>zip</h4>
+
+<p>Converts any arguments to Arrays, then merges elements of <code>obj</code> with corresponding elements from each argument</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/avoidwork">avoidwork</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
