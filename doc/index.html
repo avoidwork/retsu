@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>keigai Index</title>
+	<title>retsu Index</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -19,7 +19,7 @@
 <div class="container-fluid">
 	<div class="navbar navbar-fixed-top ">
 		<div class="navbar-inner">
-			<a class="brand" href="index.html">keigai</a>
+			<a class="brand" href="index.html">retsu</a>
 			<ul class="nav">
 				
 				<li class="dropdown">
@@ -88,66 +88,124 @@
 
     <section>
         <article><h1>retsu</h1>
-<p>retsu is a lightweight Array library, providing familiar methods from ruby.</p>
+<p>retsu is an Array micro library focused on speed.</p>
 <p><a href="http://travis-ci.org/avoidwork/retsu"><img src="https://secure.travis-ci.org/avoidwork/retsu.svg" alt="build status"></a></p>
 <h2>API</h2>
-<h4>add</h4>
-<h4>binIndex</h4>
-<h4>cast</h4>
-<h4>chunk</h4>
-<h4>clear</h4>
-<h4>clone</h4>
-<h4>contains</h4>
-<h4>collect</h4>
-<h4>compact</h4>
-<h4>count</h4>
-<h4>diff</h4>
-<h4>each</h4>
-<h4>eachReverse</h4>
-<h4>empty</h4>
-<h4>equal</h4>
-<h4>fill</h4>
-<h4>first</h4>
-<h4>flat</h4>
-<h4>forEach</h4>
-<h4>fromObject</h4>
-<h4>index</h4>
-<h4>indexed</h4>
-<h4>intersect</h4>
-<h4>keepIf</h4>
-<h4>keys</h4>
-<h4>keySort</h4>
-<h4>last</h4>
-<h4>limit</h4>
-<h4>max</h4>
-<h4>mean</h4>
-<h4>median</h4>
-<h4>merge</h4>
-<h4>min</h4>
-<h4>mingle</h4>
-<h4>mode</h4>
-<h4>range</h4>
-<h4>rassoc</h4>
-<h4>reject</h4>
-<h4>remove</h4>
-<h4>removeIf</h4>
-<h4>removeWhile</h4>
-<h4>replace</h4>
-<h4>rest</h4>
-<h4>rindex</h4>
-<h4>rotate</h4>
-<h4>series</h4>
-<h4>sort</h4>
-<h4>sorted</h4>
-<h4>split</h4>
-<h4>stddev</h4>
-<h4>sum</h4>
-<h4>take</h4>
-<h4>toObject</h4>
-<h4>total</h4>
-<h4>unique</h4>
-<h4>variance</h4>
-<h4>zip</h4></article>
+<p>Examples are provided with the included documentation, found in <code>./doc</code>.</p>
+<h4>add(obj, arg)</h4>
+<p>Adds <code>arg</code> to <code>obj</code> if it is not found in <code>obj</code></p>
+<h4>binIndex(obj, arg)</h4>
+<p>Performs a binary search on <code>obj</code> (must be sorted) for <code>arg</code></p>
+<h4>cast(obj[, keys])</h4>
+<p>Returns an Object ( NodeList, etc. ) as an Array; if <code>keys</code> is true you will get the keys of the Object</p>
+<h4>chunk(obj, size)</h4>
+<p>Transforms an Array to a 2D Array of chunks</p>
+<h4>clear(obj)</h4>
+<p>Clears an Array without destroying it</p>
+<h4>clone(obj)</h4>
+<p>Shallow clones an Array</p>
+<h4>contains(obj, arg)</h4>
+<p>Determines if obj contains arg</p>
+<h4>collect(obj, fn)</h4>
+<p>Creates a new Array of the result of <code>fn</code> executed against every index of <code>obj</code></p>
+<h4>compact(obj[, diff])</h4>
+<p>Compacts a Array by removing <code>null</code> or <code>undefined</code> indices; returns <code>null</code> if <code>diff</code> is <code>true</code> and there is no difference</p>
+<h4>count(obj, arg)</h4>
+<p>Counts the occurrence of <code>arg</code> in <code>obj</code></p>
+<h4>diff(obj1, obj2)</h4>
+<p>Finds the difference between two Arrays</p>
+<h4>each(obj, fn)</h4>
+<p>Iterates <code>obj</code> and executes <code>fn</code> with arguments [<code>value</code>, <code>index</code>]; returning <code>false</code> from <code>fn</code> halts iteration</p>
+<h4>eachReverse(obj, fn)</h4>
+<p>Like <code>each()</code>, but in reverse</p>
+<h4>empty(obj)</h4>
+<p>Determines if an Array is empty</p>
+<h4>equal(obj1, obj2)</h4>
+<p>Determines if two Arrays are equal</p>
+<h4>fill(obj, arg[, start, offset])</h4>
+<p>Fills <code>obj</code> with the evalution of <code>arg</code>, optionally from <code>start</code> to <code>offset</code></p>
+<h4>first(obj)</h4>
+<p>Returns the first index</p>
+<h4>flat(obj)</h4>
+<p>Flattens a 2D Array</p>
+<h4>forEach(obj, fn)</h4>
+<p>Like <code>each()</code>, iterates <code>obj</code> and executes <code>fn</code> with arguments [<code>value</code>, <code>index</code>]; returning <code>false</code> from <code>fn</code> halts iteration</p>
+<h4>fromObject(obj)</h4>
+<p>Creates a 2D Array from an Object</p>
+<h4>index(obj, arg)</h4>
+<p>Facade of <code>indexOf()</code></p>
+<h4>indexed(obj)</h4>
+<p>Returns an Associative Array as an Indexed Array</p>
+<h4>intersect(obj1, obj2)</h4>
+<p>Finds the intersections between two Arrays</p>
+<h4>keepIf(obj, fn)</h4>
+<p>Resizes <code>obj</code> by keeping every index which <code>fn</code> evaluates to <code>true</code></p>
+<h4>keys(obj)</h4>
+<p>Returns the keys in an Associative Array, e.g. an Object</p>
+<h4>keySort(obj, clause)</h4>
+<p>Sorts an Array based on key values, like an SQL ORDER BY clause</p>
+<h4>last(obj[, offset])</h4>
+<p>Returns the last index of the Array, with an optional <code>offset</code> from the end to retrieve a range</p>
+<h4>limit(obj, start, offset)</h4>
+<p>Returns a limited range of indices from the Array</p>
+<h4>max(obj)</h4>
+<p>Finds the maximum value in an Array</p>
+<h4>mean(obj)</h4>
+<p>Finds the mean of an Array</p>
+<h4>median(obj)</h4>
+<p>Finds the median value of an Array</p>
+<h4>merge(obj1, obj2)</h4>
+<p>Merges <code>obj2</code> into <code>obj1</code>, excluding duplicate indices</p>
+<h4>min(obj)</h4>
+<p>Finds the minimum value in an Array</p>
+<h4>mingle(obj1, obj2)</h4>
+<p>Mingles Arrays and returns a 2D Array, corresponding index positions are paired</p>
+<h4>mode(obj)</h4>
+<p>Finds the mode value of an Array</p>
+<h4>range(obj)</h4>
+<p>Finds the range of the Array</p>
+<h4>rassoc(obj, arg)</h4>
+<p>Searches a 2D Array <code>obj</code> for the first match of <code>arg</code> as a second index</p>
+<h4>reject(obj, fn)</h4>
+<p>Returns Array containing the items in <code>obj</code> for which <code>fn</code> is not true</p>
+<h4>remove(obj, start, end)</h4>
+<p>Removes indices from an Array without recreating it</p>
+<h4>removeIf(obj, fn)</h4>
+<p>Deletes every index of <code>obj</code> for which <code>fn</code> evaluates to true</p>
+<h4>removeWhile(obj, fn)</h4>
+<p>Deletes indices of <code>obj</code> until <code>fn</code> evaluates to false</p>
+<h4>replace(obj1, obj2)</h4>
+<p>Replaces the contents of <code>obj1</code> with <code>obj2</code></p>
+<h4>rest(obj[, offset])</h4>
+<p>Returns the &quot;rest&quot; of <code>obj</code>, <code>offset</code> defaults to 1</p>
+<h4>rindex(obj, arg)</h4>
+<p>Finds the last index of <code>arg</code> in <code>obj</code></p>
+<h4>rotate(obj, arg)</h4>
+<p>Returns new Array with <code>arg</code> moved to the first index</p>
+<h4>series(start, end[, offset])</h4>
+<p>Generates a series Array</p>
+<h4>sort()</h4>
+<p>Sorts the Array by parsing values, to be used with <code>[].sort()</code></p>
+<h4>sorted(obj)</h4>
+<p>Sorts <code>obj</code> using <code>sort</code></p>
+<h4>split(obj, arg)</h4>
+<p>Splits an Array by divisor <code>arg</code>, e.g. <code>retsu.split(new Array(100), 21)</code></p>
+<h4>stddev(obj)</h4>
+<p>Finds the standard deviation of an Array</p>
+<h4>sum(obj)</h4>
+<p>Gets the summation of an Array</p>
+<h4>take(obj, n)</h4>
+<p>Takes the first <code>n</code> indices from <code>obj</code></p>
+<h4>toObject(obj)</h4>
+<p>Casts an Array to Object</p>
+<h4>total(obj)</h4>
+<p>Gets the total keys in an Array</p>
+<h4>unique(obj)</h4>
+<p>Returns an Array of unique indices of <code>obj</code></p>
+<h4>variance(obj)</h4>
+<p>Finds the variance of an Array</p>
+<h4>zip</h4>
+<p>Converts any arguments to Arrays, then merges elements of <code>obj</code> with corresponding elements from each argument</p></article>
     </section>
 
 
@@ -169,7 +227,7 @@
 					
 		<span class="jsdoc-message">
 		Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a>
-		on Thu Nov 27 2014 07:57:57 GMT-0500 (EST) using the <a href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
+		on Fri Nov 28 2014 08:11:41 GMT-0500 (EST) using the <a href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
 		</span>
 				</footer>
 			</div>

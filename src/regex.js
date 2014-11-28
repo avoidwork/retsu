@@ -1,5 +1,5 @@
 /**
- * Regex patterns used through keigai
+ * Regex patterns used through retsu
  *
  * `url` was authored by Diego Perini
  *

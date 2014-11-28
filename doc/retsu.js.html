@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>keigai Source: retsu.js</title>
+	<title>retsu Source: retsu.js</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -19,7 +19,7 @@
 <div class="container-fluid">
 	<div class="navbar navbar-fixed-top ">
 		<div class="navbar-inner">
-			<a class="brand" href="index.html">keigai</a>
+			<a class="brand" href="index.html">retsu</a>
 			<ul class="nav">
 				
 				<li class="dropdown">
@@ -68,7 +68,7 @@
     <section>
         <article>
             <pre class="sunlight-highlight-javascript linenums">/**
- * retsu is a lightweight Array library, providing familiar methods from ruby
+ * Array micro library focused on speed
  *
  * @author Jason Mulligan &lt;jason.mulligan@avoidwork.com>
  * @copyright 2014 Jason Mulligan
@@ -110,7 +110,7 @@ var array = {
 	},
 
 	/**
-	 * Preforms a binary search on a sorted Array
+	 * Performs a binary search on a sorted Array
 	 *
 	 * @method binIndex
 	 * @memberOf array
@@ -211,7 +211,7 @@ var array = {
 	 * var myArray = [1, 2, 3, 4, 5];
 	 *
 	 * array.clear( myArray );
-	 * myArray.length; // 0
+	 * myarray.length; // 0
 	 */
 	clear : function ( obj ) {
 		return obj.length > 0 ? array.remove( obj, 0, obj.length ) : obj;
@@ -230,11 +230,11 @@ var array = {
 	 *
 	 * myArrayClone.push( 6 );
 	 *
-	 * myArray.length;      // 5
+	 * myarray.length;      // 5
 	 * myArrayClone.length; // 6
 	 */
 	clone : function ( obj ) {
-		return obj.slice();
+		return utility.clone( obj, true );
 	},
 
 	/**
@@ -616,7 +616,7 @@ var array = {
 	 * @example
 	 * var myArray = ["a", "b", "c"];
 	 *
-	 * myArray.prop = "d";
+	 * myarray.prop = "d";
 	 * array.indexed( myArray ); ["a", "b", "c", "d"];
 	 */
 	indexed : function ( obj ) {
@@ -630,7 +630,7 @@ var array = {
 	},
 
 	/**
-	 * Finds the intersections between obj1 and obj2
+	 * Finds the intersections between two Arrays
 	 *
 	 * @method intersect
 	 * @memberOf array
@@ -650,7 +650,7 @@ var array = {
 	},
 
 	/**
-	 * Keeps every element of `obj` for which `fn` evaluates to true
+	 * Resizes `obj` by keeping every index which `fn` evaluates to `true`
 	 *
 	 * @method keepIf
 	 * @memberOf array
@@ -664,12 +664,11 @@ var array = {
 	 * myArray[1]; // "c"
 	 */
 	keepIf : function ( obj, fn ) {
+		var result, remove;
+
 		if ( typeof fn != "function" ) {
 			throw new Error( label.invalidArguments );
 		}
-
-		var result = [],
-		    remove = [];
 
 		result = obj.filter( fn );
 		remove = array.diff( obj, result );
@@ -832,7 +831,7 @@ var array = {
 	},
 
 	/**
-	 * Finds the mean of an Array ( of numbers )
+	 * Finds the mean of an Array
 	 *
 	 * @method mean
 	 * @memberOf array
@@ -846,7 +845,7 @@ var array = {
 	},
 
 	/**
-	 * Finds the median value of an Array ( of numbers )
+	 * Finds the median value of an Array
 	 *
 	 * @method median
 	 * @memberOf array
@@ -865,7 +864,7 @@ var array = {
 	},
 
 	/**
-	 * Merges `arg` into `obj`, excluding duplicate indices
+	 * Merges `obj2` into `obj1`, excluding duplicate indices
 	 *
 	 * @method merge
 	 * @memberOf array
@@ -902,7 +901,7 @@ var array = {
 	},
 
 	/**
-	 * Mingles Arrays and returns a 2D Array
+	 * Mingles Arrays and returns a 2D Array, corresponding index positions are paired
 	 *
 	 * @method mingle
 	 * @memberOf array
@@ -973,7 +972,7 @@ var array = {
 	},
 
 	/**
-	 * Finds the range of the Array ( of numbers ) values
+	 * Finds the range of the Array
 	 *
 	 * @method range
 	 * @memberOf array
@@ -1012,7 +1011,7 @@ var array = {
 	},
 
 	/**
-	 * Returns Array containing the items in `obj` for which `fn()` is not true
+	 * Returns Array containing the items in `obj` for which `fn` is not true
 	 *
 	 * @method reject
 	 * @memberOf array
@@ -1063,7 +1062,7 @@ var array = {
 	},
 
 	/**
-	 * Deletes every element of `obj` for which `fn` evaluates to true
+	 * Deletes every index of `obj` for which `fn` evaluates to true
 	 *
 	 * @method removeIf
 	 * @memberOf array
@@ -1093,7 +1092,7 @@ var array = {
 	},
 
 	/**
-	 * Deletes elements of `obj` until `fn` evaluates to false
+	 * Deletes indices of `obj` until `fn` evaluates to false
 	 *
 	 * @method removeWhile
 	 * @memberOf array
@@ -1105,7 +1104,7 @@ var array = {
 	 *
 	 * array.removeWhile( myArray, function ( i ) { return /a|c/.test( i ); } );
 	 * myArray[0];     // "b"
-	 * myArray.length; // 2
+	 * myarray.length; // 2
 	 */
 	removeWhile : function ( obj, fn ) {
 		if ( typeof fn != "function" ) {
@@ -1131,7 +1130,7 @@ var array = {
 	},
 
 	/**
-	 * Replaces the contents of `obj` with `arg`
+	 * Replaces the contents of `obj1` with `obj2`
 	 *
 	 * @method replace
 	 * @memberOf array
@@ -1143,7 +1142,7 @@ var array = {
 	 *
 	 * array.replace( myArray, [true, false] );
 	 * myArray[0];     // true
-	 * myArray.length; // 2
+	 * myarray.length; // 2
 	 */
 	replace : function ( obj1, obj2 ) {
 		array.remove( obj1, 0, obj1.length );
@@ -1305,7 +1304,7 @@ var array = {
 	},
 
 	/**
-	 * Sorts `obj` using `array.sort`
+	 * Sorts `obj` using `sort`
 	 *
 	 * @method sorted
 	 * @memberOf array
@@ -1335,7 +1334,7 @@ var array = {
 	 *     results;
 	 *
 	 * while ( ++i &lt; 100 ) {
-	 *   myArray.push( i + 1 );
+	 *   myarray.push( i + 1 );
 	 * }
 	 *
 	 * results = array.split( myArray, 21 );
@@ -1381,7 +1380,7 @@ var array = {
 	},
 
 	/**
-	 * Finds the standard deviation of an Array ( of numbers )
+	 * Finds the standard deviation of an Array
 	 *
 	 * @method stddev
 	 * @memberOf array
@@ -1395,7 +1394,7 @@ var array = {
 	},
 
 	/**
-	 * Gets the summation of an Array of numbers
+	 * Gets the summation of an Array
 	 *
 	 * @method sum
 	 * @memberOf array
@@ -1462,7 +1461,7 @@ var array = {
 	 * @example
 	 * var myArray = [true, true, false];
 	 *
-	 * myArray.extra = true;
+	 * myarray.extra = true;
 	 * array.total( myArray ); // 4
 	 */
 	total : function ( obj ) {
@@ -1767,7 +1766,7 @@ var number = {
 };
 
 /**
- * Regex patterns used through keigai
+ * Regex patterns used through retsu
  *
  * `url` was authored by Diego Perini
  *
@@ -1896,7 +1895,7 @@ var utility = {
 	 * @return {Object}          Clone of obj
 	 * @example
 	 * var x = {a: true, b: false},
-	 *     y = utilityclone( x, true );
+	 *     y = utility.clone( x, true );
 	 *
 	 * y.a; // true
 	 */
@@ -2014,7 +2013,7 @@ var utility = {
 	 * @param  {Object} arg [Optional] Object for decoration
 	 * @return {Object}     Decorated obj
 	 * @example
-	 * var extendObj = utilityextend( someObj, {newProperty: value} );
+	 * var extendObj = utility.extend( someObj, {newProperty: value} );
 	 */
 	extend : function ( obj, arg ) {
 		var o;
@@ -2042,7 +2041,7 @@ var utility = {
 	 * @param  {Function} fn  Function to execute against properties
 	 * @return {Object}       Object
 	 * @example
-	 * utilityiterate( {...}, function ( value, key ) {
+	 * utility.iterate( {...}, function ( value, key ) {
 	 *   ...
 	 * } );
 	 */
@@ -2067,7 +2066,7 @@ var utility = {
 	 * @param  {String} target [Optional] Target console, default is "log"
 	 * @return {Undefined}     undefined
 	 * @example
-	 * utilitylog( "Something bad happened", "warn" );
+	 * utility.log( "Something bad happened", "warn" );
 	 */
 	log : function ( arg, target ) {
 		var ts, msg;
@@ -2090,7 +2089,7 @@ var utility = {
 	 * @example
 	 * var obj = {a: true};
 	 *
-	 * keigai.util.merge( obj, {b: false} )
+	 * util.merge( obj, {b: false} )
 	 * obj.b; // false
 	 */
 	merge : function ( obj, arg ) {
@@ -2122,7 +2121,7 @@ var utility = {
 	 * @param  {Boolean}  now Executes `fn` and then setup repetition, default is `true`
 	 * @return {String}       Timeout ID
 	 * @example
-	 * utilityrepeat( function () {
+	 * utility.repeat( function () {
 	 *   ...
 	 *
 	 *   // Cancelling repetition at some point in the future
@@ -2170,7 +2169,7 @@ var utility = {
 	 * @param  {Boolean} strip [Optional] Strips - from UUID
 	 * @return {String}        UUID
 	 * @example
-	 * var uuid4 = utilityuuid();
+	 * var uuid4 = utility.uuid();
 	 */
 	uuid : function ( strip ) {
 		var s = function () { return ( ( ( 1 + Math.random() ) * 0x10000 ) | 0 ).toString( 16 ).substring( 1 ); },
@@ -2323,7 +2322,7 @@ else {
 					
 		<span class="jsdoc-message">
 		Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a>
-		on Thu Nov 27 2014 07:57:57 GMT-0500 (EST) using the <a href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
+		on Fri Nov 28 2014 08:11:41 GMT-0500 (EST) using the <a href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
 		</span>
 				</footer>
 			</div>

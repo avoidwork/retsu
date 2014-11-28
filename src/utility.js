@@ -55,7 +55,7 @@ var utility = {
 	 * @return {Object}          Clone of obj
 	 * @example
 	 * var x = {a: true, b: false},
-	 *     y = utilityclone( x, true );
+	 *     y = utility.clone( x, true );
 	 *
 	 * y.a; // true
 	 */
@@ -173,7 +173,7 @@ var utility = {
 	 * @param  {Object} arg [Optional] Object for decoration
 	 * @return {Object}     Decorated obj
 	 * @example
-	 * var extendObj = utilityextend( someObj, {newProperty: value} );
+	 * var extendObj = utility.extend( someObj, {newProperty: value} );
 	 */
 	extend : function ( obj, arg ) {
 		var o;
@@ -201,7 +201,7 @@ var utility = {
 	 * @param  {Function} fn  Function to execute against properties
 	 * @return {Object}       Object
 	 * @example
-	 * utilityiterate( {...}, function ( value, key ) {
+	 * utility.iterate( {...}, function ( value, key ) {
 	 *   ...
 	 * } );
 	 */
@@ -226,7 +226,7 @@ var utility = {
 	 * @param  {String} target [Optional] Target console, default is "log"
 	 * @return {Undefined}     undefined
 	 * @example
-	 * utilitylog( "Something bad happened", "warn" );
+	 * utility.log( "Something bad happened", "warn" );
 	 */
 	log : function ( arg, target ) {
 		var ts, msg;
@@ -249,7 +249,7 @@ var utility = {
 	 * @example
 	 * var obj = {a: true};
 	 *
-	 * keigai.util.merge( obj, {b: false} )
+	 * util.merge( obj, {b: false} )
 	 * obj.b; // false
 	 */
 	merge : function ( obj, arg ) {
@@ -281,7 +281,7 @@ var utility = {
 	 * @param  {Boolean}  now Executes `fn` and then setup repetition, default is `true`
 	 * @return {String}       Timeout ID
 	 * @example
-	 * utilityrepeat( function () {
+	 * utility.repeat( function () {
 	 *   ...
 	 *
 	 *   // Cancelling repetition at some point in the future
@@ -329,7 +329,7 @@ var utility = {
 	 * @param  {Boolean} strip [Optional] Strips - from UUID
 	 * @return {String}        UUID
 	 * @example
-	 * var uuid4 = utilityuuid();
+	 * var uuid4 = utility.uuid();
 	 */
 	uuid : function ( strip ) {
 		var s = function () { return ( ( ( 1 + Math.random() ) * 0x10000 ) | 0 ).toString( 16 ).substring( 1 ); },

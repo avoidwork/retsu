@@ -21,26 +21,11 @@
 	"loopfunc": true,
 	"evil": true,
 	"globals": {
-		"localStorage": true,
-		"XMLHttpRequest": true,
-		"require": true,
-		"XDomainRequest": true,
 		"Document": true,
-		"Element": true,
-		"CustomEvent": true,
-		"Buffer": true,
+		"require": true,
 		"console": true,
 		"process": true,
 		"module": true,
-		"define": true,
-		"setImmediate": true,
-		"mongodb": true,
-		"format": true,
-		"Blob": true,
-		"Worker": true,
-		"postMessage": true,
-		"requestAnimationFrame": true,
-		"btoa": true,
-		"Promise": true
+		"define": true
 	}
 }

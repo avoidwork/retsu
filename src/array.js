@@ -25,7 +25,7 @@ var array = {
 	},
 
 	/**
-	 * Preforms a binary search on a sorted Array
+	 * Performs a binary search on a sorted Array
 	 *
 	 * @method binIndex
 	 * @memberOf array
@@ -126,7 +126,7 @@ var array = {
 	 * var myArray = [1, 2, 3, 4, 5];
 	 *
 	 * array.clear( myArray );
-	 * myArray.length; // 0
+	 * myarray.length; // 0
 	 */
 	clear : function ( obj ) {
 		return obj.length > 0 ? array.remove( obj, 0, obj.length ) : obj;
@@ -145,11 +145,11 @@ var array = {
 	 *
 	 * myArrayClone.push( 6 );
 	 *
-	 * myArray.length;      // 5
+	 * myarray.length;      // 5
 	 * myArrayClone.length; // 6
 	 */
 	clone : function ( obj ) {
-		return obj.slice();
+		return utility.clone( obj, true );
 	},
 
 	/**
@@ -531,7 +531,7 @@ var array = {
 	 * @example
 	 * var myArray = ["a", "b", "c"];
 	 *
-	 * myArray.prop = "d";
+	 * myarray.prop = "d";
 	 * array.indexed( myArray ); ["a", "b", "c", "d"];
 	 */
 	indexed : function ( obj ) {
@@ -545,7 +545,7 @@ var array = {
 	},
 
 	/**
-	 * Finds the intersections between obj1 and obj2
+	 * Finds the intersections between two Arrays
 	 *
 	 * @method intersect
 	 * @memberOf array
@@ -565,7 +565,7 @@ var array = {
 	},
 
 	/**
-	 * Keeps every element of `obj` for which `fn` evaluates to true
+	 * Resizes `obj` by keeping every index which `fn` evaluates to `true`
 	 *
 	 * @method keepIf
 	 * @memberOf array
@@ -579,12 +579,11 @@ var array = {
 	 * myArray[1]; // "c"
 	 */
 	keepIf : function ( obj, fn ) {
+		var result, remove;
+
 		if ( typeof fn != "function" ) {
 			throw new Error( label.invalidArguments );
 		}
-
-		var result = [],
-		    remove = [];
 
 		result = obj.filter( fn );
 		remove = array.diff( obj, result );
@@ -747,7 +746,7 @@ var array = {
 	},
 
 	/**
-	 * Finds the mean of an Array ( of numbers )
+	 * Finds the mean of an Array
 	 *
 	 * @method mean
 	 * @memberOf array
@@ -761,7 +760,7 @@ var array = {
 	},
 
 	/**
-	 * Finds the median value of an Array ( of numbers )
+	 * Finds the median value of an Array
 	 *
 	 * @method median
 	 * @memberOf array
@@ -780,7 +779,7 @@ var array = {
 	},
 
 	/**
-	 * Merges `arg` into `obj`, excluding duplicate indices
+	 * Merges `obj2` into `obj1`, excluding duplicate indices
 	 *
 	 * @method merge
 	 * @memberOf array
@@ -817,7 +816,7 @@ var array = {
 	},
 
 	/**
-	 * Mingles Arrays and returns a 2D Array
+	 * Mingles Arrays and returns a 2D Array, corresponding index positions are paired
 	 *
 	 * @method mingle
 	 * @memberOf array
@@ -888,7 +887,7 @@ var array = {
 	},
 
 	/**
-	 * Finds the range of the Array ( of numbers ) values
+	 * Finds the range of the Array
 	 *
 	 * @method range
 	 * @memberOf array
@@ -927,7 +926,7 @@ var array = {
 	},
 
 	/**
-	 * Returns Array containing the items in `obj` for which `fn()` is not true
+	 * Returns Array containing the items in `obj` for which `fn` is not true
 	 *
 	 * @method reject
 	 * @memberOf array
@@ -978,7 +977,7 @@ var array = {
 	},
 
 	/**
-	 * Deletes every element of `obj` for which `fn` evaluates to true
+	 * Deletes every index of `obj` for which `fn` evaluates to true
 	 *
 	 * @method removeIf
 	 * @memberOf array
@@ -1008,7 +1007,7 @@ var array = {
 	},
 
 	/**
-	 * Deletes elements of `obj` until `fn` evaluates to false
+	 * Deletes indices of `obj` until `fn` evaluates to false
 	 *
 	 * @method removeWhile
 	 * @memberOf array
@@ -1020,7 +1019,7 @@ var array = {
 	 *
 	 * array.removeWhile( myArray, function ( i ) { return /a|c/.test( i ); } );
 	 * myArray[0];     // "b"
-	 * myArray.length; // 2
+	 * myarray.length; // 2
 	 */
 	removeWhile : function ( obj, fn ) {
 		if ( typeof fn != "function" ) {
@@ -1046,7 +1045,7 @@ var array = {
 	},
 
 	/**
-	 * Replaces the contents of `obj` with `arg`
+	 * Replaces the contents of `obj1` with `obj2`
 	 *
 	 * @method replace
 	 * @memberOf array
@@ -1058,7 +1057,7 @@ var array = {
 	 *
 	 * array.replace( myArray, [true, false] );
 	 * myArray[0];     // true
-	 * myArray.length; // 2
+	 * myarray.length; // 2
 	 */
 	replace : function ( obj1, obj2 ) {
 		array.remove( obj1, 0, obj1.length );
@@ -1220,7 +1219,7 @@ var array = {
 	},
 
 	/**
-	 * Sorts `obj` using `array.sort`
+	 * Sorts `obj` using `sort`
 	 *
 	 * @method sorted
 	 * @memberOf array
@@ -1250,7 +1249,7 @@ var array = {
 	 *     results;
 	 *
 	 * while ( ++i < 100 ) {
-	 *   myArray.push( i + 1 );
+	 *   myarray.push( i + 1 );
 	 * }
 	 *
 	 * results = array.split( myArray, 21 );
@@ -1296,7 +1295,7 @@ var array = {
 	},
 
 	/**
-	 * Finds the standard deviation of an Array ( of numbers )
+	 * Finds the standard deviation of an Array
 	 *
 	 * @method stddev
 	 * @memberOf array
@@ -1310,7 +1309,7 @@ var array = {
 	},
 
 	/**
-	 * Gets the summation of an Array of numbers
+	 * Gets the summation of an Array
 	 *
 	 * @method sum
 	 * @memberOf array
@@ -1377,7 +1376,7 @@ var array = {
 	 * @example
 	 * var myArray = [true, true, false];
 	 *
-	 * myArray.extra = true;
+	 * myarray.extra = true;
 	 * array.total( myArray ); // 4
 	 */
 	total : function ( obj ) {
