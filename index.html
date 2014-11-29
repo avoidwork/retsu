@@ -59,9 +59,9 @@
 <p>Clears an Array without destroying it</p>
 
 <h4>
-<a id="cloneobj" class="anchor" href="#cloneobj" aria-hidden="true"><span class="octicon octicon-link"></span></a>clone(obj)</h4>
+<a id="cloneobj-shallow" class="anchor" href="#cloneobj-shallow" aria-hidden="true"><span class="octicon octicon-link"></span></a>clone(obj[, shallow])</h4>
 
-<p>Shallow clones an Array</p>
+<p>Clones an Array, <code>shallow</code> defaults to <code>true</code></p>
 
 <h4>
 <a id="containsobj-arg" class="anchor" href="#containsobj-arg" aria-hidden="true"><span class="octicon octicon-link"></span></a>contains(obj, arg)</h4>
@@ -89,12 +89,12 @@
 <p>Finds the difference between two Arrays</p>
 
 <h4>
-<a id="eachobj-fn" class="anchor" href="#eachobj-fn" aria-hidden="true"><span class="octicon octicon-link"></span></a>each(obj, fn)</h4>
+<a id="eachobj-fn-async-size" class="anchor" href="#eachobj-fn-async-size" aria-hidden="true"><span class="octicon octicon-link"></span></a>each(obj, fn[, async, size])</h4>
 
 <p>Iterates <code>obj</code> and executes <code>fn</code> with arguments [<code>value</code>, <code>index</code>]; returning <code>false</code> from <code>fn</code> halts iteration</p>
 
 <h4>
-<a id="eachreverseobj-fn" class="anchor" href="#eachreverseobj-fn" aria-hidden="true"><span class="octicon octicon-link"></span></a>eachReverse(obj, fn)</h4>
+<a id="eachreverseobj-fn-async-size" class="anchor" href="#eachreverseobj-fn-async-size" aria-hidden="true"><span class="octicon octicon-link"></span></a>eachReverse(obj, fn[, async, size])</h4>
 
 <p>Like <code>each()</code>, but in reverse</p>
 
@@ -124,7 +124,7 @@
 <p>Flattens a 2D Array</p>
 
 <h4>
-<a id="foreachobj-fn" class="anchor" href="#foreachobj-fn" aria-hidden="true"><span class="octicon octicon-link"></span></a>forEach(obj, fn)</h4>
+<a id="foreachobj-fn-async-size" class="anchor" href="#foreachobj-fn-async-size" aria-hidden="true"><span class="octicon octicon-link"></span></a>forEach(obj, fn[, async, size])</h4>
 
 <p>Like <code>each()</code>, iterates <code>obj</code> and executes <code>fn</code> with arguments [<code>value</code>, <code>index</code>]; returning <code>false</code> from <code>fn</code> halts iteration</p>
 
