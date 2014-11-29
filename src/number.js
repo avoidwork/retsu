@@ -13,7 +13,7 @@ var number = {
 	 * @example
 	 * number.diff( -3, 8 ); // 11
 	 */
-	diff : function ( num1, num2 ) {
+	diff: function ( num1, num2 ) {
 		if ( isNaN( num1 ) || isNaN( num2 ) ) {
 			throw new Error( label.expectedNumber );
 		}
@@ -35,7 +35,7 @@ var number = {
 	 *   ...
 	 * }
 	 */
-	even : function ( arg ) {
+	even: function ( arg ) {
 		return arg % 2 === 0;
 	},
 
@@ -53,7 +53,7 @@ var number = {
 	 *   ...
 	 * }
 	 */
-	odd : function ( arg ) {
+	odd: function ( arg ) {
 		return !number.even( arg );
 	},
 
@@ -69,7 +69,7 @@ var number = {
 	 * // Unsure if `n` is an int or a float
 	 * number.parse( n );
 	 */
-	parse : function ( arg, base ) {
+	parse: function ( arg, base ) {
 		return ( base === undefined ) ? parseFloat( arg ) : parseInt( arg, base );
 	},
 
@@ -84,7 +84,7 @@ var number = {
 	 * @example
 	 * math.round( n, "down" );
 	 */
-	round : function ( arg, direction ) {
+	round: function ( arg, direction ) {
 		arg = number.parse( arg );
 
 		if ( direction === undefined || string.isEmpty( direction ) ) {

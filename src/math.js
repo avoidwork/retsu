@@ -13,7 +13,7 @@ var math = {
 	 * @example
 	 * var sqr = math.sqr( 23 );
 	 */
-	sqr : function ( n ) {
+	sqr: function ( n ) {
 		return Math.pow( n, 2 );
 	}
 };

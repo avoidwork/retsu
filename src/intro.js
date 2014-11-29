@@ -1,5 +1,5 @@
 ( function ( global ) {
-"use strict";
+	"use strict";
 
-var server = typeof process !== undefined,
-    slice  = Array.prototype.slice;
+	var server = typeof process !== undefined,
+		slice = Array.prototype.slice;

@@ -9,7 +9,7 @@ var label = {
 	 * @type {String}
 	 * @memberOf label
 	 */
-	expectedNumber : "Expected a Number",
+	expectedNumber: "Expected a Number",
 
 	/**
 	 * One or more arguments is invalid
@@ -17,5 +17,5 @@ var label = {
 	 * @type {String}
 	 * @memberOf label
 	 */
-	invalidArguments : "One or more arguments is invalid"
+	invalidArguments: "One or more arguments is invalid"
 };

@@ -11,7 +11,7 @@ var xml = {
 	 * @param  {String} arg XML String
 	 * @return {Object}     XML Object or undefined
 	 */
-	decode : function ( arg ) {
+	decode: function ( arg ) {
 		if ( typeof arg != "string" || string.isEmpty( arg ) ) {
 			throw new Error( label.invalidArguments );
 		}
@@ -27,16 +27,16 @@ var xml = {
 	 * @param  {Mixed} arg Object or Array to cast to XML String
 	 * @return {String}    XML String or undefined
 	 */
-	encode : function ( arg, wrap ) {
+	encode: function ( arg, wrap ) {
 		try {
 			if ( arg === undefined ) {
 				throw new Error( label.invalidArguments );
 			}
 
-			wrap    = ( wrap !== false );
-			var x   = wrap ? "<xml>" : "",
-			    top = ( arguments[2] !== false ),
-			    node;
+			wrap = ( wrap !== false );
+			var x = wrap ? "<xml>" : "",
+				top = ( arguments[ 2 ] !== false ),
+				node;
 
 			/**
 			 * Encodes a value as a node
@@ -52,7 +52,7 @@ var xml = {
 				var output = "<n>v</n>";
 
 				output = output.replace( "v", ( regex.cdata.test( value ) ? "<![CDATA[" + value + "]]>" : value ) );
-				return output.replace(/<(\/)?n>/g, "<$1" + name + ">");
+				return output.replace( /<(\/)?n>/g, "<$1" + name + ">" );
 			};
 
 			if ( arg !== null && arg.xml ) {
@@ -95,7 +95,7 @@ var xml = {
 	 * @param  {String} arg String to validate
 	 * @return {Boolean}    `true` if valid XML
 	 */
-	valid : function ( arg ) {
+	valid: function ( arg ) {
 		return ( xml.decode( arg ).getElementsByTagName( "parsererror" ).length === 0 );
 	}
 };

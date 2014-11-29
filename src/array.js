@@ -16,7 +16,7 @@ var array = {
 	 * array.add( myArray, 3 ); // [1, 2, 3]
 	 * array.add( myArray, 1 ); // [1, 2, 3]
 	 */
-	add : function ( obj, arg ) {
+	add: function ( obj, arg ) {
 		if ( !array.contains( obj, arg ) ) {
 			obj.push( arg );
 		}
@@ -37,14 +37,14 @@ var array = {
 	 *
 	 * array.binIndex( myArray, 5 ); // 1
 	 */
-	binIndex : function ( obj, arg ) {
+	binIndex: function ( obj, arg ) {
 		var min = 0,
-		    max = obj.length - 1,
-		    idx, val;
+			max = obj.length - 1,
+			idx, val;
 
 		while ( min <= max ) {
 			idx = Math.floor( ( min + max ) / 2 );
-			val = obj[idx];
+			val = obj[ idx ];
 
 			if ( val < arg ) {
 				min = idx + 1;
@@ -71,8 +71,8 @@ var array = {
 	 * @example
 	 * array.cast( document.querySelectorAll( "..." ) );
 	 */
-	cast : function ( obj, key ) {
-		key   = ( key === true );
+	cast: function ( obj, key ) {
+		key = ( key === true );
 		var o = [];
 
 		if ( !isNaN( obj.length ) ) {
@@ -101,11 +101,11 @@ var array = {
 	 * @example
 	 * array.chunk( [0, 1, 2, 3], 2 ); // [[0, 1], [2, 3]]
 	 */
-	chunk : function ( obj, size ) {
+	chunk: function ( obj, size ) {
 		var result = [],
-		    nth    = number.round( ( obj.length / size ), "up" ),
-		    start  = 0,
-		    i      = -1;
+			nth = number.round( ( obj.length / size ), "up" ),
+			start = 0,
+			i = -1;
 
 		while ( ++i < nth ) {
 			start = i * size;
@@ -128,7 +128,7 @@ var array = {
 	 * array.clear( myArray );
 	 * myarray.length; // 0
 	 */
-	clear : function ( obj ) {
+	clear: function ( obj ) {
 		return obj.length > 0 ? array.remove( obj, 0, obj.length ) : obj;
 	},
 
@@ -149,7 +149,7 @@ var array = {
 	 * myarray.length;      // 5
 	 * myArrayClone.length; // 6
 	 */
-	clone : function ( obj, shallow ) {
+	clone: function ( obj, shallow ) {
 		return utility.clone( obj, shallow !== false );
 	},
 
@@ -164,7 +164,7 @@ var array = {
 	 * @example
 	 * if ( array.contains( [1], 1 ) ) { ... }
 	 */
-	contains : function ( obj, arg ) {
+	contains: function ( obj, arg ) {
 		return obj.indexOf( arg ) > -1;
 	},
 
@@ -179,7 +179,7 @@ var array = {
 	 * @example
 	 * var results = array.collect( [...], function ( ... ) { ... } );
 	 */
-	collect : function ( obj, fn ) {
+	collect: function ( obj, fn ) {
 		var result = [];
 
 		array.each( obj, function ( i ) {
@@ -201,7 +201,7 @@ var array = {
 	 * array.compact( [null, "a", "b", "c", null, "d"] ); // ["a", "b", "c", "d"]
 	 * array.compact( ["a", "b", "c", "d"], true );       // null
 	 */
-	compact : function ( obj, diff ) {
+	compact: function ( obj, diff ) {
 		diff = ( diff === true );
 		var result;
 
@@ -223,7 +223,7 @@ var array = {
 	 * @example
 	 * array.count( ["apple", "banana", "orange", "apple"], "apple" ); // 2
 	 */
-	count : function ( obj, value ) {
+	count: function ( obj, value ) {
 		return obj.filter( function ( i ) {
 			return ( i === value );
 		} ).length;
@@ -240,7 +240,7 @@ var array = {
 	 * @example
 	 * array.diff( ["a"], ["a", "b"] ); // ["b"]
 	 */
-	diff : function ( obj1, obj2 ) {
+	diff: function ( obj1, obj2 ) {
 		var result = [];
 
 		array.each( obj1, function ( i ) {
@@ -273,20 +273,20 @@ var array = {
 	 * array.each( [ ... ], function ( ... ) { ... } );
 	 * array.each( [ ... ], function ( ... ) { ... }, true, 100 ); // processing batches of a 100
 	 */
-	each : function ( obj, fn, async, size ) {
+	each: function ( obj, fn, async, size ) {
 		var nth = obj.length,
-		    i, offset;
+			i, offset;
 
 		if ( async !== true ) {
 			i = -1;
 			while ( ++i < nth ) {
-				if ( fn.call( obj, obj[i], i ) === false ) {
+				if ( fn.call( obj, obj[ i ], i ) === false ) {
 					break;
 				}
 			}
 		}
 		else {
-			size   = size || 10;
+			size = size || 10;
 			offset = 0;
 
 			if ( size > nth ) {
@@ -295,12 +295,12 @@ var array = {
 
 			utility.repeat( function () {
 				var i = -1,
-				    idx;
+					idx;
 
 				while ( ++i < size ) {
 					idx = i + offset;
 
-					if ( idx === nth || fn.call( obj, obj[idx], idx ) === false ) {
+					if ( idx === nth || fn.call( obj, obj[ idx ], idx ) === false ) {
 						return false;
 					}
 				}
@@ -331,20 +331,20 @@ var array = {
 	 * array.eachReverse( [ ... ], function ( ... ) { ... } );
 	 * array.eachReverse( [ ... ], function ( ... ) { ... }, true, 100 ); // processing batches of a 100
 	 */
-	eachReverse : function ( obj, fn, async, size ) {
+	eachReverse: function ( obj, fn, async, size ) {
 		var nth = obj.length,
 			i, offset;
 
 		if ( async !== true ) {
 			i = nth;
 			while ( --i > -1 ) {
-				if ( fn.call( obj, obj[i], i ) === false ) {
+				if ( fn.call( obj, obj[ i ], i ) === false ) {
 					break;
 				}
 			}
 		}
 		else {
-			size   = size || 10;
+			size = size || 10;
 			offset = nth - 1;
 
 			if ( size > nth ) {
@@ -358,7 +358,7 @@ var array = {
 				while ( ++i < size ) {
 					idx = offset - i;
 
-					if ( idx < 0 || fn.call( obj, obj[idx], idx ) === false ) {
+					if ( idx < 0 || fn.call( obj, obj[ idx ], idx ) === false ) {
 						return false;
 					}
 				}
@@ -385,7 +385,7 @@ var array = {
 	 * array.empty( [] );    // true
 	 * array.empty( ["a"] ); // false
 	 */
-	empty : function ( obj ) {
+	empty: function ( obj ) {
 		return ( obj.length === 0 );
 	},
 
@@ -401,7 +401,7 @@ var array = {
 	 * array.equal( ["a"], ["a"] );      // true
 	 * array.equal( ["a"], ["a", "b"] ); // false
 	 */
-	equal : function ( obj1, obj2 ) {
+	equal: function ( obj1, obj2 ) {
 		return ( json.encode( obj1 ) === json.encode( obj2 ) );
 	},
 
@@ -421,18 +421,18 @@ var array = {
 	 * array.fill( myArray, function ( i ) { return i + "a"; } );
 	 * myArray[0]; // "aa"
 	 */
-	fill : function ( obj, arg, start, offset ) {
-		var fn  = typeof arg == "function",
-		    l   = obj.length,
-		    i   = !isNaN( start ) ? start : 0,
-		    nth = !isNaN( offset ) ? i + offset : l - 1;
+	fill: function ( obj, arg, start, offset ) {
+		var fn = typeof arg == "function",
+			l = obj.length,
+			i = !isNaN( start ) ? start : 0,
+			nth = !isNaN( offset ) ? i + offset : l - 1;
 
 		if ( nth > ( l - 1 ) ) {
 			nth = l - 1;
 		}
 
 		while ( i <= nth ) {
-			obj[i] = fn ? arg( obj[i] ) : arg;
+			obj[ i ] = fn ? arg( obj[ i ] ) : arg;
 			i++;
 		}
 
@@ -449,8 +449,8 @@ var array = {
 	 * @example
 	 * array.first( ["a", "b"] ); // "a"
 	 */
-	first : function ( obj ) {
-		return obj[0];
+	first: function ( obj ) {
+		return obj[ 0 ];
 	},
 
 	/**
@@ -463,7 +463,7 @@ var array = {
 	 * @example
 	 * array.flat( [[0, 1], [2, 3]] ); // [0, 1, 2, 3]
 	 */
-	flat : function ( obj ) {
+	flat: function ( obj ) {
 		var result = [];
 
 		result = obj.reduce( function ( a, b ) {
@@ -489,7 +489,7 @@ var array = {
 	 * array.forEach( [ ... ], function ( ... ) { ... } );
 	 * array.forEach( [ ... ], function ( ... ) { ... }, true, 100 ); // processing batches of a 100
 	 */
-	forEach : function ( obj, fn, async, size ) {
+	forEach: function ( obj, fn, async, size ) {
 		return array.each( obj, fn, async, size );
 	},
 
@@ -503,7 +503,7 @@ var array = {
 	 * @example
 	 * array.fromObject( {name: "John", sex: "male"} ); // [["name", "John"], ["sex", "male"]]
 	 */
-	fromObject : function ( obj ) {
+	fromObject: function ( obj ) {
 		return array.mingle( array.keys( obj ), array.cast( obj ) );
 	},
 
@@ -518,7 +518,7 @@ var array = {
 	 * @example
 	 * array.index( ["a", "b", "c"], "b" ); // 1
 	 */
-	index : function ( obj, arg ) {
+	index: function ( obj, arg ) {
 		return obj.indexOf( arg );
 	},
 
@@ -535,7 +535,7 @@ var array = {
 	 * myarray.prop = "d";
 	 * array.indexed( myArray ); ["a", "b", "c", "d"];
 	 */
-	indexed : function ( obj ) {
+	indexed: function ( obj ) {
 		var indexed = [];
 
 		utility.iterate( obj, function ( v ) {
@@ -556,9 +556,9 @@ var array = {
 	 * @example
 	 * array.intersect( ["a", "b", "d"], ["b", "c", "d"] ); // ["b", "d"]
 	 */
-	intersect : function ( obj1, obj2 ) {
+	intersect: function ( obj1, obj2 ) {
 		var a = obj1.length > obj2.length ? obj1 : obj2,
-		    b = ( a === obj1 ? obj2 : obj1 );
+			b = ( a === obj1 ? obj2 : obj1 );
 
 		return a.filter( function ( key ) {
 			return array.contains( b, key );
@@ -579,7 +579,7 @@ var array = {
 	 * array.keepIf( myArray, function ( i ) { return /a|c/.test( i ); } );
 	 * myArray[1]; // "c"
 	 */
-	keepIf : function ( obj, fn ) {
+	keepIf: function ( obj, fn ) {
 		var result, remove;
 
 		if ( typeof fn != "function" ) {
@@ -606,7 +606,7 @@ var array = {
 	 * @example
 	 * array.keys( {abc: true, xyz: false} ); // ["abc", "xyz"]
 	 */
-	keys : function ( obj ) {
+	keys: function ( obj ) {
 		return Object.keys( obj );
 	},
 
@@ -625,12 +625,14 @@ var array = {
 	 * array.keySort( myArray, "abc" );           // [{abc: 2, xyz: 5}, {abc: 123124, xyz: 5}, {abc: 123124, xyz: 6}];
 	 * array.keySort( myArray, "abc, xyz desc" ); // [{abc: 2, xyz: 5}, {abc: 123124, xyz: 6}, {abc: 123124, xyz: 5}];
 	 */
-	keySort : function ( obj, query, sub ) {
-		query       = query.replace( /\s*asc/ig, "" ).replace( /\s*desc/ig, " desc" );
-		var queries = string.explode( query ).map( function ( i ) { return i.split( " " ); } ),
-		    sorts   = [],
-		    braceS  = "[\"",
-		    braceE  = "\"]";
+	keySort: function ( obj, query, sub ) {
+		query = query.replace( /\s*asc/ig, "" ).replace( /\s*desc/ig, " desc" );
+		var queries = string.explode( query ).map( function ( i ) {
+				return i.split( " " );
+			} ),
+			sorts = [],
+			braceS = "[\"",
+			braceE = "\"]";
 
 		if ( sub && sub !== "" ) {
 			sub = "." + sub;
@@ -641,30 +643,30 @@ var array = {
 
 		array.each( queries, function ( i ) {
 			var s = ".",
-			    e = "";
+				e = "";
 
-			if ( regex.not_dotnotation.test( i[0] ) ) {
+			if ( regex.not_dotnotation.test( i[ 0 ] ) ) {
 				s = braceS;
 				e = braceE;
 			}
 
 			sorts.push( "try {" );
 
-			if ( i[1] === "desc" ) {
-				sorts.push( "if ( a" + sub + s + i[0] + e + " < b" + sub + s + i[0] + e + " ) return 1;" );
-				sorts.push( "if ( a" + sub + s + i[0] + e + " > b" + sub + s + i[0] + e + " ) return -1;" );
+			if ( i[ 1 ] === "desc" ) {
+				sorts.push( "if ( a" + sub + s + i[ 0 ] + e + " < b" + sub + s + i[ 0 ] + e + " ) return 1;" );
+				sorts.push( "if ( a" + sub + s + i[ 0 ] + e + " > b" + sub + s + i[ 0 ] + e + " ) return -1;" );
 			}
 			else {
-				sorts.push( "if ( a" + sub + s + i[0] + e + " < b" + sub + s + i[0] + e + " ) return -1;" );
-				sorts.push( "if ( a" + sub + s + i[0] + e + " > b" + sub + s + i[0] + e + " ) return 1;" );
+				sorts.push( "if ( a" + sub + s + i[ 0 ] + e + " < b" + sub + s + i[ 0 ] + e + " ) return -1;" );
+				sorts.push( "if ( a" + sub + s + i[ 0 ] + e + " > b" + sub + s + i[ 0 ] + e + " ) return 1;" );
 			}
 
 			sorts.push( "} catch (e) {" );
 			sorts.push( "try {" );
-			sorts.push( "if ( a" + sub + s + i[0] + e + " !== undefined ) return " + ( i[1] === "desc" ? "-1" : "1") + ";" );
+			sorts.push( "if ( a" + sub + s + i[ 0 ] + e + " !== undefined ) return " + ( i[ 1 ] === "desc" ? "-1" : "1") + ";" );
 			sorts.push( "} catch (e) {}" );
 			sorts.push( "try {" );
-			sorts.push( "if ( b" + sub + s + i[0] + e + " !== undefined ) return " + ( i[1] === "desc" ? "1" : "-1") + ";" );
+			sorts.push( "if ( b" + sub + s + i[ 0 ] + e + " !== undefined ) return " + ( i[ 1 ] === "desc" ? "1" : "-1") + ";" );
 			sorts.push( "} catch (e) {}" );
 			sorts.push( "}" );
 		} );
@@ -688,14 +690,14 @@ var array = {
 	 * array.last( myArray );    // 4
 	 * array.last( myArray, 2 ); // [3, 4]
 	 */
-	last : function ( obj, arg ) {
+	last: function ( obj, arg ) {
 		var n = obj.length - 1;
 
 		if ( arg >= ( n + 1 ) ) {
 			return obj;
 		}
 		else if ( isNaN( arg ) || arg === 1 ) {
-			return obj[n];
+			return obj[ n ];
 		}
 		else {
 			return array.limit( obj, ( n - ( --arg ) ), n );
@@ -717,15 +719,15 @@ var array = {
 	 * array.limit( myArray, 0, 2 ); // [1, 2]
 	 * array.limit( myArray, 2, 2 ); // [3, 4]
 	 */
-	limit : function ( obj, start, offset ) {
+	limit: function ( obj, start, offset ) {
 		var result = [],
-		    i      = start - 1,
-		    nth    = start + offset,
-		    max    = obj.length;
+			i = start - 1,
+			nth = start + offset,
+			max = obj.length;
 
 		if ( max > 0 ) {
 			while ( ++i < nth && i < max ) {
-				result.push( obj[i] );
+				result.push( obj[ i ] );
 			}
 		}
 
@@ -742,7 +744,7 @@ var array = {
 	 * @example
 	 * array.max( [5, 3, 9, 1, 4] ); // 9
 	 */
-	max : function ( obj ) {
+	max: function ( obj ) {
 		return array.last( obj.sort( array.sort ) );
 	},
 
@@ -756,7 +758,7 @@ var array = {
 	 * @example
 	 * array.mean( [1, 3, 5] ); // 3
 	 */
-	mean : function ( obj ) {
+	mean: function ( obj ) {
 		return obj.length > 0 ? ( array.sum( obj ) / obj.length ) : undefined;
 	},
 
@@ -771,12 +773,12 @@ var array = {
 	 * array.median( [5, 1, 3, 8] ); // 4
 	 * array.median( [5, 1, 3] );    // 3
 	 */
-	median : function ( obj ) {
-		var nth    = obj.length,
-		    mid    = number.round( nth / 2, "down" ),
-		    sorted = obj.sort( array.sort );
+	median: function ( obj ) {
+		var nth = obj.length,
+			mid = number.round( nth / 2, "down" ),
+			sorted = obj.sort( array.sort );
 
-		return number.odd( nth ) ? sorted[mid] : ( ( sorted[mid - 1] + sorted[mid] ) / 2 );
+		return number.odd( nth ) ? sorted[ mid ] : ( ( sorted[ mid - 1 ] + sorted[ mid ] ) / 2 );
 	},
 
 	/**
@@ -794,7 +796,7 @@ var array = {
 	 * array.merge( a, b );
 	 * a[3]; // "d"
 	 */
-	merge : function ( obj1, obj2 ) {
+	merge: function ( obj1, obj2 ) {
 		array.each( obj2, function ( i ) {
 			array.add( obj1, i );
 		} );
@@ -812,8 +814,8 @@ var array = {
 	 * @example
 	 * array.min( [5, 3, 9, 1, 4] ); // 1
 	 */
-	min : function ( obj ) {
-		return obj.sort( array.sort )[0];
+	min: function ( obj ) {
+		return obj.sort( array.sort )[ 0 ];
 	},
 
 	/**
@@ -830,11 +832,11 @@ var array = {
 	 *
 	 * array.mingle( a, b ); // [["a", "c"], ["b", "d"]]
 	 */
-	mingle : function ( obj1, obj2 ) {
+	mingle: function ( obj1, obj2 ) {
 		var result;
 
 		result = obj1.map( function ( i, idx ) {
-			return [i, obj2[idx]];
+			return [ i, obj2[ idx ] ];
 		} );
 
 		return result;
@@ -851,19 +853,19 @@ var array = {
 	 * array.mode( [1, 3, 7, 1, 2, 10, 7, 7, 3, 10] );     // 7
 	 * array.mode( [1, 3, 7, 1, 2, 10, 7, 7, 3, 10, 10] ); // [7, 10]
 	 */
-	mode : function ( obj ) {
+	mode: function ( obj ) {
 		var values = {},
-		    count  = 0,
-		    mode   = [],
-		    nth, result;
+			count = 0,
+			mode = [],
+			nth, result;
 
 		// Counting values
 		array.each( obj, function ( i ) {
-			if ( !isNaN( values[i] ) ) {
-				values[i]++;
+			if ( !isNaN( values[ i ] ) ) {
+				values[ i ]++;
 			}
 			else {
-				values[i] = 1;
+				values[ i ] = 1;
 			}
 		} );
 
@@ -881,7 +883,7 @@ var array = {
 		nth = mode.length;
 
 		if ( nth > 0 ) {
-			result = nth === 1 ? mode[0] : mode;
+			result = nth === 1 ? mode[ 0 ] : mode;
 		}
 
 		return result;
@@ -897,7 +899,7 @@ var array = {
 	 * @example
 	 * array.range( [5, 1, 3, 8] ); // 7
 	 */
-	range : function ( obj ) {
+	range: function ( obj ) {
 		return array.max( obj ) - array.min( obj );
 	},
 
@@ -912,12 +914,12 @@ var array = {
 	 * @example
 	 * array.rassoc( [[1, 3], [7, 2], [4, 3]], 3 ); // [1, 3]
 	 */
-	rassoc : function ( obj, arg ) {
+	rassoc: function ( obj, arg ) {
 		var result;
 
 		array.each( obj, function ( i, idx ) {
-			if ( i[1] === arg ) {
-				result = obj[idx];
+			if ( i[ 1 ] === arg ) {
+				result = obj[ idx ];
 
 				return false;
 			}
@@ -937,7 +939,7 @@ var array = {
 	 * @example
 	 * array.reject( [0, 1, 2, 3, 4, 5], function ( i ) { return i % 2 > 0; } ); // [0, 2, 4]
 	 */
-	reject : function ( obj, fn ) {
+	reject: function ( obj, fn ) {
 		return array.diff( obj, obj.filter( fn ) );
 	},
 
@@ -956,7 +958,7 @@ var array = {
 	 * array.remove( myArray, 2, 3 );
 	 * myArray[2]; // "e"
 	 */
-	remove : function ( obj, start, end ) {
+	remove: function ( obj, start, end ) {
 		if ( isNaN( start ) ) {
 			start = obj.indexOf( start );
 
@@ -968,8 +970,8 @@ var array = {
 			start = start || 0;
 		}
 
-		var length    = obj.length,
-		    remaining = obj.slice( ( end || start ) + 1 || length );
+		var length = obj.length,
+			remaining = obj.slice( ( end || start ) + 1 || length );
 
 		obj.length = start < 0 ? ( length + start ) : start;
 		obj.push.apply( obj, remaining );
@@ -991,7 +993,7 @@ var array = {
 	 * array.removeIf( myArray, function ( i ) { return /a|c/.test( i ); } );
 	 * myArray[0]; // "b"
 	 */
-	removeIf : function ( obj, fn ) {
+	removeIf: function ( obj, fn ) {
 		var remove;
 
 		if ( typeof fn != "function" ) {
@@ -1001,7 +1003,7 @@ var array = {
 		remove = obj.filter( fn );
 
 		array.each( remove, function ( i ) {
-			array.remove( obj, array.index ( obj, i ) );
+			array.remove( obj, array.index( obj, i ) );
 		} );
 
 		return obj;
@@ -1022,7 +1024,7 @@ var array = {
 	 * myArray[0];     // "b"
 	 * myarray.length; // 2
 	 */
-	removeWhile : function ( obj, fn ) {
+	removeWhile: function ( obj, fn ) {
 		if ( typeof fn != "function" ) {
 			throw new Error( label.invalidArguments );
 		}
@@ -1060,7 +1062,7 @@ var array = {
 	 * myArray[0];     // true
 	 * myarray.length; // 2
 	 */
-	replace : function ( obj1, obj2 ) {
+	replace: function ( obj1, obj2 ) {
 		array.remove( obj1, 0, obj1.length );
 		array.each( obj2, function ( i ) {
 			obj1.push( i );
@@ -1081,7 +1083,7 @@ var array = {
 	 * array.rest( [1, 2, 3, 4, 5, 6] );    // [2, 3, 4, 5, 6]
 	 * array.rest( [1, 2, 3, 4, 5, 6], 3 ); // [4, 5, 6]
 	 */
-	rest : function ( obj, arg ) {
+	rest: function ( obj, arg ) {
 		arg = arg || 1;
 
 		if ( arg < 1 ) {
@@ -1102,7 +1104,7 @@ var array = {
 	 * @example
 	 * array.rindex( [1, 2, 3, 2, 1], 2 ); // 3
 	 */
-	rindex : function ( obj, arg ) {
+	rindex: function ( obj, arg ) {
 		var result = -1;
 
 		array.each( obj, function ( i, idx ) {
@@ -1126,9 +1128,9 @@ var array = {
 	 * array.rotate( [0, 1, 2, 3, 4],  3 )[0] // 2;
 	 * array.rotate( [0, 1, 2, 3, 4], -2 )[0] // 3;
 	 */
-	rotate : function ( obj, arg ) {
+	rotate: function ( obj, arg ) {
 		var nth = obj.length,
-		    result;
+			result;
 
 		if ( arg === 0 ) {
 			result = obj;
@@ -1161,17 +1163,17 @@ var array = {
 	 * array.series( 0, 5 );     // [0, 1, 2, 3, 4]
 	 * array.series( 0, 25, 5 ); // [0, 5, 10, 15, 20]
 	 */
-	series : function ( start, end, offset ) {
-		start      = start  || 0;
-		end        = end    || start;
-		offset     = offset || 1;
+	series: function ( start, end, offset ) {
+		start = start || 0;
+		end = end || start;
+		offset = offset || 1;
 		var result = [],
-		    n      = -1,
-		    nth    = Math.max( 0, Math.ceil( ( end - start ) / offset ) );
+			n = -1,
+			nth = Math.max( 0, Math.ceil( ( end - start ) / offset ) );
 
 		while ( ++n < nth ) {
-			result[n]  = start;
-			start     += offset;
+			result[ n ] = start;
+			start += offset;
 		}
 
 		return result;
@@ -1188,9 +1190,9 @@ var array = {
 	 * @example
 	 * array.sort( 2, 3 ); // -1
 	 */
-	sort : function ( a, b ) {
-		var types = {a: typeof a, b: typeof b},
-		    c, d, result;
+	sort: function ( a, b ) {
+		var types = { a: typeof a, b: typeof b },
+			c, d, result;
 
 		if ( types.a === "number" && types.b === "number" ) {
 			result = a - b;
@@ -1232,7 +1234,7 @@ var array = {
 	 * array.sorted( myArray );
 	 * myArray[0]; // 2
 	 */
-	sorted : function ( obj ) {
+	sorted: function ( obj ) {
 		return obj.sort( array.sort );
 	},
 
@@ -1261,15 +1263,15 @@ var array = {
 	 * results[20].length; // 1
 	 * results[20][0];     // 100
 	 */
-	split : function ( obj, divisor ) {
-		var result  = [],
-		    total   = obj.length,
-		    nth     = Math.ceil( total / divisor ),
-		    low     = Math.floor( total / divisor ),
-		    lower   = Math.ceil( total / nth ),
-		    lowered = false,
-		    start   = 0,
-		    i       = -1;
+	split: function ( obj, divisor ) {
+		var result = [],
+			total = obj.length,
+			nth = Math.ceil( total / divisor ),
+			low = Math.floor( total / divisor ),
+			lower = Math.ceil( total / nth ),
+			lowered = false,
+			start = 0,
+			i = -1;
 
 		// Finding the fold
 		if ( number.diff( total, ( divisor * nth ) ) > nth ) {
@@ -1305,7 +1307,7 @@ var array = {
 	 * @example
 	 * array.stddev( [1, 3, 5] ); // 1.632993161855452
 	 */
-	stddev : function ( obj ) {
+	stddev: function ( obj ) {
 		return Math.sqrt( array.variance( obj ) );
 	},
 
@@ -1319,7 +1321,7 @@ var array = {
 	 * @example
 	 * array.sum( [2, 4, 3, 1] ); // 10
 	 */
-	sum : function ( obj ) {
+	sum: function ( obj ) {
 		var result = 0;
 
 		if ( obj.length > 0 ) {
@@ -1342,7 +1344,7 @@ var array = {
 	 * @example
 	 * array.take( [1, 2, 3, 4], 2 ); // [1, 2]
 	 */
-	take : function ( obj, n ) {
+	take: function ( obj, n ) {
 		return array.limit( obj, 0, n );
 	},
 
@@ -1356,12 +1358,12 @@ var array = {
 	 * @example
 	 * array.toObject( ["abc", "def"] ); // {0: "abc", 1: "def"}
 	 */
-	toObject : function ( ar ) {
+	toObject: function ( ar ) {
 		var obj = {},
-		    i   = ar.length;
+			i = ar.length;
 
 		while ( i-- ) {
-			obj[i.toString()] = ar[i];
+			obj[ i.toString() ] = ar[ i ];
 		}
 
 		return obj;
@@ -1380,7 +1382,7 @@ var array = {
 	 * myarray.extra = true;
 	 * array.total( myArray ); // 4
 	 */
-	total : function ( obj ) {
+	total: function ( obj ) {
 		return array.indexed( obj ).length;
 	},
 
@@ -1394,7 +1396,7 @@ var array = {
 	 * @example
 	 * array.unique( ["a", "b", "a", "c", "b", "d"] ); // ["a", "b", "c", "d"]
 	 */
-	unique : function ( obj ) {
+	unique: function ( obj ) {
 		var result = [];
 
 		array.each( obj, function ( i ) {
@@ -1414,10 +1416,10 @@ var array = {
 	 * @example
 	 * array.variance( [1, 3, 5] ); // 2.6666666666666665
 	 */
-	variance : function ( obj ) {
+	variance: function ( obj ) {
 		var nth = obj.length,
-		    n   = 0,
-		    mean;
+			n = 0,
+			mean;
 
 		if ( nth > 0 ) {
 			mean = array.mean( obj );
@@ -1451,25 +1453,25 @@ var array = {
 	 * @example
 	 * array.zip( [0, 1], 1 ); // [[0, 1], [1, null]]
 	 */
-	zip : function ( obj, args ) {
+	zip: function ( obj, args ) {
 		var result = [];
 
 		// Preparing args
 		if ( !( args instanceof Array ) ) {
-			args = typeof args == "object" ? array.cast( args ) : [args];
+			args = typeof args == "object" ? array.cast( args ) : [ args ];
 		}
 
 		array.each( args, function ( i, idx ) {
 			if ( !( i instanceof Array ) ) {
-				this[idx] = [i];
+				this[ idx ] = [ i ];
 			}
 		} );
 
 		// Building result Array
 		array.each( obj, function ( i, idx ) {
-			result[idx] = [i];
+			result[ idx ] = [ i ];
 			array.each( args, function ( x ) {
-				result[idx].push( x[idx] || null );
+				result[ idx ].push( x[ idx ] || null );
 			} );
 		} );
 

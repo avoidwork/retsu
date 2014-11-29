@@ -16,7 +16,7 @@ var string = {
 	 *   ...
 	 * } );
 	 */
-	explode : function ( obj, arg ) {
+	explode: function ( obj, arg ) {
 		arg = arg || ",";
 
 		return string.trim( obj ).split( new RegExp( "\\s*" + arg + "\\s*" ) );
@@ -34,7 +34,7 @@ var string = {
 	 *   ...
 	 * } );
 	 */
-	isEmpty : function ( obj ) {
+	isEmpty: function ( obj ) {
 		return string.trim( obj ) === "";
 	},
 
@@ -48,7 +48,7 @@ var string = {
 	 * @example
 	 * string.trim( "  hello world " ); // "hello world"
 	 */
-	trim : function ( obj ) {
+	trim: function ( obj ) {
 		return obj.replace( /^(\s+|\t+|\n+)|(\s+|\t+|\n+)$/g, "" );
 	}
 };

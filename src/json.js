@@ -21,7 +21,7 @@ var json = {
 	 *   ... // invalid JSON, with `Error` suppressed by `silent`
 	 * }
 	 */
-	decode : function ( arg, silent ) {
+	decode: function ( arg, silent ) {
 		try {
 			return JSON.parse( arg );
 		}
@@ -52,7 +52,7 @@ var json = {
 	 *   ... // invalid JSON, with `Error` suppressed by `silent`
 	 * }
 	 */
-	encode : function ( arg, silent ) {
+	encode: function ( arg, silent ) {
 		try {
 			return JSON.stringify( arg );
 		}

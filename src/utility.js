@@ -9,7 +9,7 @@ var utility = {
 	 * @memberOf utility
 	 * @type {Object}
 	 */
-	timer : {},
+	timer: {},
 
 	/**
 	 * Collection of repeating functions
@@ -27,21 +27,21 @@ var utility = {
 	 * @param  {String} id ID of timer( s )
 	 * @return {Undefined} undefined
 	 */
-	clearTimers : function ( id ) {
+	clearTimers: function ( id ) {
 		if ( id === undefined || string.isEmpty( id ) ) {
 			throw new Error( label.invalidArguments );
 		}
 
 		// deferred
-		if ( utility.timer[id] ) {
-			clearTimeout( utility.timer[id] );
-			delete utility.timer[id];
+		if ( utility.timer[ id ] ) {
+			clearTimeout( utility.timer[ id ] );
+			delete utility.timer[ id ];
 		}
 
 		// repeating
-		if ( utility.repeating[id] ) {
-			clearTimeout( utility.repeating[id] );
-			delete utility.repeating[id];
+		if ( utility.repeating[ id ] ) {
+			clearTimeout( utility.repeating[ id ] );
+			delete utility.repeating[ id ];
 		}
 	},
 
@@ -59,7 +59,7 @@ var utility = {
 	 *
 	 * y.a; // true
 	 */
-	clone : function ( obj, shallow ) {
+	clone: function ( obj, shallow ) {
 		var clone, result;
 
 		if ( shallow === true ) {
@@ -72,7 +72,7 @@ var utility = {
 			result = [];
 
 			array.each( obj, function ( i, idx ) {
-				result[idx] = utility.clone( i );
+				result[ idx ] = utility.clone( i );
 			} );
 
 			return result;
@@ -93,7 +93,7 @@ var utility = {
 				// Decorating Functions that would be lost with JSON encoding/decoding
 				utility.iterate( obj, function ( v, k ) {
 					if ( typeof v == "function" ) {
-						clone[k] = v;
+						clone[ k ] = v;
 					}
 				} );
 			}
@@ -120,10 +120,10 @@ var utility = {
 	 * @param  {Boolean}  repeat [Optional] Describes the execution, default is `false`
 	 * @return {String}          ID of the timer
 	 */
-	defer : function ( fn, ms, id, repeat ) {
+	defer: function ( fn, ms, id, repeat ) {
 		var op;
 
-		ms     = ms || 0;
+		ms = ms || 0;
 		repeat = ( repeat === true );
 
 		if ( id !== undefined ) {
@@ -138,7 +138,7 @@ var utility = {
 			fn();
 		};
 
-		utility[repeat ? "repeating" : "timer"][id] = setTimeout( op, ms );
+		utility[ repeat ? "repeating" : "timer" ][ id ] = setTimeout( op, ms );
 
 		return id;
 	},
@@ -154,15 +154,15 @@ var utility = {
 	 * @param  {Boolean} warning [Optional] Will display as console warning if true
 	 * @return {Undefined}       undefined
 	 */
-	error : function ( e, args, scope, warning ) {
+	error: function ( e, args, scope, warning ) {
 		var o = {
-			"arguments" : args ? array.cast( args ) : [],
-			message     : e.message || e,
-			number      : e.number ? ( e.number & 0xFFFF ) : undefined,
-			scope       : scope,
-			stack       : e.stack || undefined,
-			timestamp   : new Date().toUTCString(),
-			type        : e.type || "TypeError"
+			"arguments": args ? array.cast( args ) : [],
+			message: e.message || e,
+			number: e.number ? ( e.number & 0xFFFF ) : undefined,
+			scope: scope,
+			stack: e.stack || undefined,
+			timestamp: new Date().toUTCString(),
+			type: e.type || "TypeError"
 		};
 
 		utility.log( o.stack || o.message, warning !== true ? "error" : "warn" );
@@ -181,7 +181,7 @@ var utility = {
 	 * @example
 	 * var extendObj = utility.extend( someObj, {newProperty: value} );
 	 */
-	extend : function ( obj, arg ) {
+	extend: function ( obj, arg ) {
 		var o;
 
 		if ( obj === undefined ) {
@@ -211,13 +211,13 @@ var utility = {
 	 *   ...
 	 * } );
 	 */
-	iterate : function ( obj, fn ) {
+	iterate: function ( obj, fn ) {
 		if ( typeof fn != "function" ) {
 			throw new Error( label.invalidArguments );
 		}
 
 		array.each( Object.keys( obj ), function ( i ) {
-			return fn.call( obj, obj[i], i );
+			return fn.call( obj, obj[ i ], i );
 		} );
 
 		return obj;
@@ -234,13 +234,13 @@ var utility = {
 	 * @example
 	 * utility.log( "Something bad happened", "warn" );
 	 */
-	log : function ( arg, target ) {
+	log: function ( arg, target ) {
 		var ts, msg;
 
 		if ( typeof console != "undefined" ) {
-			ts  = typeof arg != "object";
+			ts = typeof arg != "object";
 			msg = ts ? "[" + new Date().toLocaleTimeString() + "] " + arg : arg;
-			console[target || "log"]( msg );
+			console[ target || "log" ]( msg );
 		}
 	},
 
@@ -258,18 +258,18 @@ var utility = {
 	 * util.merge( obj, {b: false} )
 	 * obj.b; // false
 	 */
-	merge : function ( obj, arg ) {
+	merge: function ( obj, arg ) {
 		utility.iterate( arg, function ( v, k ) {
-			if ( ( obj[k] instanceof Array ) && ( v instanceof Array ) ) {
-				array.merge( obj[k], v );
+			if ( ( obj[ k ] instanceof Array ) && ( v instanceof Array ) ) {
+				array.merge( obj[ k ], v );
 			}
-			else if ( ( obj[k] instanceof Object ) && ( v instanceof Object ) ) {
+			else if ( ( obj[ k ] instanceof Object ) && ( v instanceof Object ) ) {
 				utility.iterate( v, function ( x, y ) {
-					obj[k][y] = utility.clone( x );
+					obj[ k ][ y ] = utility.clone( x );
 				} );
 			}
 			else {
-				obj[k] = utility.clone( v );
+				obj[ k ] = utility.clone( v );
 			}
 		} );
 
@@ -296,9 +296,9 @@ var utility = {
 	 *   }
 	 * }, 1000, "repeating" );
 	 */
-	repeat : function ( fn, ms, id, now ) {
-		ms  = ms || 10;
-		id  = id || utility.uuid( true );
+	repeat: function ( fn, ms, id, now ) {
+		ms = ms || 10;
+		id = id || utility.uuid( true );
 		now = ( now !== false );
 
 		// Could be valid to return false from initial execution
@@ -312,12 +312,12 @@ var utility = {
 				var recursive = this;
 
 				if ( fn() !== false ) {
-					utility.repeating[id] = setTimeout( function () {
+					utility.repeating[ id ] = setTimeout( function () {
 						recursive.call( recursive, fn, ms, id );
 					}, ms );
 				}
 				else {
-					delete utility.repeating[id];
+					delete utility.repeating[ id ];
 				}
 			};
 
@@ -337,12 +337,14 @@ var utility = {
 	 * @example
 	 * var uuid4 = utility.uuid();
 	 */
-	uuid : function ( strip ) {
-		var s = function () { return ( ( ( 1 + Math.random() ) * 0x10000 ) | 0 ).toString( 16 ).substring( 1 ); },
-		    r = [8, 9, "a", "b"],
-		    o;
+	uuid: function ( strip ) {
+		var s = function () {
+				return ( ( ( 1 + Math.random() ) * 0x10000 ) | 0 ).toString( 16 ).substring( 1 );
+			},
+			r = [ 8, 9, "a", "b" ],
+			o;
 
-		o = ( s() + s() + "-" + s() + "-4" + s().substr( 0, 3 ) + "-" + r[Math.floor( Math.random() * 4 )] + s().substr( 0, 3 ) + "-" + s() + s() + s() );
+		o = ( s() + s() + "-" + s() + "-4" + s().substr( 0, 3 ) + "-" + r[ Math.floor( Math.random() * 4 ) ] + s().substr( 0, 3 ) + "-" + s() + s() + s() );
 
 		if ( strip === true ) {
 			o = o.replace( /-/g, "" );
