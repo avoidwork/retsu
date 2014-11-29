@@ -26,7 +26,7 @@ Clears an Array without destroying it
 Clones an Array, `shallow` defaults to `true`
 
 #### contains(obj, arg)
-Determines if obj contains arg
+Determines if `obj` contains `arg`
 
 #### collect(obj, fn)
 Creates a new Array of the result of `fn` executed against every index of `obj`
