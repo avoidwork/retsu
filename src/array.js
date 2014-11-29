@@ -137,8 +137,9 @@ var array = {
 	 *
 	 * @method clone
 	 * @memberOf array
-	 * @param  {Array} obj Array to clone
-	 * @return {Array}     Clone of Array
+	 * @param  {Array}   obj     Array to clone
+	 * @param  {Boolean} shallow [Optional] Default is `true`
+	 * @return {Array}           Clone of Array
 	 * @example
 	 * var myArray      = [1, 2, 3, 4, 5],
 	 *     myArrayClone = array.clone( myArray );
@@ -148,8 +149,8 @@ var array = {
 	 * myarray.length;      // 5
 	 * myArrayClone.length; // 6
 	 */
-	clone : function ( obj ) {
-		return utility.clone( obj, true );
+	clone : function ( obj, shallow ) {
+		return utility.clone( obj, shallow !== false );
 	},
 
 	/**
@@ -1431,6 +1432,13 @@ var array = {
 			return n;
 		}
 	},
+
+	/**
+	 * Library version
+	 *
+	 * @type {String}
+	 */
+	version: "{{VERSION}}",
 
 	/**
 	 * Converts any arguments to Arrays, then merges elements of `obj` with corresponding elements from each argument

@@ -22,8 +22,8 @@ Transforms an Array to a 2D Array of chunks
 #### clear(obj)
 Clears an Array without destroying it
 
-#### clone(obj)
-Shallow clones an Array
+#### clone(obj[, shallow])
+Clones an Array, `shallow` defaults to `true`
 
 #### contains(obj, arg)
 Determines if obj contains arg
@@ -40,10 +40,10 @@ Counts the occurrence of `arg` in `obj`
 #### diff(obj1, obj2)
 Finds the difference between two Arrays
 
-#### each(obj, fn)
+#### each(obj, fn[, async, size])
 Iterates `obj` and executes `fn` with arguments [`value`, `index`]; returning `false` from `fn` halts iteration
 
-#### eachReverse(obj, fn)
+#### eachReverse(obj, fn[, async, size])
 Like `each()`, but in reverse
 
 #### empty(obj)
@@ -61,7 +61,7 @@ Returns the first index
 #### flat(obj)
 Flattens a 2D Array
 
-#### forEach(obj, fn)
+#### forEach(obj, fn[, async, size])
 Like `each()`, iterates `obj` and executes `fn` with arguments [`value`, `index`]; returning `false` from `fn` halts iteration
 
 #### fromObject(obj)

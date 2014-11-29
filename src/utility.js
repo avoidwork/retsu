@@ -60,7 +60,7 @@ var utility = {
 	 * y.a; // true
 	 */
 	clone : function ( obj, shallow ) {
-		var clone;
+		var clone, result;
 
 		if ( shallow === true ) {
 			return obj !== undefined && obj !== null ? json.decode( json.encode( obj ) ) : obj;
@@ -69,7 +69,13 @@ var utility = {
 			return obj;
 		}
 		else if ( obj instanceof Array ) {
-			return obj.slice();
+			result = [];
+
+			array.each( obj, function ( i, idx ) {
+				result[idx] = utility.clone( i );
+			} );
+
+			return result;
 		}
 		else if ( !server && obj instanceof Document ) {
 			return xml.decode( xml.encode( obj ) );

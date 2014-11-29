@@ -1,13 +1,10 @@
 /.idea/
-/.sass-cache/
-/css/
 /doc/
 /node_modules/
-/lib/retsu.map
 /lib/retsu.min.js
+/lib/retsu.min.js.map
 /src/
 /test/
-/sass/
 .git
 .gitignore
 .jshintrc
