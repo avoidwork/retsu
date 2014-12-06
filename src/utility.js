@@ -212,10 +212,6 @@ var utility = {
 	 * } );
 	 */
 	iterate: function ( obj, fn ) {
-		if ( typeof fn != "function" ) {
-			throw new Error( label.invalidArguments );
-		}
-
 		array.each( Object.keys( obj ), function ( i ) {
 			return fn.call( obj, obj[ i ], i );
 		} );

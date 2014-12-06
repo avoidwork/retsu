@@ -1,0 +1,32 @@
+{
+  "name": "retsu",
+  "version": "1.0.3",
+  "homepage": "https://github.com/avoidwork/retsu",
+  "authors": [
+    "Jason Mulligan <jason.mulligan@avoidwork.com>"
+  ],
+  "description": "Array micro library focused on speed",
+  "main": "lib/retsu.min.js",
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "array",
+    "utility",
+    "ruby"
+  ],
+  "license": "BSD-3",
+  "ignore": [
+    "**/.*",
+    "doc",
+    "node_modules",
+    "bower_components",
+    "src",
+    "test",
+    "tests",
+    "Gruntfile.js",
+    "docstrap.json"
+  ]
+}

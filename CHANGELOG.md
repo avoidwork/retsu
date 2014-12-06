@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.0.3
+- Removing `typeof` conditionals in a few iteration functions
+- Adding `bower.json`
+
 ## 1.0.2
 - Updated `clone(obj[, shallow])` with an optional `shallow` parameter, default is `true`
 - Added `version` property for interop

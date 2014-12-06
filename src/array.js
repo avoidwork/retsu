@@ -580,14 +580,8 @@ var array = {
 	 * myArray[1]; // "c"
 	 */
 	keepIf: function ( obj, fn ) {
-		var result, remove;
-
-		if ( typeof fn != "function" ) {
-			throw new Error( label.invalidArguments );
-		}
-
-		result = obj.filter( fn );
-		remove = array.diff( obj, result );
+		var result = obj.filter( fn ),
+			remove = array.diff( obj, result );
 
 		array.each( remove, function ( i ) {
 			array.remove( obj, array.index( obj, i ) );
@@ -994,13 +988,7 @@ var array = {
 	 * myArray[0]; // "b"
 	 */
 	removeIf: function ( obj, fn ) {
-		var remove;
-
-		if ( typeof fn != "function" ) {
-			throw new Error( label.invalidArguments );
-		}
-
-		remove = obj.filter( fn );
+		var remove = obj.filter( fn );
 
 		array.each( remove, function ( i ) {
 			array.remove( obj, array.index( obj, i ) );
@@ -1025,10 +1013,6 @@ var array = {
 	 * myarray.length; // 2
 	 */
 	removeWhile: function ( obj, fn ) {
-		if ( typeof fn != "function" ) {
-			throw new Error( label.invalidArguments );
-		}
-
 		var remove = [];
 
 		array.each( obj, function ( i ) {
