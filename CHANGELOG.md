@@ -1,5 +1,8 @@
 # Change Log
 
+## 1.1.1
+- Updating README
+
 ## 1.1.0
 - Created `array.iterator()`, & `array.iterate()`
 - Refactored `array.each()` to `array.iterate()`

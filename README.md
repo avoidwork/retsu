@@ -76,6 +76,12 @@ Returns an Associative Array as an Indexed Array
 #### intersect(obj1, obj2)
 Finds the intersections between two Arrays
 
+#### iterate(obj1, fn)
+Iterates an Array using an Iterator
+
+#### iterator(obj1)
+Creates an Array generator to iterate the indices
+
 #### keepIf(obj, fn)
 Resizes `obj` by keeping every index which `fn` evaluates to `true`
 
