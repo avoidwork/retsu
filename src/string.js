@@ -12,7 +12,7 @@ var string = {
 	 * @param  {String} arg String to split on
 	 * @return {Array}      Array of the exploded String
 	 * @example
-	 * array.each( string.explode( "abc, def" ), function ( i ) {
+	 * array.iterate( string.explode( "abc, def" ), function ( i ) {
 	 *   ...
 	 * } );
 	 */

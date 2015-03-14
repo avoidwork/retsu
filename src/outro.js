@@ -10,5 +10,4 @@ else if ( typeof define == "function" ) {
 else {
 	global.retsu = array;
 }
-} )
-( this );
+} )( this );

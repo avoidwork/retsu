@@ -71,7 +71,7 @@ var utility = {
 		else if ( obj instanceof Array ) {
 			result = [];
 
-			array.each( obj, function ( i, idx ) {
+			array.iterate( obj, function ( i, idx ) {
 				result[ idx ] = utility.clone( i );
 			} );
 
@@ -212,7 +212,7 @@ var utility = {
 	 * } );
 	 */
 	iterate: function ( obj, fn ) {
-		array.each( Object.keys( obj ), function ( i ) {
+		array.iterate( Object.keys( obj ), function ( i ) {
 			return fn.call( obj, obj[ i ], i );
 		} );
 

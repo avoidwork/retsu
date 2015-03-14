@@ -1,8 +1,12 @@
 # Change Log
 
+## 1.1.0
+- Created `array.iterator()`, & `array.iterate()`
+- Refactored `array.each()` to `array.iterate()`
+
 ## 1.0.3
-- Removing `typeof` conditionals in a few iteration functions
-- Adding `bower.json`
+- Removed `typeof` conditionals in a few iteration functions
+- Added `bower.json`
 
 ## 1.0.2
 - Updated `clone(obj[, shallow])` with an optional `shallow` parameter, default is `true`

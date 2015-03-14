@@ -182,7 +182,7 @@ var array = {
 	collect: function ( obj, fn ) {
 		var result = [];
 
-		array.each( obj, function ( i ) {
+		array.iterate( obj, function ( i ) {
 			result.push( fn( i ) );
 		} );
 
@@ -243,13 +243,13 @@ var array = {
 	diff: function ( obj1, obj2 ) {
 		var result = [];
 
-		array.each( obj1, function ( i ) {
+		array.iterate( obj1, function ( i ) {
 			if ( !array.contains( obj2, i ) ) {
 				array.add( result, i );
 			}
 		} );
 
-		array.each( obj2, function ( i ) {
+		array.iterate( obj2, function ( i ) {
 			if ( !array.contains( obj1, i ) ) {
 				array.add( result, i );
 			}
@@ -270,8 +270,8 @@ var array = {
 	 * @param  {Number}   size  [Optional] Batch size for async iteration, default is 10
 	 * @return {Array}          Array
 	 * @example
-	 * array.each( [ ... ], function ( ... ) { ... } );
-	 * array.each( [ ... ], function ( ... ) { ... }, true, 100 ); // processing batches of a 100
+	 * array.iterate( [ ... ], function ( ... ) { ... } );
+	 * array.iterate( [ ... ], function ( ... ) { ... }, true, 100 ); // processing batches of a 100
 	 */
 	each: function ( obj, fn, async, size ) {
 		var nth = obj.length,
@@ -546,6 +546,56 @@ var array = {
 	},
 
 	/**
+	 * Iterates an Array using an Iterator
+	 *
+	 * @method iterate
+	 * @memberOf array
+	 * @param  {Array} obj Array to iterate
+	 * @return {Array}     Array to iterate
+	 */
+	iterate: function ( obj, fn ) {
+		var itr = array.iterator( obj ),
+			i = -1,
+			item, next;
+
+		do {
+			item = itr.next();
+
+			if ( !item.done ) {
+				next = fn( item.value, ++i );
+			}
+			else {
+				next = false;
+			}
+		} while ( next !== false );
+
+		return obj;
+	},
+
+	/**
+	 * Creates an Array generator to iterate the indices
+	 *
+	 * @method iterator
+	 * @memberOf array
+	 * @param  {Array} obj Array to iterate
+	 * @return {Function}  Generator
+	 */
+	iterator: function ( obj ) {
+		var i = -1,
+			n = obj.length;
+
+		return {
+			next: function () {
+				if ( ++i < n ) {
+					return { done: false, value: obj[ i ] };
+				} else {
+					return { done: true };
+				}
+			}
+		};
+	},
+
+	/**
 	 * Finds the intersections between two Arrays
 	 *
 	 * @method intersect
@@ -583,7 +633,7 @@ var array = {
 		var result = obj.filter( fn ),
 			remove = array.diff( obj, result );
 
-		array.each( remove, function ( i ) {
+		array.iterate( remove, function ( i ) {
 			array.remove( obj, array.index( obj, i ) );
 		} );
 
@@ -635,7 +685,7 @@ var array = {
 			sub = "";
 		}
 
-		array.each( queries, function ( i ) {
+		array.iterate( queries, function ( i ) {
 			var s = ".",
 				e = "";
 
@@ -791,7 +841,7 @@ var array = {
 	 * a[3]; // "d"
 	 */
 	merge: function ( obj1, obj2 ) {
-		array.each( obj2, function ( i ) {
+		array.iterate( obj2, function ( i ) {
 			array.add( obj1, i );
 		} );
 
@@ -854,7 +904,7 @@ var array = {
 			nth, result;
 
 		// Counting values
-		array.each( obj, function ( i ) {
+		array.iterate( obj, function ( i ) {
 			if ( !isNaN( values[ i ] ) ) {
 				values[ i ]++;
 			}
@@ -911,7 +961,7 @@ var array = {
 	rassoc: function ( obj, arg ) {
 		var result;
 
-		array.each( obj, function ( i, idx ) {
+		array.iterate( obj, function ( i, idx ) {
 			if ( i[ 1 ] === arg ) {
 				result = obj[ idx ];
 
@@ -990,7 +1040,7 @@ var array = {
 	removeIf: function ( obj, fn ) {
 		var remove = obj.filter( fn );
 
-		array.each( remove, function ( i ) {
+		array.iterate( remove, function ( i ) {
 			array.remove( obj, array.index( obj, i ) );
 		} );
 
@@ -1015,7 +1065,7 @@ var array = {
 	removeWhile: function ( obj, fn ) {
 		var remove = [];
 
-		array.each( obj, function ( i ) {
+		array.iterate( obj, function ( i ) {
 			if ( fn( i ) !== false ) {
 				remove.push( i );
 			}
@@ -1024,7 +1074,7 @@ var array = {
 			}
 		} );
 
-		array.each( remove, function ( i ) {
+		array.iterate( remove, function ( i ) {
 			array.remove( obj, array.index( obj, i ) );
 		} );
 
@@ -1048,7 +1098,7 @@ var array = {
 	 */
 	replace: function ( obj1, obj2 ) {
 		array.remove( obj1, 0, obj1.length );
-		array.each( obj2, function ( i ) {
+		array.iterate( obj2, function ( i ) {
 			obj1.push( i );
 		} );
 
@@ -1091,7 +1141,7 @@ var array = {
 	rindex: function ( obj, arg ) {
 		var result = -1;
 
-		array.each( obj, function ( i, idx ) {
+		array.iterate( obj, function ( i, idx ) {
 			if ( i === arg ) {
 				result = idx;
 			}
@@ -1383,7 +1433,7 @@ var array = {
 	unique: function ( obj ) {
 		var result = [];
 
-		array.each( obj, function ( i ) {
+		array.iterate( obj, function ( i ) {
 			array.add( result, i );
 		} );
 
@@ -1408,7 +1458,7 @@ var array = {
 		if ( nth > 0 ) {
 			mean = array.mean( obj );
 
-			array.each( obj, function ( i ) {
+			array.iterate( obj, function ( i ) {
 				n += math.sqr( i - mean );
 			} );
 
@@ -1445,16 +1495,16 @@ var array = {
 			args = typeof args == "object" ? array.cast( args ) : [ args ];
 		}
 
-		array.each( args, function ( i, idx ) {
+		array.iterate( args, function ( i, idx ) {
 			if ( !( i instanceof Array ) ) {
-				this[ idx ] = [ i ];
+				args[ idx ] = [ i ];
 			}
 		} );
 
 		// Building result Array
-		array.each( obj, function ( i, idx ) {
+		array.iterate( obj, function ( i, idx ) {
 			result[ idx ] = [ i ];
-			array.each( args, function ( x ) {
+			array.iterate( args, function ( x ) {
 				result[ idx ].push( x[ idx ] || null );
 			} );
 		} );
