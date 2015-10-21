@@ -19,7 +19,7 @@ var string = {
 	explode: function (obj, arg) {
 		arg = arg || ",";
 
-		return string.trim(obj ).split( new RegExp( "\\s*" + arg + "\\s*" ));
+		return string.trim(obj ).split(new RegExp( "\\s*" + arg + "\\s*"));
 	},
 
 	/**

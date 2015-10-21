@@ -14,7 +14,7 @@ var number = {
 	 * number.diff(-3, 8); // 11
 	 */
 	diff: function (num1, num2) {
-		if (isNaN( num1 ) || isNaN( num2 )) {
+		if (isNaN(num1 ) || isNaN( num2)) {
 			throw new Error(label.expectedNumber);
 		}
 
@@ -31,7 +31,7 @@ var number = {
 	 * @example
 	 * var n = 234235;
 	 *
-	 * if (number.even( n )) {
+	 * if (number.even(n)) {
 	 *   ...
 	 * }
 	 */
@@ -49,7 +49,7 @@ var number = {
 	 * @example
 	 * var n = 234235;
 	 *
-	 * if (number.odd( n )) {
+	 * if (number.odd(n)) {
 	 *   ...
 	 * }
 	 */
@@ -70,7 +70,7 @@ var number = {
 	 * number.parse(n);
 	 */
 	parse: function (arg, base) {
-		return (base === undefined ) ? parseFloat( arg ) : parseInt( arg, base);
+		return (base === undefined ) ? parseFloat(arg) : parseInt( arg, base);
 	},
 
 	/**
@@ -87,10 +87,10 @@ var number = {
 	round: function (arg, direction) {
 		arg = number.parse(arg);
 
-		if (direction === undefined || string.isEmpty( direction )) {
-			return number.parse(arg.toFixed( 0 ));
+		if (direction === undefined || string.isEmpty(direction)) {
+			return number.parse(arg.toFixed(0));
 		}
-		else if (regex.down.test( direction )) {
+		else if (regex.down.test(direction)) {
 			return ~~(arg);
 		}
 		else {

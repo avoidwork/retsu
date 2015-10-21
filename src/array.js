@@ -17,7 +17,7 @@ let array = {
 	 * array.add(myArray, 1); // [1, 2, 3]
 	 */
 	add: function (obj, arg) {
-		if (!array.contains( obj, arg )) {
+		if (!array.contains(obj, arg)) {
 			obj.push(arg);
 		}
 
@@ -38,13 +38,13 @@ let array = {
 	 * array.binIndex(myArray, 5); // 1
 	 */
 	binIndex: function (obj, arg) {
-		let max = obj.length - 1;
-		let min = 0;
-		let idx = 0;
-		let val = 0;
+		let max = obj.length - 1,
+			min = 0,
+			idx = 0,
+			val = 0;
 
 		while (min <= max) {
-			idx = Math.floor(( min + max ) / 2);
+			idx = Math.floor((min + max) / 2);
 			val = obj[ idx ];
 
 			if (val < arg) {
@@ -68,12 +68,12 @@ let array = {
 	 * @param  {Boolean} key [Optional] Returns key or value, only applies to Objects without a length property
 	 * @return {Array}       Object as an Array
 	 * @example
-	 * array.cast(document.querySelectorAll( "..." ));
+	 * array.cast(document.querySelectorAll("..."));
 	 */
 	cast: function (obj, key) {
 		let o = [];
 
-		if (!isNaN( obj.length )) {
+		if (!isNaN(obj.length)) {
 			o = Array.from(obj);
 		} else if (key === true) {
 			o = array.keys(obj);
@@ -99,13 +99,13 @@ let array = {
 	 */
 	chunk: function (obj, size) {
 		let result = [];
-		let nth = number.round(( obj.length / size ), "up");
+		let nth = number.round((obj.length / size), "up");
 		let start = 0;
 		let i = -1;
 
 		while (++i < nth) {
 			start = i * size;
-			result.push(array.limit( obj, start, size ));
+			result.push(array.limit(obj, start, size));
 		}
 
 		return result;
@@ -158,7 +158,7 @@ let array = {
 	 * @param  {Mixed} arg Value to look for
 	 * @return {Boolean}   True if found, false if not
 	 * @example
-	 * if (array.contains( [1], 1 )) { ... }
+	 * if (array.contains([1], 1)) { ... }
 	 */
 	contains: function (obj, arg) {
 		return obj.indexOf(arg) > -1;
@@ -263,7 +263,7 @@ let array = {
 		if (async !== true) {
 			i = -1;
 			while (++i < nth) {
-				if (fn.call( obj, obj[ i ], i ) === false) {
+				if (fn.call(obj, obj[ i ], i) === false) {
 					break;
 				}
 			}
@@ -281,7 +281,7 @@ let array = {
 				while (++i < size) {
 					idx = i + offset;
 
-					if (idx === nth || fn.call( obj, obj[ idx ], idx ) === false) {
+					if (idx === nth || fn.call(obj, obj[ idx ], idx) === false) {
 						return false;
 					}
 				}
@@ -319,7 +319,7 @@ let array = {
 		if (async !== true) {
 			i = nth;
 			while (--i > -1) {
-				if (fn.call( obj, obj[ i ], i ) === false) {
+				if (fn.call(obj, obj[ i ], i) === false) {
 					break;
 				}
 			}
@@ -338,7 +338,7 @@ let array = {
 				while (++i < size) {
 					idx = offset - i;
 
-					if (idx < 0 || fn.call( obj, obj[ idx ], idx ) === false) {
+					if (idx < 0 || fn.call(obj, obj[ idx ], idx) === false) {
 						return false;
 					}
 				}
@@ -407,7 +407,7 @@ let array = {
 		let i = !isNaN(start) ? start : 0;
 		let nth = !isNaN(offset) ? i + offset : l - 1;
 
-		if (nth > ( l - 1 )) {
+		if (nth > (l - 1)) {
 			nth = l - 1;
 		}
 
@@ -491,7 +491,7 @@ let array = {
 	 * array.fromObject({name: "John", sex: "male"}); // [["name", "John"], ["sex", "male"]]
 	 */
 	fromObject: function (obj) {
-		return array.mingle(array.keys( obj ), array.cast( obj ));
+		return array.mingle(array.keys(obj ), array.cast( obj));
 	},
 
 	/**
@@ -643,7 +643,7 @@ let array = {
 		remove = array.diff(obj, result);
 
 		array.each( remove, function (i) {
-			array.remove(obj, array.index( obj, i ));
+			array.remove(obj, array.index(obj, i));
 		} );
 
 		return obj;
@@ -681,7 +681,7 @@ let array = {
 	keySort: function (obj, query, sub) {
 		query = query.replace(/\s*asc/ig, "" ).replace( /\s*desc/ig, " desc");
 
-		let queries = string.explode(query ).map( function (i ) { return i.split( " "); });
+		let queries = string.explode(query ).map(function (i) { return i.split( " "); });
 		let sorts = [];
 		let braceS = "[\"";
 		let braceE = "\"]";
@@ -696,7 +696,7 @@ let array = {
 			let s = ".";
 			let e = "";
 
-			if (regex.not_dotnotation.test( i[ 0 ] )) {
+			if (regex.not_dotnotation.test(i[ 0 ])) {
 				s = braceS;
 				e = braceE;
 			}
@@ -704,26 +704,26 @@ let array = {
 			sorts.push("try {");
 
 			if (i[ 1 ] === "desc") {
-				sorts.push("if ( a" + sub + s + i[ 0 ] + e + " < b" + sub + s + i[ 0 ] + e + " ) return 1;");
-				sorts.push("if ( a" + sub + s + i[ 0 ] + e + " > b" + sub + s + i[ 0 ] + e + " ) return -1;");
+				sorts.push("if (a" + sub + s + i[ 0 ] + e + " < b" + sub + s + i[ 0 ] + e + ") return 1;");
+				sorts.push("if (a" + sub + s + i[ 0 ] + e + " > b" + sub + s + i[ 0 ] + e + ") return -1;");
 			} else {
-				sorts.push("if ( a" + sub + s + i[ 0 ] + e + " < b" + sub + s + i[ 0 ] + e + " ) return -1;");
-				sorts.push("if ( a" + sub + s + i[ 0 ] + e + " > b" + sub + s + i[ 0 ] + e + " ) return 1;");
+				sorts.push("if (a" + sub + s + i[ 0 ] + e + " < b" + sub + s + i[ 0 ] + e + ") return -1;");
+				sorts.push("if (a" + sub + s + i[ 0 ] + e + " > b" + sub + s + i[ 0 ] + e + ") return 1;");
 			}
 
 			sorts.push("} catch (e) {");
 			sorts.push("try {");
-			sorts.push("if ( a" + sub + s + i[ 0 ] + e + " !== undefined ) return " + ( i[ 1 ] === "desc" ? "-1" : "1") + ";");
+			sorts.push("if (a" + sub + s + i[ 0 ] + e + " !== undefined) return " + ( i[ 1 ] === "desc" ? "-1" : "1") + ";");
 			sorts.push("} catch (e) {}");
 			sorts.push("try {");
-			sorts.push("if ( b" + sub + s + i[ 0 ] + e + " !== undefined ) return " + ( i[ 1 ] === "desc" ? "1" : "-1") + ";");
+			sorts.push("if (b" + sub + s + i[ 0 ] + e + " !== undefined) return " + ( i[ 1 ] === "desc" ? "1" : "-1") + ";");
 			sorts.push("} catch (e) {}");
 			sorts.push("}");
 		} );
 
 		sorts.push("return 0;");
 
-		return obj.sort(new Function( "a", "b", sorts.join( "\n" ) ));
+		return obj.sort(new Function("a", "b", sorts.join( "\n" )));
 	},
 
 	/**
@@ -743,12 +743,12 @@ let array = {
 	last: function (obj, arg) {
 		let n = obj.length - 1;
 
-		if (arg >= ( n + 1 )) {
+		if (arg >= (n + 1)) {
 			return obj;
-		} else if (isNaN( arg ) || arg === 1) {
+		} else if (isNaN(arg) || arg === 1) {
 			return obj[ n ];
 		} else {
-			return array.limit(obj, ( n - ( --arg ) ), n);
+			return array.limit(obj, (n - ( --arg )), n);
 		}
 	},
 
@@ -793,7 +793,7 @@ let array = {
 	 * array.max([5, 3, 9, 1, 4]); // 9
 	 */
 	max: function (obj) {
-		return array.last(array.sorted( array.clone( obj ) ));
+		return array.last(array.sorted(array.clone( obj )));
 	},
 
 	/**
@@ -807,7 +807,7 @@ let array = {
 	 * array.mean([1, 3, 5]); // 3
 	 */
 	mean: function (obj) {
-		return obj.length > 0 ? (array.sum( obj ) / obj.length) : undefined;
+		return obj.length > 0 ? (array.sum(obj) / obj.length) : undefined;
 	},
 
 	/**
@@ -822,11 +822,11 @@ let array = {
 	 * array.median([5, 1, 3]);    // 3
 	 */
 	median: function (obj) {
-		let dupe = array.sorted(array.clone( obj ));
+		let dupe = array.sorted(array.clone(obj));
 		let nth = dupe.length;
 		let mid = number.round(nth / 2, "down");
 
-		return number.odd(nth ) ? dupe[ mid ]: ( ( dupe[ mid - 1 ] + dupe[ mid ] ) / 2);
+		return number.odd(nth ) ? dupe[ mid ]: (( dupe[ mid - 1 ] + dupe[ mid ]) / 2);
 	},
 
 	/**
@@ -863,7 +863,7 @@ let array = {
 	 * array.min([5, 3, 9, 1, 4]); // 1
 	 */
 	min: function (obj) {
-		return array.sorted(array.clone( obj ))[ 0 ];
+		return array.sorted(array.clone(obj))[ 0 ];
 	},
 
 	/**
@@ -907,7 +907,7 @@ let array = {
 
 		// Counting values
 		array.each( obj, function (i) {
-			if (!isNaN( values[ i ] )) {
+			if (!isNaN(values[ i ])) {
 				values[ i ]++;
 			} else {
 				values[ i ] = 1;
@@ -915,12 +915,12 @@ let array = {
 		} );
 
 		// Finding the highest occurring count
-		count = array.max(array.cast( values ));
+		count = array.max(array.cast(values));
 
 		// Finding values that match the count
 		utility.iterate( values, function (v, k) {
 			if (v === count) {
-				mode.push(number.parse( k ));
+				mode.push(number.parse(k));
 			}
 		} );
 
@@ -985,7 +985,7 @@ let array = {
 	 * array.reject([0, 1, 2, 3, 4, 5], function (i) { return i % 2 > 0; }); // [0, 2, 4]
 	 */
 	reject: function (obj, fn) {
-		return array.diff(obj, obj.filter( fn ));
+		return array.diff(obj, obj.filter(fn));
 	},
 
 	/**
@@ -1004,7 +1004,7 @@ let array = {
 	 * myArray[2]; // "e"
 	 */
 	remove: function (obj, start, end) {
-		if (isNaN( start )) {
+		if (isNaN(start)) {
 			start = array.index(obj, start);
 
 			if (start === -1) {
@@ -1015,7 +1015,7 @@ let array = {
 		}
 
 		let length = obj.length;
-		let remaining = obj.slice(( end || start ) + 1 || length);
+		let remaining = obj.slice((end || start) + 1 || length);
 
 		obj.length = start < 0 ? (length + start) : start;
 		obj.push.apply(obj, remaining);
@@ -1041,7 +1041,7 @@ let array = {
 		let remove = obj.filter(fn);
 
 		array.each( remove, function (i) {
-			array.remove(obj, array.index( obj, i ));
+			array.remove(obj, array.index(obj, i));
 		} );
 
 		return obj;
@@ -1066,7 +1066,7 @@ let array = {
 		let remove = [];
 
 		array.each( obj, function (i) {
-			if (fn( i ) !== false) {
+			if (fn(i) !== false) {
 				remove.push(i);
 			} else {
 				return false;
@@ -1074,7 +1074,7 @@ let array = {
 		} );
 
 		array.each( remove, function (i) {
-			array.remove(obj, array.index( obj, i ));
+			array.remove(obj, array.index(obj, i));
 		} );
 
 		return obj;
@@ -1173,7 +1173,7 @@ let array = {
 			}
 
 			result = array.limit(obj, arg, nth);
-			result = result.concat(array.limit( obj, 0, arg ));
+			result = result.concat(array.limit(obj, 0, arg));
 		}
 
 		return result;
@@ -1197,7 +1197,7 @@ let array = {
 
 		let result = [];
 		let n = -1;
-		let nth = Math.max(0, Math.ceil( ( end - start ) / offset ));
+		let nth = Math.max(0, Math.ceil(( end - start ) / offset));
 
 		while (++n < nth) {
 			result[ n ] = start;
@@ -1297,7 +1297,7 @@ let array = {
 		let i = -1;
 
 		// Finding the fold
-		if (number.diff( total, ( divisor * nth ) ) > nth) {
+		if (number.diff(total, ( divisor * nth )) > nth) {
 			lower = total - (low * divisor) + low - 1;
 		} else if (total % divisor > 0 && lower * nth >= total) {
 			lower--;
@@ -1313,7 +1313,7 @@ let array = {
 				lowered = true;
 			}
 
-			result.push(array.limit( obj, start, nth ));
+			result.push(array.limit(obj, start, nth));
 		}
 
 		return result;
@@ -1330,7 +1330,7 @@ let array = {
 	 * array.stddev([1, 3, 5]); // 1.632993161855452
 	 */
 	stddev: function (obj) {
-		return Math.sqrt(array.variance( obj ));
+		return Math.sqrt(array.variance(obj));
 	},
 
 	/**
@@ -1478,12 +1478,12 @@ let array = {
 		let result = [];
 
 		// Preparing args
-		if (!( args instanceof Array )) {
+		if (!(args instanceof Array)) {
 			args = typeof args === "object" ? array.cast(args) : [ args ];
 		}
 
 		array.each( args, function (i, idx) {
-			if (!( i instanceof Array )) {
+			if (!(i instanceof Array)) {
 				args[ idx ] = [ i ];
 			}
 		} );

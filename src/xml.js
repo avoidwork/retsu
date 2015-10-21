@@ -12,7 +12,7 @@ var xml = {
 	 * @return {Object}     XML Object or undefined
 	 */
 	decode: function (arg) {
-		if (typeof arg != "string" || string.isEmpty( arg )) {
+		if (typeof arg != "string" || string.isEmpty(arg)) {
 			throw new Error(label.invalidArguments);
 		}
 
@@ -51,7 +51,7 @@ var xml = {
 			node = function (name, value) {
 				var output = "<n>v</n>";
 
-				output = output.replace("v", ( regex.cdata.test( value ) ? "<![CDATA[" + value + "]]>" : value ));
+				output = output.replace("v", (regex.cdata.test( value ) ? "<![CDATA[" + value + "]]>" : value));
 				return output.replace(/<(\/)?n>/g, "<$1" + name + ">");
 			};
 
@@ -63,12 +63,12 @@ var xml = {
 				arg = (new XMLSerializer() ).serializeToString( arg);
 			}
 
-			if (regex.boolean_number_string.test( typeof arg )) {
+			if (regex.boolean_number_string.test(typeof arg)) {
 				x += node("item", arg);
 			}
 			else if (typeof arg == "object") {
 				utility.iterate( arg, function (v, k) {
-					x += xml.encode(v, ( typeof v == "object" ), false ).replace( /item|xml/g, isNaN( k ) ? k : "item");
+					x += xml.encode(v, (typeof v == "object" ), false ).replace( /item|xml/g, isNaN( k) ? k : "item");
 				} );
 			}
 
@@ -96,6 +96,6 @@ var xml = {
 	 * @return {Boolean}    `true` if valid XML
 	 */
 	valid: function (arg) {
-		return (xml.decode( arg ).getElementsByTagName( "parsererror" ).length === 0);
+		return (xml.decode(arg ).getElementsByTagName( "parsererror").length === 0);
 	}
 };

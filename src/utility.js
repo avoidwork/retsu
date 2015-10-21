@@ -28,7 +28,7 @@ var utility = {
 	 * @return {Undefined} undefined
 	 */
 	clearTimers: function (id) {
-		if (id === undefined || string.isEmpty( id )) {
+		if (id === undefined || string.isEmpty(id)) {
 			throw new Error(label.invalidArguments);
 		}
 
@@ -210,10 +210,10 @@ var utility = {
 	 */
 	merge: function (obj, arg) {
 		utility.iterate( arg, function (v, k) {
-			if (( obj[ k ] instanceof Array ) && ( v instanceof Array )) {
+			if ((obj[ k ] instanceof Array ) && ( v instanceof Array)) {
 				array.merge(obj[ k ], v);
 			}
-			else if (( obj[ k ] instanceof Object ) && ( v instanceof Object )) {
+			else if ((obj[ k ] instanceof Object ) && ( v instanceof Object)) {
 				utility.iterate( v, function (x, y) {
 					obj[ k ][ y ] = utility.clone(x);
 				} );
@@ -289,12 +289,12 @@ var utility = {
 	 */
 	uuid: function (strip) {
 		var s = function () {
-				return (( ( 1 + Math.random() ) * 0x10000 ) | 0 ).toString( 16 ).substring( 1);
+				return ((( 1 + Math.random() ) * 0x10000 ) | 0 ).toString( 16).substring( 1);
 			},
 			r = [ 8, 9, "a", "b" ],
 			o;
 
-		o = (s() + s() + "-" + s() + "-4" + s().substr( 0, 3 ) + "-" + r[ Math.floor( Math.random() * 4 ) ] + s().substr( 0, 3 ) + "-" + s() + s() + s());
+		o = (s() + s() + "-" + s() + "-4" + s().substr(0, 3 ) + "-" + r[ Math.floor( Math.random() * 4 ) ] + s().substr( 0, 3) + "-" + s() + s() + s());
 
 		if (strip === true) {
 			o = o.replace(/-/g, "");
