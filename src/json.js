@@ -2,7 +2,7 @@
  * @namespace json
  * @private
  */
-var json = {
+const json = {
 	/**
 	 * Decodes the argument
 	 *
@@ -12,22 +12,22 @@ var json = {
 	 * @param  {Boolean} silent [Optional] Silently fail
 	 * @return {Mixed}          Entity resulting from parsing JSON, or undefined
 	 * @example
-	 * var x = json.decode( ..., true );
+	 * var x = json.decode(..., true);
 	 *
-	 * if ( x ) {
+	 * if (x) {
 	 *   ...
 	 * }
 	 * else {
 	 *   ... // invalid JSON, with `Error` suppressed by `silent`
 	 * }
 	 */
-	decode: function ( arg, silent ) {
+	decode (arg, silent) {
 		try {
-			return JSON.parse( arg );
+			return JSON.parse(arg);
 		}
-		catch ( e ) {
-			if ( silent !== true ) {
-				utility.error( e, arguments, this );
+		catch (e) {
+			if (silent !== true) {
+				utility.error(e, arguments, this);
 			}
 
 			return undefined;
@@ -43,22 +43,22 @@ var json = {
 	 * @param  {Boolean} silent [Optional] Silently fail
 	 * @return {String}         JSON, or undefined
 	 * @example
-	 * var x = json.encode( ..., true );
+	 * var x = json.encode(..., true);
 	 *
-	 * if ( x ) {
+	 * if (x) {
 	 *   ...
 	 * }
 	 * else {
 	 *   ... // invalid JSON, with `Error` suppressed by `silent`
 	 * }
 	 */
-	encode: function ( arg, silent ) {
+	encode (arg, silent) {
 		try {
-			return JSON.stringify( arg );
+			return JSON.stringify(arg);
 		}
-		catch ( e ) {
-			if ( silent !== true ) {
-				utility.error( e, arguments, this );
+		catch (e) {
+			if (silent !== true) {
+				utility.error(e, arguments, this);
 			}
 
 			return undefined;

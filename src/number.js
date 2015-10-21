@@ -11,14 +11,14 @@ var number = {
 	 * @param {Number} arg Number to compare
 	 * @return {Number}    The absolute difference
 	 * @example
-	 * number.diff( -3, 8 ); // 11
+	 * number.diff(-3, 8); // 11
 	 */
-	diff: function ( num1, num2 ) {
-		if ( isNaN( num1 ) || isNaN( num2 ) ) {
-			throw new Error( label.expectedNumber );
+	diff: function (num1, num2) {
+		if (isNaN( num1 ) || isNaN( num2 )) {
+			throw new Error(label.expectedNumber);
 		}
 
-		return Math.abs( num1 - num2 );
+		return Math.abs(num1 - num2);
 	},
 
 	/**
@@ -31,11 +31,11 @@ var number = {
 	 * @example
 	 * var n = 234235;
 	 *
-	 * if ( number.even( n ) ) {
+	 * if (number.even( n )) {
 	 *   ...
 	 * }
 	 */
-	even: function ( arg ) {
+	even: function (arg) {
 		return arg % 2 === 0;
 	},
 
@@ -49,12 +49,12 @@ var number = {
 	 * @example
 	 * var n = 234235;
 	 *
-	 * if ( number.odd( n ) ) {
+	 * if (number.odd( n )) {
 	 *   ...
 	 * }
 	 */
-	odd: function ( arg ) {
-		return !number.even( arg );
+	odd: function (arg) {
+		return !number.even(arg);
 	},
 
 	/**
@@ -67,10 +67,10 @@ var number = {
 	 * @return {Number}      Integer or float
 	 * @example
 	 * // Unsure if `n` is an int or a float
-	 * number.parse( n );
+	 * number.parse(n);
 	 */
-	parse: function ( arg, base ) {
-		return ( base === undefined ) ? parseFloat( arg ) : parseInt( arg, base );
+	parse: function (arg, base) {
+		return (base === undefined ) ? parseFloat( arg ) : parseInt( arg, base);
 	},
 
 	/**
@@ -82,19 +82,19 @@ var number = {
 	 * @param  {String} direction [Optional] "up" or "down"
 	 * @return {Number}           Rounded interger
 	 * @example
-	 * math.round( n, "down" );
+	 * math.round(n, "down");
 	 */
-	round: function ( arg, direction ) {
-		arg = number.parse( arg );
+	round: function (arg, direction) {
+		arg = number.parse(arg);
 
-		if ( direction === undefined || string.isEmpty( direction ) ) {
-			return number.parse( arg.toFixed( 0 ) );
+		if (direction === undefined || string.isEmpty( direction )) {
+			return number.parse(arg.toFixed( 0 ));
 		}
-		else if ( regex.down.test( direction ) ) {
-			return ~~( arg );
+		else if (regex.down.test( direction )) {
+			return ~~(arg);
 		}
 		else {
-			return Math.ceil( arg );
+			return Math.ceil(arg);
 		}
 	}
 };

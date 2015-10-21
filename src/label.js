@@ -2,7 +2,7 @@
  * @namespace label
  * @private
  */
-var label = {
+const label = {
 	/**
 	 * Expected a Number
 	 *

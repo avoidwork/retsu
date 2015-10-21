@@ -1,8 +1,8 @@
 // Node, AMD & window supported
-if ( typeof exports != "undefined" ) {
+if (typeof exports != "undefined") {
 	module.exports = array;
 }
-else if ( typeof define == "function" ) {
+else if (typeof define == "function") {
 	define( function () {
 		return array;
 	} );
@@ -10,4 +10,4 @@ else if ( typeof define == "function" ) {
 else {
 	global.retsu = array;
 }
-} )( this );
+} )(this);

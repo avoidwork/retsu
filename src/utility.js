@@ -24,23 +24,23 @@ var utility = {
 	 *
 	 * @method clearTimers
 	 * @memberOf utility
-	 * @param  {String} id ID of timer( s )
+	 * @param  {String} id ID of timer(s)
 	 * @return {Undefined} undefined
 	 */
-	clearTimers: function ( id ) {
-		if ( id === undefined || string.isEmpty( id ) ) {
-			throw new Error( label.invalidArguments );
+	clearTimers: function (id) {
+		if (id === undefined || string.isEmpty( id )) {
+			throw new Error(label.invalidArguments);
 		}
 
 		// deferred
-		if ( utility.timer[ id ] ) {
-			clearTimeout( utility.timer[ id ] );
+		if (utility.timer[ id ]) {
+			clearTimeout(utility.timer[ id ]);
 			delete utility.timer[ id ];
 		}
 
 		// repeating
-		if ( utility.repeating[ id ] ) {
-			clearTimeout( utility.repeating[ id ] );
+		if (utility.repeating[ id ]) {
+			clearTimeout(utility.repeating[ id ]);
 			delete utility.repeating[ id ];
 		}
 	},
@@ -50,62 +50,16 @@ var utility = {
 	 *
 	 * @method clone
 	 * @memberOf utility
-	 * @param  {Object}  obj     Object to clone
-	 * @param  {Boolean} shallow [Optional] Create a shallow clone, which doesn't maintain prototypes, default is `false`
-	 * @return {Object}          Clone of obj
+	 * @param  {Object} obj Object to clone
+	 * @return {Object}     Clone of obj
 	 * @example
 	 * var x = {a: true, b: false},
-	 *     y = utility.clone( x, true );
+	 *     y = utility.clone(x);
 	 *
 	 * y.a; // true
 	 */
-	clone: function ( obj, shallow ) {
-		var clone, result;
-
-		if ( shallow === true ) {
-			return obj !== undefined && obj !== null ? json.decode( json.encode( obj ) ) : obj;
-		}
-		else if ( !obj || regex.primitive.test( typeof obj ) || ( obj instanceof RegExp ) ) {
-			return obj;
-		}
-		else if ( obj instanceof Array ) {
-			result = [];
-
-			array.iterate( obj, function ( i, idx ) {
-				result[ idx ] = utility.clone( i );
-			} );
-
-			return result;
-		}
-		else if ( !server && obj instanceof Document ) {
-			return xml.decode( xml.encode( obj ) );
-		}
-		else if ( typeof obj.__proto__ != "undefined" ) {
-			return utility.extend( obj.__proto__, obj );
-		}
-		else if ( obj instanceof Object ) {
-			// If JSON encoding fails due to recursion, the original Object is returned because it's assumed this is for decoration
-			clone = json.encode( obj, true );
-
-			if ( clone !== undefined ) {
-				clone = json.decode( clone );
-
-				// Decorating Functions that would be lost with JSON encoding/decoding
-				utility.iterate( obj, function ( v, k ) {
-					if ( typeof v == "function" ) {
-						clone[ k ] = v;
-					}
-				} );
-			}
-			else {
-				clone = obj;
-			}
-
-			return clone;
-		}
-		else {
-			return obj;
-		}
+	clone: function (obj) {
+		return JSON.parse(JSON.stringify(obj));
 	},
 
 	/**
@@ -120,25 +74,25 @@ var utility = {
 	 * @param  {Boolean}  repeat [Optional] Describes the execution, default is `false`
 	 * @return {String}          ID of the timer
 	 */
-	defer: function ( fn, ms, id, repeat ) {
+	defer: function (fn, ms, id, repeat) {
 		var op;
 
 		ms = ms || 0;
-		repeat = ( repeat === true );
+		repeat = (repeat === true);
 
-		if ( id !== undefined ) {
-			utility.clearTimers( id );
+		if (id !== undefined) {
+			utility.clearTimers(id);
 		}
 		else {
-			id = utility.uuid( true );
+			id = utility.uuid(true);
 		}
 
 		op = function () {
-			utility.clearTimers( id );
+			utility.clearTimers(id);
 			fn();
 		};
 
-		utility[ repeat ? "repeating" : "timer" ][ id ] = setTimeout( op, ms );
+		utility[ repeat ? "repeating" : "timer" ][ id ] = setTimeout(op, ms);
 
 		return id;
 	},
@@ -154,18 +108,18 @@ var utility = {
 	 * @param  {Boolean} warning [Optional] Will display as console warning if true
 	 * @return {Undefined}       undefined
 	 */
-	error: function ( e, args, scope, warning ) {
+	error: function (e, args, scope, warning) {
 		var o = {
-			"arguments": args ? array.cast( args ) : [],
+			"arguments": args ? array.cast(args) : [],
 			message: e.message || e,
-			number: e.number ? ( e.number & 0xFFFF ) : undefined,
+			number: e.number ? (e.number & 0xFFFF) : undefined,
 			scope: scope,
 			stack: e.stack || undefined,
 			timestamp: new Date().toUTCString(),
 			type: e.type || "TypeError"
 		};
 
-		utility.log( o.stack || o.message, warning !== true ? "error" : "warn" );
+		utility.log(o.stack || o.message, warning !== true ? "error" : "warn");
 
 		return undefined;
 	},
@@ -179,19 +133,19 @@ var utility = {
 	 * @param  {Object} arg [Optional] Object for decoration
 	 * @return {Object}     Decorated obj
 	 * @example
-	 * var extendObj = utility.extend( someObj, {newProperty: value} );
+	 * var extendObj = utility.extend(someObj, {newProperty: value});
 	 */
-	extend: function ( obj, arg ) {
+	extend: function (obj, arg) {
 		var o;
 
-		if ( obj === undefined ) {
-			throw new Error( label.invalidArguments );
+		if (obj === undefined) {
+			throw new Error(label.invalidArguments);
 		}
 
-		o = Object.create( obj );
+		o = Object.create(obj);
 
-		if ( arg instanceof Object ) {
-			utility.merge( o, arg );
+		if (arg instanceof Object) {
+			utility.merge(o, arg);
 		}
 
 		return o;
@@ -207,13 +161,13 @@ var utility = {
 	 * @param  {Function} fn  Function to execute against properties
 	 * @return {Object}       Object
 	 * @example
-	 * utility.iterate( {...}, function ( value, key ) {
+	 * utility.iterate( {...}, function (value, key) {
 	 *   ...
 	 * } );
 	 */
-	iterate: function ( obj, fn ) {
-		array.iterate( Object.keys( obj ), function ( i ) {
-			return fn.call( obj, obj[ i ], i );
+	iterate: function (obj, fn) {
+		array.iterate(Object.keys( obj), function (i) {
+			return fn.call(obj, obj[ i ], i);
 		} );
 
 		return obj;
@@ -228,15 +182,15 @@ var utility = {
 	 * @param  {String} target [Optional] Target console, default is "log"
 	 * @return {Undefined}     undefined
 	 * @example
-	 * utility.log( "Something bad happened", "warn" );
+	 * utility.log("Something bad happened", "warn");
 	 */
-	log: function ( arg, target ) {
+	log: function (arg, target) {
 		var ts, msg;
 
-		if ( typeof console != "undefined" ) {
+		if (typeof console != "undefined") {
 			ts = typeof arg != "object";
 			msg = ts ? "[" + new Date().toLocaleTimeString() + "] " + arg : arg;
-			console[ target || "log" ]( msg );
+			console[ target || "log" ](msg);
 		}
 	},
 
@@ -251,21 +205,21 @@ var utility = {
 	 * @example
 	 * var obj = {a: true};
 	 *
-	 * util.merge( obj, {b: false} )
+	 * util.merge(obj, {b: false})
 	 * obj.b; // false
 	 */
-	merge: function ( obj, arg ) {
-		utility.iterate( arg, function ( v, k ) {
-			if ( ( obj[ k ] instanceof Array ) && ( v instanceof Array ) ) {
-				array.merge( obj[ k ], v );
+	merge: function (obj, arg) {
+		utility.iterate( arg, function (v, k) {
+			if (( obj[ k ] instanceof Array ) && ( v instanceof Array )) {
+				array.merge(obj[ k ], v);
 			}
-			else if ( ( obj[ k ] instanceof Object ) && ( v instanceof Object ) ) {
-				utility.iterate( v, function ( x, y ) {
-					obj[ k ][ y ] = utility.clone( x );
+			else if (( obj[ k ] instanceof Object ) && ( v instanceof Object )) {
+				utility.iterate( v, function (x, y) {
+					obj[ k ][ y ] = utility.clone(x);
 				} );
 			}
 			else {
-				obj[ k ] = utility.clone( v );
+				obj[ k ] = utility.clone(v);
 			}
 		} );
 
@@ -287,29 +241,29 @@ var utility = {
 	 *   ...
 	 *
 	 *   // Cancelling repetition at some point in the future
-	 *   if ( someCondition ) {
+	 *   if (someCondition) {
 	 *     return false;
 	 *   }
 	 * }, 1000, "repeating" );
 	 */
-	repeat: function ( fn, ms, id, now ) {
+	repeat: function (fn, ms, id, now) {
 		ms = ms || 10;
-		id = id || utility.uuid( true );
-		now = ( now !== false );
+		id = id || utility.uuid(true);
+		now = (now !== false);
 
 		// Could be valid to return false from initial execution
-		if ( now && fn() === false ) {
+		if (now && fn() === false) {
 			return;
 		}
 
 		// Creating repeating execution
 		utility.defer( function () {
-			var recursive = function ( fn, ms, id ) {
+			var recursive = function (fn, ms, id) {
 				var recursive = this;
 
-				if ( fn() !== false ) {
+				if (fn() !== false) {
 					utility.repeating[ id ] = setTimeout( function () {
-						recursive.call( recursive, fn, ms, id );
+						recursive.call(recursive, fn, ms, id);
 					}, ms );
 				}
 				else {
@@ -317,7 +271,7 @@ var utility = {
 				}
 			};
 
-			recursive.call( recursive, fn, ms, id );
+			recursive.call(recursive, fn, ms, id);
 		}, ms, id, true );
 
 		return id;
@@ -333,17 +287,17 @@ var utility = {
 	 * @example
 	 * var uuid4 = utility.uuid();
 	 */
-	uuid: function ( strip ) {
+	uuid: function (strip) {
 		var s = function () {
-				return ( ( ( 1 + Math.random() ) * 0x10000 ) | 0 ).toString( 16 ).substring( 1 );
+				return (( ( 1 + Math.random() ) * 0x10000 ) | 0 ).toString( 16 ).substring( 1);
 			},
 			r = [ 8, 9, "a", "b" ],
 			o;
 
-		o = ( s() + s() + "-" + s() + "-4" + s().substr( 0, 3 ) + "-" + r[ Math.floor( Math.random() * 4 ) ] + s().substr( 0, 3 ) + "-" + s() + s() + s() );
+		o = (s() + s() + "-" + s() + "-4" + s().substr( 0, 3 ) + "-" + r[ Math.floor( Math.random() * 4 ) ] + s().substr( 0, 3 ) + "-" + s() + s() + s());
 
-		if ( strip === true ) {
-			o = o.replace( /-/g, "" );
+		if (strip === true) {
+			o = o.replace(/-/g, "");
 		}
 
 		return o;
