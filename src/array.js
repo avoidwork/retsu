@@ -41,22 +41,23 @@ let array = {
 		let max = obj.length - 1,
 			min = 0,
 			idx = 0,
-			val = 0;
+			val = 0,
+			result = -1;
 
 		while (min <= max) {
 			idx = Math.floor((min + max) / 2);
-			val = obj[ idx ];
+			val = obj[idx];
 
 			if (val < arg) {
 				min = idx + 1;
 			} else if (val > arg) {
 				max = idx - 1;
 			} else {
-				return idx;
+				result = idx;
 			}
 		}
 
-		return -1;
+		return result;
 	},
 
 	/**
@@ -70,13 +71,13 @@ let array = {
 	 * @example
 	 * array.cast(document.querySelectorAll("..."));
 	 */
-	cast: function (obj, key) {
+	cast: function (obj, key = false) {
 		let o = [];
 
-		if (!isNaN(obj.length)) {
-			o = Array.from(obj);
-		} else if (key === true) {
+		if (key === true) {
 			o = array.keys(obj);
+		} else if (!isNaN(obj.length)) {
+			o = Array.from(obj);
 		} else {
 			Object.keys(obj).forEach(function (i) {
 				o.push(obj[i]);
@@ -98,10 +99,10 @@ let array = {
 	 * array.chunk([0, 1, 2, 3], 2); // [[0, 1], [2, 3]]
 	 */
 	chunk: function (obj, size) {
-		let result = [];
-		let nth = number.round((obj.length / size), "up");
-		let start = 0;
-		let i = -1;
+		let result = [],
+			nth = number.round((obj.length / size), "up"),
+			start = 0,
+			i = -1;
 
 		while (++i < nth) {
 			start = i * size;
@@ -125,17 +126,16 @@ let array = {
 	 * myArray.length; // 0
 	 */
 	clear: function (obj) {
-		return obj.length > 0 ? array.remove(obj, 0, obj.length) : obj;
+		return array.remove(obj, 0, obj.length);
 	},
 
 	/**
-	 * Clones an Array
+	 * Shallow clones an Array
 	 *
 	 * @method clone
 	 * @memberOf array
-	 * @param  {Array}   obj     Array to clone
-	 * @param  {Boolean} shallow [Optional] Default is `true`
-	 * @return {Array}           Clone of Array
+	 * @param  {Array} obj Array to clone
+	 * @return {Array}     Clone of Array
 	 * @example
 	 * let myArray      = [1, 2, 3, 4, 5],
 	 *     myArrayClone = array.clone(myArray);
@@ -145,8 +145,8 @@ let array = {
 	 * myArray.length;      // 5
 	 * myArrayClone.length; // 6
 	 */
-	clone: function (obj, shallow=true) {
-		return utility.clone(obj, shallow);
+	clone: function (obj) {
+		return JSON.parse(JSON.stringify(obj));
 	},
 
 	/**
@@ -191,12 +191,12 @@ let array = {
 	 * array.compact([null, "a", "b", "c", null, "d"]); // ["a", "b", "c", "d"]
 	 * array.compact(["a", "b", "c", "d"], true);       // null
 	 */
-	compact: function (obj, diff) {
-		let result = obj.filter( function (i) {
-			return !regex.null_undefined.test(i);
-		} );
+	compact: function (obj, diff = false) {
+		let result = obj.filter(function (i) {
+			return i !== null && i !== undefined;
+		});
 
-		return diff !== true ? result : (result.length < obj.length ? result : null);
+		return diff !== true ? result : result.length < obj.length ? result : null;
 	},
 
 	/**
@@ -211,9 +211,9 @@ let array = {
 	 * array.count(["apple", "banana", "orange", "apple"], "apple"); // 2
 	 */
 	count: function (obj, value) {
-		return obj.filter( function (i) {
-			return (i === value);
-		} ).length;
+		return obj.filter(function (i) {
+			return i === value;
+		}).length;
 	},
 
 	/**
@@ -227,18 +227,12 @@ let array = {
 	 * @example
 	 * array.diff(["a"], ["a", "b"]); // ["b"]
 	 */
-	diff: function (obj1, obj2) {
-		let result;
-
-		result = obj1.filter( function (i) {
-			return !array.contains(obj2, i);
-		} );
-
-		result = result.concat( obj2.filter( function (i) {
-			return !array.contains(obj1, i);
-		} ) );
-
-		return result;
+	diff: function (a, b) {
+		return a.filter(function (i) {
+			return !array.contains(b, i);
+		}).concat(b.filter(function (i) {
+			return !array.contains(a, i);
+		}));
 	},
 
 	/**
@@ -247,52 +241,71 @@ let array = {
 	 *
 	 * @method each
 	 * @memberOf array
+	 * @param  {Array}    obj Array to iterate
+	 * @param  {Function} fn  Function to execute on index values
+	 * @param  {Mixed}    ctx [Optional] Context for `fn`
+	 * @return {Array}        Array
+	 * @example
+	 * array.each([...], function (...) { ... });
+	 * array.each([...], function (...) { ... }, true, 100); // processing batches of a 100
+	 */
+	each: function (obj, fn, ctx = fn) {
+		let nth = obj.length,
+			i = -1;
+
+		while (++i < nth) {
+			if (ctx.call(obj, obj[i], i) === false) {
+				break;
+			}
+		}
+
+		return obj;
+	},
+
+	/**
+	 * Iterates `obj` asynchronously and executes `fn` with arguments [`value`, `index`].
+	 * Returning `false` halts iteration.
+	 *
+	 * @method each
+	 * @memberOf array
 	 * @param  {Array}    obj   Array to iterate
 	 * @param  {Function} fn    Function to execute on index values
-	 * @param  {Boolean}  async [Optional] Asynchronous iteration
-	 * @param  {Number}   size  [Optional] Batch size for async iteration, default is 10
+	 * @param  {Number}   size  Function to execute on index values
+	 * @param  {Mixed}    ctx   [Optional] Context for `fn`
 	 * @return {Array}          Array
 	 * @example
-	 * array.each([ ... ], function (...) { ... });
-	 * array.each([ ... ], function (...) { ... }, true, 100); // processing batches of a 100
+	 * array.eachAsync([...], function (...) { ... });
+	 * array.eachAsync([...], function (...) { ... }, true, 100); // processing batches of a 100
 	 */
-	each: function (obj, fn, async, size=10) {
-		let nth = obj.length;
-		let i, offset;
-
-		if (async !== true) {
-			i = -1;
-			while (++i < nth) {
-				if (fn.call(obj, obj[ i ], i) === false) {
-					break;
-				}
-			}
-		} else {
+	eachAsync: function (obj, fn, size = 10, ctx = fn) {
+		let lobj = array.clone(obj),
+			nth = lobj.length,
 			offset = 0;
 
-			if (size > nth) {
-				size = nth;
+		if (size > nth) {
+			size = nth;
+		}
+
+		utility.repeat(function () {
+			let i = -1,
+				idx, result;
+
+			while (++i < size) {
+				idx = i + offset;
+
+				if (idx === nth || ctx.call(lobj, lobj[idx], idx) === false) {
+					result = false;
+				}
 			}
 
-			utility.repeat( function () {
-				let i = -1;
-				let idx;
+			offset += size;
 
-				while (++i < size) {
-					idx = i + offset;
+			if (offset >= nth) {
+				result = false;
+			}
 
-					if (idx === nth || fn.call(obj, obj[ idx ], idx) === false) {
-						return false;
-					}
-				}
-
-				offset += size;
-
-				if (offset >= nth) {
-					return false;
-				}
-			}, undefined, undefined, false );
-		}
+			return result;
+		}, undefined, undefined, false);
 
 		return obj;
 	},
@@ -303,70 +316,74 @@ let array = {
 	 *
 	 * @method eachReverse
 	 * @memberOf array
-	 * @param  {Array}    obj   Array to iterate
-	 * @param  {Function} fn    Function to execute on index values
-	 * @param  {Boolean}  async [Optional] Asynchronous iteration
-	 * @param  {Number}   size  [Optional] Batch size for async iteration, default is 10
-	 * @return {Array}          Array
+	 * @param  {Array}    obj Array to iterate
+	 * @param  {Function} fn  Function to execute on index values
+	 * @param  {Boolean}  ctx [Optional] Context to execute `fn`
+	 * @return {Array}        Array
 	 * @example
-	 * array.eachReverse([ ... ], function (...) { ... });
-	 * array.eachReverse([ ... ], function (...) { ... }, true, 100); // processing batches of a 100
+	 * array.eachReverse([...], function (...) { ... });
+	 * array.eachReverse([...], function (...) { ... }, true, 100); // processing batches of a 100
 	 */
-	eachReverse: function (obj, fn, async, size) {
-		let nth = obj.length;
-		let i, offset;
+	eachReverse: function (obj, fn, ctx = fn) {
+		let i = obj.length;
 
-		if (async !== true) {
-			i = nth;
-			while (--i > -1) {
-				if (fn.call(obj, obj[ i ], i) === false) {
-					break;
-				}
+		while (--i > -1) {
+			if (ctx.call(obj, obj[i], i) === false) {
+				break;
 			}
-		} else {
-			size = size || 10;
-			offset = nth - 1;
-
-			if (size > nth) {
-				size = nth;
-			}
-
-			utility.repeat( function () {
-				let i = -1;
-				let idx;
-
-				while (++i < size) {
-					idx = offset - i;
-
-					if (idx < 0 || fn.call(obj, obj[ idx ], idx) === false) {
-						return false;
-					}
-				}
-
-				offset -= size;
-
-				if (offset < 0) {
-					return false;
-				}
-			}, undefined, undefined, false );
 		}
 
 		return obj;
 	},
 
 	/**
-	 * Determines if an Array is empty
+	 * Iterates `obj` asynchronously in reverse and executes `fn` with arguments [`value`, `index`].
+	 * Returning `false` halts iteration.
 	 *
-	 * @method empty
+	 * @method eachReverse
 	 * @memberOf array
-	 * @param  {Array} obj Array to inspect
-	 * @return {Boolean}   `true` if there's no indices
+	 * @param  {Array}    obj   Array to iterate
+	 * @param  {Function} fn    Function to execute on index values
+	 * @param  {Number}   size  [Optional] Batch size for async iteration, default is 10
+	 * @param  {Boolean}  ctx   [Optional] Context to execute `fn`
+	 * @return {Array}          Array
 	 * @example
-	 * array.empty([]);    // true
-	 * array.empty(["a"]); // false
+	 * array.eachReverse([...], function (...) { ... });
+	 * array.eachReverse([...], function (...) { ... }, true, 100); // processing batches of a 100
 	 */
-	empty: function (obj) {
-		return obj.length === 0;
+	eachReverseAsync: function (obj, fn, size = 10, ctx = fn) {
+		let lobj = array.clone(obj),
+			nth = lobj.length,
+			i, offset, result;
+
+		offset = nth - 1;
+
+		if (size > nth) {
+			size = nth;
+		}
+
+		utility.repeat( function () {
+			let i = -1;
+			let idx;
+
+			while (++i < size) {
+				idx = offset - i;
+
+				if (idx < 0 || ctx.call(lobj, lobj[idx], idx) === false) {
+					result = false;
+				}
+			}
+
+			offset -= size;
+
+			if (offset < 0) {
+				result = false;
+			}
+
+			return result;
+		}, undefined, undefined, false);
+
+		return obj;
 	},
 
 	/**
@@ -374,15 +391,15 @@ let array = {
 	 *
 	 * @method equal
 	 * @memberOf array
-	 * @param  {Array} obj1 Array to compare
-	 * @param  {Array} obj2 Array to compare
+	 * @param  {Array} a Array to compare
+	 * @param  {Array} b Array to compare
 	 * @return {Boolean} `true` if the Arrays match
 	 * @example
 	 * array.equal(["a"], ["a"]);      // true
 	 * array.equal(["a"], ["a", "b"]); // false
 	 */
-	equal: function (obj1, obj2) {
-		return JSON.stringify(obj1 ) === JSON.stringify( obj2);
+	equal: function (a, b) {
+		return JSON.stringify(a) === JSON.stringify(b);
 	},
 
 	/**
@@ -402,23 +419,22 @@ let array = {
 	 * myArray[0]; // "aa"
 	 */
 	fill: function (obj, arg, start, offset) {
-		let fn = typeof arg === "function";
-		let l = obj.length;
-		let i = !isNaN(start) ? start : 0;
-		let nth = !isNaN(offset) ? i + offset : l - 1;
+		let l = obj.length,
+			i = !isNaN(start) ? start : 0,
+			nth = !isNaN(offset) ? i + offset : l - 1;
 
 		if (nth > (l - 1)) {
 			nth = l - 1;
 		}
 
-		if (fn) {
+		if (typeof arg === "function") {
 			while (i <= nth) {
-				obj[ i ] = arg(obj[ i ]);
+				obj[i] = arg(obj[i]);
 				i++;
 			}
 		} else {
 			while (i <= nth) {
-				obj[ i ] = arg;
+				obj[i] = arg;
 				i++;
 			}
 		}
@@ -437,7 +453,7 @@ let array = {
 	 * array.first(["a", "b"]); // "a"
 	 */
 	first: function (obj) {
-		return obj[ 0 ];
+		return obj[0];
 	},
 
 	/**
@@ -451,13 +467,9 @@ let array = {
 	 * array.flat([[0, 1], [2, 3]]); // [0, 1, 2, 3]
 	 */
 	flat: function (obj) {
-		let result = [];
-
-		result = obj.reduce( function (a, b) {
+		return obj.reduce(function (a, b) {
 			return a.concat(b);
-		}, result );
-
-		return result;
+		}, []);
 	},
 
 	/**
@@ -467,17 +479,16 @@ let array = {
 	 * @method forEach
 	 * @memberOf array
 	 * @see array.each
-	 * @param  {Array}    obj   Array to iterate
-	 * @param  {Function} fn    Function to execute on index values
-	 * @param  {Boolean}  async [Optional] Asynchronous iteration
-	 * @param  {Number}   size  [Optional] Batch size for async iteration, default is 10
-	 * @return {Array}          Array
+	 * @param  {Array}    obj Array to iterate
+	 * @param  {Function} fn  Function to execute on index values
+	 * @param  {Function} ctx [Optional] Context to execute `fn`
+	 * @return {Array}        Array
 	 * @example
-	 * array.forEach([ ... ], function (...) { ... });
-	 * array.forEach([ ... ], function (...) { ... }, true, 100); // processing batches of a 100
+	 * array.forEach([...], function (...) { ... });
+	 * array.forEach([...], function (...) { ... }, true, 100); // processing batches of a 100
 	 */
-	forEach: function (obj, fn, async, size) {
-		return array.each(obj, fn, async, size);
+	forEach: function (obj, fn, ctx = fn) {
+		return array.each(obj, fn, ctx);
 	},
 
 	/**
@@ -491,7 +502,7 @@ let array = {
 	 * array.fromObject({name: "John", sex: "male"}); // [["name", "John"], ["sex", "male"]]
 	 */
 	fromObject: function (obj) {
-		return array.mingle(array.keys(obj ), array.cast( obj));
+		return array.mingle(array.keys(obj), array.cast(obj));
 	},
 
 	/**
@@ -523,13 +534,9 @@ let array = {
 	 * array.indexed(myArray); ["a", "b", "c", "d"];
 	 */
 	indexed: function (obj) {
-		let result = [];
-
-		utility.iterate( obj, function (v) {
-			result.push(v);
-		} );
-
-		return result;
+		return Object.keys(obj).map(function (key) {
+			return obj[key];
+		});
 	},
 
 	/**
@@ -544,12 +551,34 @@ let array = {
 	 * array.intersect(["a", "b", "d"], ["b", "c", "d"]); // ["b", "d"]
 	 */
 	intersect: function (obj1, obj2) {
-		let a = obj1.length > obj2.length ? obj1 : obj2;
-		let b = (a === obj1 ? obj2 : obj1);
+		let a, b;
 
-		return a.filter( function (key) {
+		if (obj1.length > obj2.length) {
+			a = obj1;
+			b = obj2;
+		} else {
+			a = obj2;
+			b = obj1;
+		}
+
+		return a.filter(function (key) {
 			return array.contains(b, key);
-		} );
+		});
+	},
+
+	/**
+	 * Determines if an Array is empty
+	 *
+	 * @method isEmpty
+	 * @memberOf array
+	 * @param  {Array} obj Array to inspect
+	 * @return {Boolean}   `true` if there's no indices
+	 * @example
+	 * array.isEmpty([]);    // true
+	 * array.isEmpty(["a"]); // false
+	 */
+	isEmpty: function (obj) {
+		return obj.length === 0;
 	},
 
 	/**
@@ -561,17 +590,16 @@ let array = {
 	 * @return {Array}     Array to iterate
 	 */
 	iterate: function (obj, fn) {
-		let itr = array.iterator(obj);
-		let i = -1;
-		let item, next;
+		let itr = array.iterator(obj),
+			i = -1,
+			item, next;
 
 		do {
 			item = itr.next();
 
 			if (!item.done) {
 				next = fn(item.value, ++i);
-			}
-			else {
+			} else {
 				next = false;
 			}
 		} while (next !== false);
@@ -588,16 +616,20 @@ let array = {
 	 * @return {Function}  Generator
 	 */
 	iterator: function (obj) {
-		let i = -1;
-		let n = obj.length;
+		let nth = obj.length,
+			i = -1;
 
 		return {
 			next () {
-				if (++i < n) {
-					return { done: false, value: obj[ i ] };
+				let result;
+
+				if (++i < nth) {
+					result = {done: false, value: obj[i]};
 				} else {
-					return { done: true };
+					result = {done: true};
 				}
+
+				return result;
 			}
 		};
 	},
@@ -696,27 +728,27 @@ let array = {
 			let s = ".";
 			let e = "";
 
-			if (regex.not_dotnotation.test(i[ 0 ])) {
+			if (regex.not_dotnotation.test(i[0])) {
 				s = braceS;
 				e = braceE;
 			}
 
 			sorts.push("try {");
 
-			if (i[ 1 ] === "desc") {
-				sorts.push("if (a" + sub + s + i[ 0 ] + e + " < b" + sub + s + i[ 0 ] + e + ") return 1;");
-				sorts.push("if (a" + sub + s + i[ 0 ] + e + " > b" + sub + s + i[ 0 ] + e + ") return -1;");
+			if (i[1] === "desc") {
+				sorts.push("if (a" + sub + s + i[0 ] + e + " < b" + sub + s + i[ 0] + e + ") return 1;");
+				sorts.push("if (a" + sub + s + i[0 ] + e + " > b" + sub + s + i[ 0] + e + ") return -1;");
 			} else {
-				sorts.push("if (a" + sub + s + i[ 0 ] + e + " < b" + sub + s + i[ 0 ] + e + ") return -1;");
-				sorts.push("if (a" + sub + s + i[ 0 ] + e + " > b" + sub + s + i[ 0 ] + e + ") return 1;");
+				sorts.push("if (a" + sub + s + i[0 ] + e + " < b" + sub + s + i[ 0] + e + ") return -1;");
+				sorts.push("if (a" + sub + s + i[0 ] + e + " > b" + sub + s + i[ 0] + e + ") return 1;");
 			}
 
 			sorts.push("} catch (e) {");
 			sorts.push("try {");
-			sorts.push("if (a" + sub + s + i[ 0 ] + e + " !== undefined) return " + ( i[ 1 ] === "desc" ? "-1" : "1") + ";");
+			sorts.push("if (a" + sub + s + i[0 ] + e + " !== undefined) return " + ( i[ 1] === "desc" ? "-1" : "1") + ";");
 			sorts.push("} catch (e) {}");
 			sorts.push("try {");
-			sorts.push("if (b" + sub + s + i[ 0 ] + e + " !== undefined) return " + ( i[ 1 ] === "desc" ? "1" : "-1") + ";");
+			sorts.push("if (b" + sub + s + i[0 ] + e + " !== undefined) return " + ( i[ 1] === "desc" ? "1" : "-1") + ";");
 			sorts.push("} catch (e) {}");
 			sorts.push("}");
 		} );
@@ -746,7 +778,7 @@ let array = {
 		if (arg >= (n + 1)) {
 			return obj;
 		} else if (isNaN(arg) || arg === 1) {
-			return obj[ n ];
+			return obj[n];
 		} else {
 			return array.limit(obj, (n - ( --arg )), n);
 		}
@@ -775,7 +807,7 @@ let array = {
 
 		if (max > 0) {
 			while (++i < nth && i < max) {
-				result.push(obj[ i ]);
+				result.push(obj[i]);
 			}
 		}
 
@@ -826,7 +858,7 @@ let array = {
 		let nth = dupe.length;
 		let mid = number.round(nth / 2, "down");
 
-		return number.odd(nth ) ? dupe[ mid ]: (( dupe[ mid - 1 ] + dupe[ mid ]) / 2);
+		return number.odd(nth ) ? dupe[mid ]: (( dupe[ mid - 1 ] + dupe[ mid]) / 2);
 	},
 
 	/**
@@ -863,7 +895,7 @@ let array = {
 	 * array.min([5, 3, 9, 1, 4]); // 1
 	 */
 	min: function (obj) {
-		return array.sorted(array.clone(obj))[ 0 ];
+		return array.sorted(array.clone(obj))[0];
 	},
 
 	/**
@@ -882,7 +914,7 @@ let array = {
 	 */
 	mingle: function (obj1, obj2) {
 		let result = obj1.map( function (i, idx) {
-			return [ i, obj2[ idx ] ];
+			return [i, obj2[ idx ]];
 		} );
 
 		return result;
@@ -907,10 +939,10 @@ let array = {
 
 		// Counting values
 		array.each( obj, function (i) {
-			if (!isNaN(values[ i ])) {
-				values[ i ]++;
+			if (!isNaN(values[i])) {
+				values[i]++;
 			} else {
-				values[ i ] = 1;
+				values[i] = 1;
 			}
 		} );
 
@@ -928,7 +960,7 @@ let array = {
 		nth = mode.length;
 
 		if (nth > 0) {
-			result = nth === 1 ? mode[ 0 ] : mode;
+			result = nth === 1 ? mode[0] : mode;
 		}
 
 		return result;
@@ -963,8 +995,8 @@ let array = {
 		let result;
 
 		array.each( obj, function (i, idx) {
-			if (i[ 1 ] === arg) {
-				result = utility.clone(obj[ idx ], true);
+			if (i[1] === arg) {
+				result = utility.clone(obj[idx], true);
 
 				return false;
 			}
@@ -1200,7 +1232,7 @@ let array = {
 		let nth = Math.max(0, Math.ceil(( end - start ) / offset));
 
 		while (++n < nth) {
-			result[ n ] = start;
+			result[n] = start;
 			start += offset;
 		}
 
@@ -1385,7 +1417,7 @@ let array = {
 		let i = ar.length;
 
 		while (i--) {
-			obj[ i.toString() ] = ar[ i ];
+			obj[i.toString() ] = ar[ i];
 		}
 
 		return obj;
@@ -1479,20 +1511,20 @@ let array = {
 
 		// Preparing args
 		if (!(args instanceof Array)) {
-			args = typeof args === "object" ? array.cast(args) : [ args ];
+			args = typeof args === "object" ? array.cast(args) : [args];
 		}
 
 		array.each( args, function (i, idx) {
 			if (!(i instanceof Array)) {
-				args[ idx ] = [ i ];
+				args[idx ] = [ i];
 			}
 		} );
 
 		// Building result Array
 		array.each( obj, function (i, idx) {
-			result[ idx ] = [ i ];
+			result[idx ] = [ i];
 			array.each( args, function (x) {
-				result[ idx ].push(x[ idx ] || null);
+				result[idx ].push(x[ idx] || null);
 			} );
 		} );
 

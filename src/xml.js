@@ -35,7 +35,7 @@ var xml = {
 
 			wrap = (wrap !== false);
 			var x = wrap ? "<xml>" : "",
-				top = (arguments[ 2 ] !== false),
+				top = (arguments[2] !== false),
 				node;
 
 			/**

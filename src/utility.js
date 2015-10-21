@@ -33,15 +33,15 @@ var utility = {
 		}
 
 		// deferred
-		if (utility.timer[ id ]) {
-			clearTimeout(utility.timer[ id ]);
-			delete utility.timer[ id ];
+		if (utility.timer[id]) {
+			clearTimeout(utility.timer[id]);
+			delete utility.timer[id];
 		}
 
 		// repeating
-		if (utility.repeating[ id ]) {
-			clearTimeout(utility.repeating[ id ]);
-			delete utility.repeating[ id ];
+		if (utility.repeating[id]) {
+			clearTimeout(utility.repeating[id]);
+			delete utility.repeating[id];
 		}
 	},
 
@@ -92,7 +92,7 @@ var utility = {
 			fn();
 		};
 
-		utility[ repeat ? "repeating" : "timer" ][ id ] = setTimeout(op, ms);
+		utility[repeat ? "repeating" : "timer" ][ id] = setTimeout(op, ms);
 
 		return id;
 	},
@@ -167,7 +167,7 @@ var utility = {
 	 */
 	iterate: function (obj, fn) {
 		array.iterate(Object.keys( obj), function (i) {
-			return fn.call(obj, obj[ i ], i);
+			return fn.call(obj, obj[i], i);
 		} );
 
 		return obj;
@@ -190,7 +190,7 @@ var utility = {
 		if (typeof console != "undefined") {
 			ts = typeof arg != "object";
 			msg = ts ? "[" + new Date().toLocaleTimeString() + "] " + arg : arg;
-			console[ target || "log" ](msg);
+			console[target || "log"](msg);
 		}
 	},
 
@@ -210,16 +210,16 @@ var utility = {
 	 */
 	merge: function (obj, arg) {
 		utility.iterate( arg, function (v, k) {
-			if ((obj[ k ] instanceof Array ) && ( v instanceof Array)) {
-				array.merge(obj[ k ], v);
+			if ((obj[k] instanceof Array ) && ( v instanceof Array)) {
+				array.merge(obj[k], v);
 			}
-			else if ((obj[ k ] instanceof Object ) && ( v instanceof Object)) {
+			else if ((obj[k] instanceof Object ) && ( v instanceof Object)) {
 				utility.iterate( v, function (x, y) {
-					obj[ k ][ y ] = utility.clone(x);
+					obj[k ][ y] = utility.clone(x);
 				} );
 			}
 			else {
-				obj[ k ] = utility.clone(v);
+				obj[k] = utility.clone(v);
 			}
 		} );
 
@@ -262,12 +262,12 @@ var utility = {
 				var recursive = this;
 
 				if (fn() !== false) {
-					utility.repeating[ id ] = setTimeout( function () {
+					utility.repeating[id] = setTimeout( function () {
 						recursive.call(recursive, fn, ms, id);
 					}, ms );
 				}
 				else {
-					delete utility.repeating[ id ];
+					delete utility.repeating[id];
 				}
 			};
 
@@ -291,10 +291,10 @@ var utility = {
 		var s = function () {
 				return ((( 1 + Math.random() ) * 0x10000 ) | 0 ).toString( 16).substring( 1);
 			},
-			r = [ 8, 9, "a", "b" ],
+			r = [8, 9, "a", "b"],
 			o;
 
-		o = (s() + s() + "-" + s() + "-4" + s().substr(0, 3 ) + "-" + r[ Math.floor( Math.random() * 4 ) ] + s().substr( 0, 3) + "-" + s() + s() + s());
+		o = (s() + s() + "-" + s() + "-4" + s().substr(0, 3 ) + "-" + r[Math.floor( Math.random() * 4 )] + s().substr( 0, 3) + "-" + s() + s() + s());
 
 		if (strip === true) {
 			o = o.replace(/-/g, "");
