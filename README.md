@@ -22,7 +22,7 @@ Transforms an Array to a 2D Array of chunks
 #### clear(obj)
 Clears an Array without destroying it
 
-#### clone(obj[, shallow])
+#### clone(obj)
 Clones an Array, `shallow` defaults to `true`
 
 #### contains(obj, arg)
@@ -40,11 +40,17 @@ Counts the occurrence of `arg` in `obj`
 #### diff(obj1, obj2)
 Finds the difference between two Arrays
 
-#### each(obj, fn[, async, size])
+#### each(obj, fn[, ctx])
 Iterates `obj` and executes `fn` with arguments [`value`, `index`]; returning `false` from `fn` halts iteration
 
-#### eachReverse(obj, fn[, async, size])
+#### eachAsync(obj, fn[, async, size, ctx])
+Iterates `obj` and executes `fn` with arguments [`value`, `index`]; returning `false` from `fn` halts iteration
+
+#### eachReverse(obj, fn[, ctx])
 Like `each()`, but in reverse
+
+#### eachAsyncReverse(obj, fn[, async, size, ctx])
+Like `eachAsync()`, but in reverse
 
 #### empty(obj)
 Determines if an Array is empty
@@ -61,7 +67,7 @@ Returns the first index
 #### flat(obj)
 Flattens a 2D Array
 
-#### forEach(obj, fn[, async, size])
+#### forEach(obj, fn[, ctx])
 Like `each()`, iterates `obj` and executes `fn` with arguments [`value`, `index`]; returning `false` from `fn` halts iteration
 
 #### fromObject(obj)
@@ -84,12 +90,6 @@ Creates an Array generator to iterate the indices
 
 #### keepIf(obj, fn)
 Resizes `obj` by keeping every index which `fn` evaluates to `true`
-
-#### keys(obj)
-Returns the keys in an Associative Array, e.g. an Object
-
-#### keySort(obj, clause)
-Sorts an Array based on key values, like an SQL ORDER BY clause
 
 #### last(obj[, offset])
 Returns the last index of the Array, with an optional `offset` from the end to retrieve a range
