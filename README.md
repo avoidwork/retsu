@@ -1,6 +1,7 @@
 # retsu
 
-retsu is an Array micro library focused on speed.
+retsu is an Array library for Client or Server, focused on providing useful functions, and speed.
+It implements popular Array methods from Ruby.
 
 [![build status](https://secure.travis-ci.org/avoidwork/retsu.svg)](http://travis-ci.org/avoidwork/retsu)
 
