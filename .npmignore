@@ -7,7 +7,8 @@
 /test/
 .git
 .gitignore
-.jshintrc
+.eslintrc
 .travis.yml
+bower.yml
 docstrap.json
 Gruntfile.js
