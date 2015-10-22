@@ -82,10 +82,10 @@ Returns an Associative Array as an Indexed Array
 #### intersect(obj1, obj2)
 Finds the intersections between two Arrays
 
-#### iterate(obj1, fn)
+#### iterate(obj, fn)
 Iterates an Array using an Iterator
 
-#### iterator(obj1)
+#### iterator(obj)
 Creates an Array generator to iterate the indices
 
 #### keepIf(obj, fn)
