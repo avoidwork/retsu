@@ -291,10 +291,10 @@
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">var myArray = [1, 2];
+    <pre class="sunlight-highlight-javascript">let myArray = [1, 2];
 
-array.add( myArray, 3 ); &#x2F;&#x2F; [1, 2, 3]
-array.add( myArray, 1 ); &#x2F;&#x2F; [1, 2, 3]</pre>
+array.add(myArray, 3); &#x2F;&#x2F; [1, 2, 3]
+array.add(myArray, 1); &#x2F;&#x2F; [1, 2, 3]</pre>
 
 
     
@@ -311,7 +311,7 @@ array.add( myArray, 1 ); &#x2F;&#x2F; [1, 2, 3]</pre>
     
     
     <div class="description">
-        <p>Performs a binary search on a sorted Array</p>
+        <p>Preforms a binary search on a sorted Array</p>
     </div>
     
 
@@ -461,9 +461,9 @@ array.add( myArray, 1 ); &#x2F;&#x2F; [1, 2, 3]</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">var myArray = [1, 5, 10, 15, 20, 25, ...];
+    <pre class="sunlight-highlight-javascript">let myArray = [1, 5, 10, 15, 20, 25, ...];
 
-array.binIndex( myArray, 5 ); &#x2F;&#x2F; 1</pre>
+array.binIndex(myArray, 5); &#x2F;&#x2F; 1</pre>
 
 
     
@@ -480,7 +480,7 @@ array.binIndex( myArray, 5 ); &#x2F;&#x2F; 1</pre>
     
     
     <div class="description">
-        <p>Returns an Object ( NodeList, etc. ) as an Array</p>
+        <p>Returns an Object (NodeList, etc.) as an Array</p>
     </div>
     
 
@@ -630,7 +630,7 @@ array.binIndex( myArray, 5 ); &#x2F;&#x2F; 1</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">array.cast( document.querySelectorAll( &quot;...&quot; ) );</pre>
+    <pre class="sunlight-highlight-javascript">array.cast(document.querySelectorAll(&quot;...&quot;));</pre>
 
 
     
@@ -720,7 +720,7 @@ array.binIndex( myArray, 5 ); &#x2F;&#x2F; 1</pre>
 
             
 
-            <td class="description last"><p>Chunk size ( integer )</p></td>
+            <td class="description last"><p>Chunk size (integer)</p></td>
         </tr>
 
 	
@@ -797,7 +797,7 @@ array.binIndex( myArray, 5 ); &#x2F;&#x2F; 1</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">array.chunk( [0, 1, 2, 3], 2 ); &#x2F;&#x2F; [[0, 1], [2, 3]]</pre>
+    <pre class="sunlight-highlight-javascript">array.chunk([0, 1, 2, 3], 2); &#x2F;&#x2F; [[0, 1], [2, 3]]</pre>
 
 
     
@@ -941,10 +941,10 @@ array.binIndex( myArray, 5 ); &#x2F;&#x2F; 1</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">var myArray = [1, 2, 3, 4, 5];
+    <pre class="sunlight-highlight-javascript">let myArray = [1, 2, 3, 4, 5];
 
-array.clear( myArray );
-myarray.length; &#x2F;&#x2F; 0</pre>
+array.clear(myArray);
+myArray.length; &#x2F;&#x2F; 0</pre>
 
 
     
@@ -953,7 +953,7 @@ myarray.length; &#x2F;&#x2F; 0</pre>
         
             
 <dt>
-    <h4 class="name" id="clone"><span class="type-signature">&lt;static> </span>clone<span class="signature">(obj, shallow)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+    <h4 class="name" id="clone"><span class="type-signature">&lt;static> </span>clone<span class="signature">(obj)</span><span class="type-signature"> &rarr; {Array}</span></h4>
     
     
 </dt>
@@ -961,7 +961,7 @@ myarray.length; &#x2F;&#x2F; 0</pre>
     
     
     <div class="description">
-        <p>Clones an Array</p>
+        <p>Shallow clones an Array</p>
     </div>
     
 
@@ -1012,29 +1012,6 @@ myarray.length; &#x2F;&#x2F; 0</pre>
             
 
             <td class="description last"><p>Array to clone</p></td>
-        </tr>
-
-	
-
-        <tr>
-            
-                <td class="name"><code>shallow</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Boolean</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>[Optional] Default is <code>true</code></p></td>
         </tr>
 
 	
@@ -1111,12 +1088,12 @@ myarray.length; &#x2F;&#x2F; 0</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">var myArray      = [1, 2, 3, 4, 5],
-    myArrayClone = array.clone( myArray );
+    <pre class="sunlight-highlight-javascript">let myArray      = [1, 2, 3, 4, 5],
+    myArrayClone = array.clone(myArray);
 
-myArrayClone.push( 6 );
+myArrayClone.push(6);
 
-myarray.length;      &#x2F;&#x2F; 5
+myArray.length;      &#x2F;&#x2F; 5
 myArrayClone.length; &#x2F;&#x2F; 6</pre>
 
 
@@ -1134,7 +1111,7 @@ myArrayClone.length; &#x2F;&#x2F; 6</pre>
     
     
     <div class="description">
-        <p>Creates a new Array of the result of <code>fn</code> executed against every index of <code>obj</code></p>
+        <p>Facade of <code>Array.map()</code></p>
     </div>
     
 
@@ -1284,7 +1261,7 @@ myArrayClone.length; &#x2F;&#x2F; 6</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">var results = array.collect( [...], function ( ... ) { ... } );</pre>
+    <pre class="sunlight-highlight-javascript">let results = array.collect([...], function (...) { ... });</pre>
 
 
     
@@ -1428,7 +1405,7 @@ myArrayClone.length; &#x2F;&#x2F; 6</pre>
     
             
 <div class="param-desc">
-    <p>Compacted copy of <code>obj</code>, or null ( if <code>diff</code> is passed &amp; no diff is found )</p>
+    <p>Compacted copy of <code>obj</code>, or null (if <code>diff</code> is passed &amp; no diff is found)</p>
 </div>
 
 
@@ -1451,8 +1428,8 @@ myArrayClone.length; &#x2F;&#x2F; 6</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">array.compact( [null, &quot;a&quot;, &quot;b&quot;, &quot;c&quot;, null, &quot;d&quot;] ); &#x2F;&#x2F; [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;]
-array.compact( [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;], true );       &#x2F;&#x2F; null</pre>
+    <pre class="sunlight-highlight-javascript">array.compact([null, &quot;a&quot;, &quot;b&quot;, &quot;c&quot;, null, &quot;d&quot;]); &#x2F;&#x2F; [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;]
+array.compact([&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;], true);       &#x2F;&#x2F; null</pre>
 
 
     
@@ -1619,7 +1596,7 @@ array.compact( [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;], tru
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">if ( array.contains( [1], 1 ) ) { ... }</pre>
+    <pre class="sunlight-highlight-javascript">if (array.contains([1], 1)) { ... }</pre>
 
 
     
@@ -1786,7 +1763,7 @@ array.compact( [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;], tru
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">array.count( [&quot;apple&quot;, &quot;banana&quot;, &quot;orange&quot;, &quot;apple&quot;], &quot;apple&quot; ); &#x2F;&#x2F; 2</pre>
+    <pre class="sunlight-highlight-javascript">array.count([&quot;apple&quot;, &quot;banana&quot;, &quot;orange&quot;, &quot;apple&quot;], &quot;apple&quot;); &#x2F;&#x2F; 2</pre>
 
 
     
@@ -1953,7 +1930,7 @@ array.compact( [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;], tru
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">array.diff( [&quot;a&quot;], [&quot;a&quot;, &quot;b&quot;] ); &#x2F;&#x2F; [&quot;b&quot;]</pre>
+    <pre class="sunlight-highlight-javascript">array.diff([&quot;a&quot;], [&quot;a&quot;, &quot;b&quot;]); &#x2F;&#x2F; [&quot;b&quot;]</pre>
 
 
     
@@ -1962,7 +1939,7 @@ array.compact( [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;], tru
         
             
 <dt>
-    <h4 class="name" id="each"><span class="type-signature">&lt;static> </span>each<span class="signature">(obj, fn, async, size)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+    <h4 class="name" id="each"><span class="type-signature">&lt;static> </span>each<span class="signature">(obj, fn, ctx)</span><span class="type-signature"> &rarr; {Array}</span></h4>
     
     
 </dt>
@@ -2051,13 +2028,13 @@ Returning <code>false</code> halts iteration.</p>
 
         <tr>
             
-                <td class="name"><code>async</code></td>
+                <td class="name"><code>ctx</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Boolean</span>
+<span class="param-type">Mixed</span>
 
 
             
@@ -2067,30 +2044,7 @@ Returning <code>false</code> halts iteration.</p>
 
             
 
-            <td class="description last"><p>[Optional] Asynchronous iteration</p></td>
-        </tr>
-
-	
-
-        <tr>
-            
-                <td class="name"><code>size</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>[Optional] Batch size for async iteration, default is 10</p></td>
+            <td class="description last"><p>[Optional] Context for <code>fn</code></p></td>
         </tr>
 
 	
@@ -2167,8 +2121,8 @@ Returning <code>false</code> halts iteration.</p>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">array.iterate( [ ... ], function ( ... ) { ... } );
-array.iterate( [ ... ], function ( ... ) { ... }, true, 100 ); &#x2F;&#x2F; processing batches of a 100</pre>
+    <pre class="sunlight-highlight-javascript">array.each([...], function (...) { ... });
+array.each([...], function (...) { ... }, true, 100); &#x2F;&#x2F; processing batches of a 100</pre>
 
 
     
@@ -2177,7 +2131,222 @@ array.iterate( [ ... ], function ( ... ) { ... }, true, 100 ); &#x2F;&#x2F; proc
         
             
 <dt>
-    <h4 class="name" id="eachReverse"><span class="type-signature">&lt;static> </span>eachReverse<span class="signature">(obj, fn, async, size)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+    <h4 class="name" id="each"><span class="type-signature">&lt;static> </span>each<span class="signature">(obj, fn, size, ctx)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Iterates <code>obj</code> asynchronously and executes <code>fn</code> with arguments [<code>value</code>, <code>index</code>].
+Returning <code>false</code> halts iteration.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name"><code>obj</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Array to iterate</p></td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>fn</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Function to execute on index values</p></td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>size</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Function to execute on index values</p></td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>ctx</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Mixed</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>[Optional] Context for <code>fn</code></p></td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Array</p>
+</div>
+
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type">Array</span>
+
+
+	</dd>
+</dl>
+
+
+        
+    
+    
+        <h5>Example</h5>
+        
+    <pre class="sunlight-highlight-javascript">array.eachAsync([...], function (...) { ... });
+array.eachAsync([...], function (...) { ... }, true, 100); &#x2F;&#x2F; processing batches of a 100</pre>
+
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="eachReverse"><span class="type-signature">&lt;static> </span>eachReverse<span class="signature">(obj, fn, ctx)</span><span class="type-signature"> &rarr; {Array}</span></h4>
     
     
 </dt>
@@ -2266,7 +2435,7 @@ Returning <code>false</code> halts iteration.</p>
 
         <tr>
             
-                <td class="name"><code>async</code></td>
+                <td class="name"><code>ctx</code></td>
             
 
             <td class="type">
@@ -2282,30 +2451,7 @@ Returning <code>false</code> halts iteration.</p>
 
             
 
-            <td class="description last"><p>[Optional] Asynchronous iteration</p></td>
-        </tr>
-
-	
-
-        <tr>
-            
-                <td class="name"><code>size</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>[Optional] Batch size for async iteration, default is 10</p></td>
+            <td class="description last"><p>[Optional] Context to execute <code>fn</code></p></td>
         </tr>
 
 	
@@ -2382,8 +2528,8 @@ Returning <code>false</code> halts iteration.</p>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">array.eachReverse( [ ... ], function ( ... ) { ... } );
-array.eachReverse( [ ... ], function ( ... ) { ... }, true, 100 ); &#x2F;&#x2F; processing batches of a 100</pre>
+    <pre class="sunlight-highlight-javascript">array.eachReverse([...], function (...) { ... });
+array.eachReverse([...], function (...) { ... }, true, 100); &#x2F;&#x2F; processing batches of a 100</pre>
 
 
     
@@ -2392,7 +2538,7 @@ array.eachReverse( [ ... ], function ( ... ) { ... }, true, 100 ); &#x2F;&#x2F; 
         
             
 <dt>
-    <h4 class="name" id="empty"><span class="type-signature">&lt;static> </span>empty<span class="signature">(obj)</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
+    <h4 class="name" id="eachReverse"><span class="type-signature">&lt;static> </span>eachReverse<span class="signature">(obj, fn, size, ctx)</span><span class="type-signature"> &rarr; {Array}</span></h4>
     
     
 </dt>
@@ -2400,7 +2546,8 @@ array.eachReverse( [ ... ], function ( ... ) { ... }, true, 100 ); &#x2F;&#x2F; 
     
     
     <div class="description">
-        <p>Determines if an Array is empty</p>
+        <p>Iterates <code>obj</code> asynchronously in reverse and executes <code>fn</code> with arguments [<code>value</code>, <code>index</code>].
+Returning <code>false</code> halts iteration.</p>
     </div>
     
 
@@ -2450,7 +2597,76 @@ array.eachReverse( [ ... ], function ( ... ) { ... }, true, 100 ); &#x2F;&#x2F; 
 
             
 
-            <td class="description last"><p>Array to inspect</p></td>
+            <td class="description last"><p>Array to iterate</p></td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>fn</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Function to execute on index values</p></td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>size</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>[Optional] Batch size for async iteration, default is 10</p></td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>ctx</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>[Optional] Context to execute <code>fn</code></p></td>
         </tr>
 
 	
@@ -2504,7 +2720,7 @@ array.eachReverse( [ ... ], function ( ... ) { ... }, true, 100 ); &#x2F;&#x2F; 
     
             
 <div class="param-desc">
-    <p><code>true</code> if there's no indices</p>
+    <p>Array</p>
 </div>
 
 
@@ -2515,7 +2731,7 @@ array.eachReverse( [ ... ], function ( ... ) { ... }, true, 100 ); &#x2F;&#x2F; 
 	</dt>
 	<dd>
 		
-<span class="param-type">Boolean</span>
+<span class="param-type">Array</span>
 
 
 	</dd>
@@ -2527,8 +2743,8 @@ array.eachReverse( [ ... ], function ( ... ) { ... }, true, 100 ); &#x2F;&#x2F; 
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">array.empty( [] );    &#x2F;&#x2F; true
-array.empty( [&quot;a&quot;] ); &#x2F;&#x2F; false</pre>
+    <pre class="sunlight-highlight-javascript">array.eachReverse([...], function (...) { ... });
+array.eachReverse([...], function (...) { ... }, true, 100); &#x2F;&#x2F; processing batches of a 100</pre>
 
 
     
@@ -2537,7 +2753,7 @@ array.empty( [&quot;a&quot;] ); &#x2F;&#x2F; false</pre>
         
             
 <dt>
-    <h4 class="name" id="equal"><span class="type-signature">&lt;static> </span>equal<span class="signature">(obj1, obj2)</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
+    <h4 class="name" id="equal"><span class="type-signature">&lt;static> </span>equal<span class="signature">(a, b)</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
     
     
 </dt>
@@ -2579,7 +2795,7 @@ array.empty( [&quot;a&quot;] ); &#x2F;&#x2F; false</pre>
 
         <tr>
             
-                <td class="name"><code>obj1</code></td>
+                <td class="name"><code>a</code></td>
             
 
             <td class="type">
@@ -2602,7 +2818,7 @@ array.empty( [&quot;a&quot;] ); &#x2F;&#x2F; false</pre>
 
         <tr>
             
-                <td class="name"><code>obj2</code></td>
+                <td class="name"><code>b</code></td>
             
 
             <td class="type">
@@ -2695,8 +2911,8 @@ array.empty( [&quot;a&quot;] ); &#x2F;&#x2F; false</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">array.equal( [&quot;a&quot;], [&quot;a&quot;] );      &#x2F;&#x2F; true
-array.equal( [&quot;a&quot;], [&quot;a&quot;, &quot;b&quot;] ); &#x2F;&#x2F; false</pre>
+    <pre class="sunlight-highlight-javascript">array.equal([&quot;a&quot;], [&quot;a&quot;]);      &#x2F;&#x2F; true
+array.equal([&quot;a&quot;], [&quot;a&quot;, &quot;b&quot;]); &#x2F;&#x2F; false</pre>
 
 
     
@@ -2909,9 +3125,9 @@ array.equal( [&quot;a&quot;], [&quot;a&quot;, &quot;b&quot;] ); &#x2F;&#x2F; fal
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">var myArray = [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;];
+    <pre class="sunlight-highlight-javascript">let myArray = [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;];
 
-array.fill( myArray, function ( i ) { return i + &quot;a&quot;; } );
+array.fill(myArray, function (i) { return i + &quot;a&quot;; });
 myArray[0]; &#x2F;&#x2F; &quot;aa&quot;</pre>
 
 
@@ -3056,7 +3272,7 @@ myArray[0]; &#x2F;&#x2F; &quot;aa&quot;</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">array.first( [&quot;a&quot;, &quot;b&quot;] ); &#x2F;&#x2F; &quot;a&quot;</pre>
+    <pre class="sunlight-highlight-javascript">array.first([&quot;a&quot;, &quot;b&quot;]); &#x2F;&#x2F; &quot;a&quot;</pre>
 
 
     
@@ -3200,7 +3416,7 @@ myArray[0]; &#x2F;&#x2F; &quot;aa&quot;</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">array.flat( [[0, 1], [2, 3]] ); &#x2F;&#x2F; [0, 1, 2, 3]</pre>
+    <pre class="sunlight-highlight-javascript">array.flat([[0, 1], [2, 3]]); &#x2F;&#x2F; [0, 1, 2, 3]</pre>
 
 
     
@@ -3209,7 +3425,7 @@ myArray[0]; &#x2F;&#x2F; &quot;aa&quot;</pre>
         
             
 <dt>
-    <h4 class="name" id="forEach"><span class="type-signature">&lt;static> </span>forEach<span class="signature">(obj, fn, async, size)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+    <h4 class="name" id="forEach"><span class="type-signature">&lt;static> </span>forEach<span class="signature">(obj, fn, ctx)</span><span class="type-signature"> &rarr; {Array}</span></h4>
     
     
 </dt>
@@ -3298,13 +3514,13 @@ Returning <code>false</code> halts iteration.</p>
 
         <tr>
             
-                <td class="name"><code>async</code></td>
+                <td class="name"><code>ctx</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Boolean</span>
+<span class="param-type">function</span>
 
 
             
@@ -3314,30 +3530,7 @@ Returning <code>false</code> halts iteration.</p>
 
             
 
-            <td class="description last"><p>[Optional] Asynchronous iteration</p></td>
-        </tr>
-
-	
-
-        <tr>
-            
-                <td class="name"><code>size</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>[Optional] Batch size for async iteration, default is 10</p></td>
+            <td class="description last"><p>[Optional] Context to execute <code>fn</code></p></td>
         </tr>
 
 	
@@ -3421,8 +3614,8 @@ Returning <code>false</code> halts iteration.</p>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">array.forEach( [ ... ], function ( ... ) { ... } );
-array.forEach( [ ... ], function ( ... ) { ... }, true, 100 ); &#x2F;&#x2F; processing batches of a 100</pre>
+    <pre class="sunlight-highlight-javascript">array.forEach([...], function (...) { ... });
+array.forEach([...], function (...) { ... }, true, 100); &#x2F;&#x2F; processing batches of a 100</pre>
 
 
     
@@ -3566,7 +3759,7 @@ array.forEach( [ ... ], function ( ... ) { ... }, true, 100 ); &#x2F;&#x2F; proc
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">array.fromObject( {name: &quot;John&quot;, sex: &quot;male&quot;} ); &#x2F;&#x2F; [[&quot;name&quot;, &quot;John&quot;], [&quot;sex&quot;, &quot;male&quot;]]</pre>
+    <pre class="sunlight-highlight-javascript">array.fromObject({name: &quot;John&quot;, sex: &quot;male&quot;}); &#x2F;&#x2F; [[&quot;name&quot;, &quot;John&quot;], [&quot;sex&quot;, &quot;male&quot;]]</pre>
 
 
     
@@ -3733,7 +3926,7 @@ array.forEach( [ ... ], function ( ... ) { ... }, true, 100 ); &#x2F;&#x2F; proc
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">array.index( [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;], &quot;b&quot; ); &#x2F;&#x2F; 1</pre>
+    <pre class="sunlight-highlight-javascript">array.index([&quot;a&quot;, &quot;b&quot;, &quot;c&quot;], &quot;b&quot;); &#x2F;&#x2F; 1</pre>
 
 
     
@@ -3877,10 +4070,10 @@ array.forEach( [ ... ], function ( ... ) { ... }, true, 100 ); &#x2F;&#x2F; proc
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">var myArray = [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;];
+    <pre class="sunlight-highlight-javascript">let myArray = [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;];
 
-myarray.prop = &quot;d&quot;;
-array.indexed( myArray ); [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;];</pre>
+myArray.prop = &quot;d&quot;;
+array.indexed(myArray); [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;];</pre>
 
 
     
@@ -3897,7 +4090,7 @@ array.indexed( myArray ); [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&
     
     
     <div class="description">
-        <p>Finds the intersections between two Arrays</p>
+        <p>Finds the intersections between obj1 and obj2</p>
     </div>
     
 
@@ -4047,7 +4240,152 @@ array.indexed( myArray ); [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">array.intersect( [&quot;a&quot;, &quot;b&quot;, &quot;d&quot;], [&quot;b&quot;, &quot;c&quot;, &quot;d&quot;] ); &#x2F;&#x2F; [&quot;b&quot;, &quot;d&quot;]</pre>
+    <pre class="sunlight-highlight-javascript">array.intersect([&quot;a&quot;, &quot;b&quot;, &quot;d&quot;], [&quot;b&quot;, &quot;c&quot;, &quot;d&quot;]); &#x2F;&#x2F; [&quot;b&quot;, &quot;d&quot;]</pre>
+
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="isEmpty"><span class="type-signature">&lt;static> </span>isEmpty<span class="signature">(obj)</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Determines if an Array is empty</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name"><code>obj</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Array to inspect</p></td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p><code>true</code> if there's no indices</p>
+</div>
+
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type">Boolean</span>
+
+
+	</dd>
+</dl>
+
+
+        
+    
+    
+        <h5>Example</h5>
+        
+    <pre class="sunlight-highlight-javascript">array.isEmpty([]);    &#x2F;&#x2F; true
+array.isEmpty([&quot;a&quot;]); &#x2F;&#x2F; false</pre>
 
 
     
@@ -4340,7 +4678,7 @@ array.indexed( myArray ); [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&
     
     
     <div class="description">
-        <p>Resizes <code>obj</code> by keeping every index which <code>fn</code> evaluates to <code>true</code></p>
+        <p>Keeps every element of <code>obj</code> for which <code>fn</code> evaluates to true</p>
     </div>
     
 
@@ -4490,347 +4828,10 @@ array.indexed( myArray ); [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">var myArray = [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;];
+    <pre class="sunlight-highlight-javascript">let myArray = [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;];
 
-array.keepIf( myArray, function ( i ) { return &#x2F;a|c&#x2F;.test( i ); } );
+array.keepIf(myArray, function (i ) { return &#x2F;a|c&#x2F;.test( i); });
 myArray[1]; &#x2F;&#x2F; &quot;c&quot;</pre>
-
-
-    
-</dd>
-
-        
-            
-<dt>
-    <h4 class="name" id="keys"><span class="type-signature">&lt;static> </span>keys<span class="signature">(obj)</span><span class="type-signature"> &rarr; {Array}</span></h4>
-    
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        <p>Returns the keys in an &quot;Associative Array&quot;</p>
-    </div>
-    
-
-    
-    
-    
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-
-		<th>Type</th>
-
-		
-
-		
-
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-
-	<tbody>
-	
-
-        <tr>
-            
-                <td class="name"><code>obj</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Mixed</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Array or Object to extract keys from</p></td>
-        </tr>
-
-	
-	</tbody>
-</table>
-
-    
-    
-    
-<dl class="details">
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <p>Array of the keys</p>
-</div>
-
-
-
-<dl>
-	<dt>
-		Type
-	</dt>
-	<dd>
-		
-<span class="param-type">Array</span>
-
-
-	</dd>
-</dl>
-
-
-        
-    
-    
-        <h5>Example</h5>
-        
-    <pre class="sunlight-highlight-javascript">array.keys( {abc: true, xyz: false} ); &#x2F;&#x2F; [&quot;abc&quot;, &quot;xyz&quot;]</pre>
-
-
-    
-</dd>
-
-        
-            
-<dt>
-    <h4 class="name" id="keySort"><span class="type-signature">&lt;static> </span>keySort<span class="signature">(obj, query, sub)</span><span class="type-signature"> &rarr; {Array}</span></h4>
-    
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        <p>Sorts an Array based on key values, like an SQL ORDER BY clause</p>
-    </div>
-    
-
-    
-    
-    
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-
-		<th>Type</th>
-
-		
-
-		
-
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-
-	<tbody>
-	
-
-        <tr>
-            
-                <td class="name"><code>obj</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Array</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Array to sort</p></td>
-        </tr>
-
-	
-
-        <tr>
-            
-                <td class="name"><code>query</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Sort query, e.g. &quot;name, age desc, country&quot;</p></td>
-        </tr>
-
-	
-
-        <tr>
-            
-                <td class="name"><code>sub</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>[Optional] Key which holds data, e.g. &quot;{data: {}}&quot; = &quot;data&quot;</p></td>
-        </tr>
-
-	
-	</tbody>
-</table>
-
-    
-    
-    
-<dl class="details">
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <p>Sorted Array</p>
-</div>
-
-
-
-<dl>
-	<dt>
-		Type
-	</dt>
-	<dd>
-		
-<span class="param-type">Array</span>
-
-
-	</dd>
-</dl>
-
-
-        
-    
-    
-        <h5>Example</h5>
-        
-    <pre class="sunlight-highlight-javascript">var myArray = [{abc: 123124, xyz: 5}, {abc: 123124, xyz: 6}, {abc: 2, xyz: 5}];
-
-array.keySort( myArray, &quot;abc&quot; );           &#x2F;&#x2F; [{abc: 2, xyz: 5}, {abc: 123124, xyz: 5}, {abc: 123124, xyz: 6}];
-array.keySort( myArray, &quot;abc, xyz desc&quot; ); &#x2F;&#x2F; [{abc: 2, xyz: 5}, {abc: 123124, xyz: 6}, {abc: 123124, xyz: 5}];</pre>
 
 
     
@@ -4974,7 +4975,7 @@ array.keySort( myArray, &quot;abc, xyz desc&quot; ); &#x2F;&#x2F; [{abc: 2, xyz:
     
             
 <div class="param-desc">
-    <p>Last index( s ) of Array</p>
+    <p>Last index(s) of Array</p>
 </div>
 
 
@@ -4997,10 +4998,10 @@ array.keySort( myArray, &quot;abc, xyz desc&quot; ); &#x2F;&#x2F; [{abc: 2, xyz:
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">var myArray = [1, 2, 3, 4];
+    <pre class="sunlight-highlight-javascript">let myArray = [1, 2, 3, 4];
 
-array.last( myArray );    &#x2F;&#x2F; 4
-array.last( myArray, 2 ); &#x2F;&#x2F; [3, 4]</pre>
+array.last(myArray);    &#x2F;&#x2F; 4
+array.last(myArray, 2); &#x2F;&#x2F; [3, 4]</pre>
 
 
     
@@ -5009,7 +5010,7 @@ array.last( myArray, 2 ); &#x2F;&#x2F; [3, 4]</pre>
         
             
 <dt>
-    <h4 class="name" id="limit"><span class="type-signature">&lt;static> </span>limit<span class="signature">(obj, start, offset)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+    <h4 class="name" id="limit"><span class="type-signature">&lt;static> </span>limit<span class="signature">(obj, start, range)</span><span class="type-signature"> &rarr; {Array}</span></h4>
     
     
 </dt>
@@ -5097,7 +5098,7 @@ array.last( myArray, 2 ); &#x2F;&#x2F; [3, 4]</pre>
 
         <tr>
             
-                <td class="name"><code>offset</code></td>
+                <td class="name"><code>range</code></td>
             
 
             <td class="type">
@@ -5190,10 +5191,10 @@ array.last( myArray, 2 ); &#x2F;&#x2F; [3, 4]</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">var myArray = [1, 2, 3, 4];
+    <pre class="sunlight-highlight-javascript">let myArray = [1, 2, 3, 4];
 
-array.limit( myArray, 0, 2 ); &#x2F;&#x2F; [1, 2]
-array.limit( myArray, 2, 2 ); &#x2F;&#x2F; [3, 4]</pre>
+array.limit(myArray, 0, 2); &#x2F;&#x2F; [1, 2]
+array.limit(myArray, 2, 2); &#x2F;&#x2F; [3, 4]</pre>
 
 
     
@@ -5337,7 +5338,7 @@ array.limit( myArray, 2, 2 ); &#x2F;&#x2F; [3, 4]</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">array.max( [5, 3, 9, 1, 4] ); &#x2F;&#x2F; 9</pre>
+    <pre class="sunlight-highlight-javascript">array.max([5, 3, 9, 1, 4]); &#x2F;&#x2F; 9</pre>
 
 
     
@@ -5354,7 +5355,7 @@ array.limit( myArray, 2, 2 ); &#x2F;&#x2F; [3, 4]</pre>
     
     
     <div class="description">
-        <p>Finds the mean of an Array</p>
+        <p>Finds the mean of an Array (of numbers)</p>
     </div>
     
 
@@ -5458,7 +5459,7 @@ array.limit( myArray, 2, 2 ); &#x2F;&#x2F; [3, 4]</pre>
     
             
 <div class="param-desc">
-    <p>Mean of the Array ( float or integer )</p>
+    <p>Mean of the Array (float or integer)</p>
 </div>
 
 
@@ -5481,7 +5482,7 @@ array.limit( myArray, 2, 2 ); &#x2F;&#x2F; [3, 4]</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">array.mean( [1, 3, 5] ); &#x2F;&#x2F; 3</pre>
+    <pre class="sunlight-highlight-javascript">array.mean([1, 3, 5]); &#x2F;&#x2F; 3</pre>
 
 
     
@@ -5498,7 +5499,7 @@ array.limit( myArray, 2, 2 ); &#x2F;&#x2F; [3, 4]</pre>
     
     
     <div class="description">
-        <p>Finds the median value of an Array</p>
+        <p>Finds the median value of an Array (of numbers)</p>
     </div>
     
 
@@ -5602,7 +5603,7 @@ array.limit( myArray, 2, 2 ); &#x2F;&#x2F; [3, 4]</pre>
     
             
 <div class="param-desc">
-    <p>Median number of the Array ( float or integer )</p>
+    <p>Median number of the Array (float or integer)</p>
 </div>
 
 
@@ -5625,8 +5626,8 @@ array.limit( myArray, 2, 2 ); &#x2F;&#x2F; [3, 4]</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">array.median( [5, 1, 3, 8] ); &#x2F;&#x2F; 4
-array.median( [5, 1, 3] );    &#x2F;&#x2F; 3</pre>
+    <pre class="sunlight-highlight-javascript">array.median([5, 1, 3, 8]); &#x2F;&#x2F; 4
+array.median([5, 1, 3]);    &#x2F;&#x2F; 3</pre>
 
 
     
@@ -5635,7 +5636,7 @@ array.median( [5, 1, 3] );    &#x2F;&#x2F; 3</pre>
         
             
 <dt>
-    <h4 class="name" id="merge"><span class="type-signature">&lt;static> </span>merge<span class="signature">(obj1, obj2)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+    <h4 class="name" id="merge"><span class="type-signature">&lt;static> </span>merge<span class="signature">(a, b)</span><span class="type-signature"> &rarr; {Array}</span></h4>
     
     
 </dt>
@@ -5643,7 +5644,7 @@ array.median( [5, 1, 3] );    &#x2F;&#x2F; 3</pre>
     
     
     <div class="description">
-        <p>Merges <code>obj2</code> into <code>obj1</code>, excluding duplicate indices</p>
+        <p>Merges <code>arg</code> into <code>obj</code>, excluding duplicate indices</p>
     </div>
     
 
@@ -5677,7 +5678,7 @@ array.median( [5, 1, 3] );    &#x2F;&#x2F; 3</pre>
 
         <tr>
             
-                <td class="name"><code>obj1</code></td>
+                <td class="name"><code>a</code></td>
             
 
             <td class="type">
@@ -5700,7 +5701,7 @@ array.median( [5, 1, 3] );    &#x2F;&#x2F; 3</pre>
 
         <tr>
             
-                <td class="name"><code>obj2</code></td>
+                <td class="name"><code>b</code></td>
             
 
             <td class="type">
@@ -5793,11 +5794,10 @@ array.median( [5, 1, 3] );    &#x2F;&#x2F; 3</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">var a = [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;],
+    <pre class="sunlight-highlight-javascript">let a = [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;],
     b = [&quot;d&quot;];
 
-array.merge( a, b );
-a[3]; &#x2F;&#x2F; &quot;d&quot;</pre>
+array.merge(a, b) &#x2F;&#x2F; [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;];</pre>
 
 
     
@@ -5941,7 +5941,7 @@ a[3]; &#x2F;&#x2F; &quot;d&quot;</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">array.min( [5, 3, 9, 1, 4] ); &#x2F;&#x2F; 1</pre>
+    <pre class="sunlight-highlight-javascript">array.min([5, 3, 9, 1, 4]); &#x2F;&#x2F; 1</pre>
 
 
     
@@ -5958,7 +5958,7 @@ a[3]; &#x2F;&#x2F; &quot;d&quot;</pre>
     
     
     <div class="description">
-        <p>Mingles Arrays and returns a 2D Array, corresponding index positions are paired</p>
+        <p>Mingles Arrays and returns a 2D Array</p>
     </div>
     
 
@@ -6108,10 +6108,10 @@ a[3]; &#x2F;&#x2F; &quot;d&quot;</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">var a = [&quot;a&quot;, &quot;b&quot;],
+    <pre class="sunlight-highlight-javascript">let a = [&quot;a&quot;, &quot;b&quot;],
     b = [&quot;c&quot;, &quot;d&quot;];
 
-array.mingle( a, b ); &#x2F;&#x2F; [[&quot;a&quot;, &quot;c&quot;], [&quot;b&quot;, &quot;d&quot;]]</pre>
+array.mingle(a, b); &#x2F;&#x2F; [[&quot;a&quot;, &quot;c&quot;], [&quot;b&quot;, &quot;d&quot;]]</pre>
 
 
     
@@ -6255,8 +6255,8 @@ array.mingle( a, b ); &#x2F;&#x2F; [[&quot;a&quot;, &quot;c&quot;], [&quot;b&quo
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">array.mode( [1, 3, 7, 1, 2, 10, 7, 7, 3, 10] );     &#x2F;&#x2F; 7
-array.mode( [1, 3, 7, 1, 2, 10, 7, 7, 3, 10, 10] ); &#x2F;&#x2F; [7, 10]</pre>
+    <pre class="sunlight-highlight-javascript">array.mode([1, 3, 7, 1, 2, 10, 7, 7, 3, 10]);     &#x2F;&#x2F; 7
+array.mode([1, 3, 7, 1, 2, 10, 7, 7, 3, 10, 10]); &#x2F;&#x2F; [7, 10]</pre>
 
 
     
@@ -6273,7 +6273,7 @@ array.mode( [1, 3, 7, 1, 2, 10, 7, 7, 3, 10, 10] ); &#x2F;&#x2F; [7, 10]</pre>
     
     
     <div class="description">
-        <p>Finds the range of the Array</p>
+        <p>Finds the range of the Array (of numbers) values</p>
     </div>
     
 
@@ -6377,7 +6377,7 @@ array.mode( [1, 3, 7, 1, 2, 10, 7, 7, 3, 10, 10] ); &#x2F;&#x2F; [7, 10]</pre>
     
             
 <div class="param-desc">
-    <p>Range of the array ( float or integer )</p>
+    <p>Range of the array (float or integer)</p>
 </div>
 
 
@@ -6400,7 +6400,7 @@ array.mode( [1, 3, 7, 1, 2, 10, 7, 7, 3, 10, 10] ); &#x2F;&#x2F; [7, 10]</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">array.range( [5, 1, 3, 8] ); &#x2F;&#x2F; 7</pre>
+    <pre class="sunlight-highlight-javascript">array.range([5, 1, 3, 8]); &#x2F;&#x2F; 7</pre>
 
 
     
@@ -6567,7 +6567,7 @@ array.mode( [1, 3, 7, 1, 2, 10, 7, 7, 3, 10, 10] ); &#x2F;&#x2F; [7, 10]</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">array.rassoc( [[1, 3], [7, 2], [4, 3]], 3 ); &#x2F;&#x2F; [1, 3]</pre>
+    <pre class="sunlight-highlight-javascript">array.rassoc([[1, 3], [7, 2], [4, 3]], 3); &#x2F;&#x2F; [1, 3]</pre>
 
 
     
@@ -6584,7 +6584,7 @@ array.mode( [1, 3, 7, 1, 2, 10, 7, 7, 3, 10, 10] ); &#x2F;&#x2F; [7, 10]</pre>
     
     
     <div class="description">
-        <p>Returns Array containing the items in <code>obj</code> for which <code>fn</code> is not true</p>
+        <p>Returns Array containing the items in <code>obj</code> for which <code>fn()</code> is not true</p>
     </div>
     
 
@@ -6734,7 +6734,7 @@ array.mode( [1, 3, 7, 1, 2, 10, 7, 7, 3, 10, 10] ); &#x2F;&#x2F; [7, 10]</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">array.reject( [0, 1, 2, 3, 4, 5], function ( i ) { return i % 2 &gt; 0; } ); &#x2F;&#x2F; [0, 2, 4]</pre>
+    <pre class="sunlight-highlight-javascript">array.reject([0, 1, 2, 3, 4, 5], function (i) { return i % 2 &gt; 0; }); &#x2F;&#x2F; [0, 2, 4]</pre>
 
 
     
@@ -6924,9 +6924,9 @@ array.mode( [1, 3, 7, 1, 2, 10, 7, 7, 3, 10, 10] ); &#x2F;&#x2F; [7, 10]</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">var myArray = [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;];
+    <pre class="sunlight-highlight-javascript">let myArray = [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;];
 
-array.remove( myArray, 2, 3 );
+array.remove(myArray, 2, 3);
 myArray[2]; &#x2F;&#x2F; &quot;e&quot;</pre>
 
 
@@ -6944,7 +6944,7 @@ myArray[2]; &#x2F;&#x2F; &quot;e&quot;</pre>
     
     
     <div class="description">
-        <p>Deletes every index of <code>obj</code> for which <code>fn</code> evaluates to true</p>
+        <p>Deletes every element of <code>obj</code> for which <code>fn</code> evaluates to true</p>
     </div>
     
 
@@ -7094,9 +7094,9 @@ myArray[2]; &#x2F;&#x2F; &quot;e&quot;</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">var myArray = [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;];
+    <pre class="sunlight-highlight-javascript">let myArray = [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;];
 
-array.removeIf( myArray, function ( i ) { return &#x2F;a|c&#x2F;.test( i ); } );
+array.removeIf(myArray, function (i ) { return &#x2F;a|c&#x2F;.test( i); });
 myArray[0]; &#x2F;&#x2F; &quot;b&quot;</pre>
 
 
@@ -7114,7 +7114,7 @@ myArray[0]; &#x2F;&#x2F; &quot;b&quot;</pre>
     
     
     <div class="description">
-        <p>Deletes indices of <code>obj</code> until <code>fn</code> evaluates to false</p>
+        <p>Deletes elements of <code>obj</code> until <code>fn</code> evaluates to false</p>
     </div>
     
 
@@ -7264,11 +7264,11 @@ myArray[0]; &#x2F;&#x2F; &quot;b&quot;</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">var myArray = [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;];
+    <pre class="sunlight-highlight-javascript">let myArray = [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;];
 
-array.removeWhile( myArray, function ( i ) { return &#x2F;a|c&#x2F;.test( i ); } );
+array.removeWhile(myArray, function (i ) { return &#x2F;a|c&#x2F;.test( i); });
 myArray[0];     &#x2F;&#x2F; &quot;b&quot;
-myarray.length; &#x2F;&#x2F; 2</pre>
+myArray.length; &#x2F;&#x2F; 2</pre>
 
 
     
@@ -7435,11 +7435,11 @@ myarray.length; &#x2F;&#x2F; 2</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">var myArray = [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;];
+    <pre class="sunlight-highlight-javascript">let myArray = [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;];
 
-array.replace( myArray, [true, false] );
+array.replace(myArray, [true, false]);
 myArray[0];     &#x2F;&#x2F; true
-myarray.length; &#x2F;&#x2F; 2</pre>
+myArray.length; &#x2F;&#x2F; 2</pre>
 
 
     
@@ -7529,7 +7529,7 @@ myarray.length; &#x2F;&#x2F; 2</pre>
 
             
 
-            <td class="description last"><p>[Optional] Start position of subset of <code>obj</code> ( positive number only )</p></td>
+            <td class="description last"><p>[Optional] Start position of subset of <code>obj</code> (positive number only)</p></td>
         </tr>
 
 	
@@ -7606,8 +7606,8 @@ myarray.length; &#x2F;&#x2F; 2</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">array.rest( [1, 2, 3, 4, 5, 6] );    &#x2F;&#x2F; [2, 3, 4, 5, 6]
-array.rest( [1, 2, 3, 4, 5, 6], 3 ); &#x2F;&#x2F; [4, 5, 6]</pre>
+    <pre class="sunlight-highlight-javascript">array.rest([1, 2, 3, 4, 5, 6]);    &#x2F;&#x2F; [2, 3, 4, 5, 6]
+array.rest([1, 2, 3, 4, 5, 6], 3); &#x2F;&#x2F; [4, 5, 6]</pre>
 
 
     
@@ -7774,7 +7774,7 @@ array.rest( [1, 2, 3, 4, 5, 6], 3 ); &#x2F;&#x2F; [4, 5, 6]</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">array.rindex( [1, 2, 3, 2, 1], 2 ); &#x2F;&#x2F; 3</pre>
+    <pre class="sunlight-highlight-javascript">array.rindex([1, 2, 3, 2, 1], 2); &#x2F;&#x2F; 3</pre>
 
 
     
@@ -7941,8 +7941,8 @@ array.rest( [1, 2, 3, 4, 5, 6], 3 ); &#x2F;&#x2F; [4, 5, 6]</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">array.rotate( [0, 1, 2, 3, 4],  3 )[0] &#x2F;&#x2F; 2;
-array.rotate( [0, 1, 2, 3, 4], -2 )[0] &#x2F;&#x2F; 3;</pre>
+    <pre class="sunlight-highlight-javascript">array.rotate([0, 1, 2, 3, 4],  3)[0] &#x2F;&#x2F; 2;
+array.rotate([0, 1, 2, 3, 4], -2)[0] &#x2F;&#x2F; 3;</pre>
 
 
     
@@ -8132,8 +8132,8 @@ array.rotate( [0, 1, 2, 3, 4], -2 )[0] &#x2F;&#x2F; 3;</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">array.series( 0, 5 );     &#x2F;&#x2F; [0, 1, 2, 3, 4]
-array.series( 0, 25, 5 ); &#x2F;&#x2F; [0, 5, 10, 15, 20]</pre>
+    <pre class="sunlight-highlight-javascript">array.series(0, 5);     &#x2F;&#x2F; [0, 1, 2, 3, 4]
+array.series(0, 25, 5); &#x2F;&#x2F; [0, 5, 10, 15, 20]</pre>
 
 
     
@@ -8300,7 +8300,7 @@ array.series( 0, 25, 5 ); &#x2F;&#x2F; [0, 5, 10, 15, 20]</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">array.sort( 2, 3 ); &#x2F;&#x2F; -1</pre>
+    <pre class="sunlight-highlight-javascript">array.sort(2, 3); &#x2F;&#x2F; -1</pre>
 
 
     
@@ -8317,7 +8317,7 @@ array.series( 0, 25, 5 ); &#x2F;&#x2F; [0, 5, 10, 15, 20]</pre>
     
     
     <div class="description">
-        <p>Sorts <code>obj</code> using <code>sort</code></p>
+        <p>Sorts <code>obj</code> using <code>array.sort</code></p>
     </div>
     
 
@@ -8444,9 +8444,9 @@ array.series( 0, 25, 5 ); &#x2F;&#x2F; [0, 5, 10, 15, 20]</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">var myArray = [5, 9, 2, 4];
+    <pre class="sunlight-highlight-javascript">let myArray = [5, 9, 2, 4];
 
-array.sorted( myArray );
+array.sorted(myArray);
 myArray[0]; &#x2F;&#x2F; 2</pre>
 
 
@@ -8614,15 +8614,15 @@ myArray[0]; &#x2F;&#x2F; 2</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">var myArray = [],
+    <pre class="sunlight-highlight-javascript">let myArray = [],
     i       = -1,
     results;
 
-while ( ++i &lt; 100 ) {
-  myarray.push( i + 1 );
+while (++i &lt; 100) {
+  myArray.push(i + 1);
 }
 
-results = array.split( myArray, 21 );
+results = array.split(myArray, 21);
 results.length;     &#x2F;&#x2F; 21
 results[0].length;  &#x2F;&#x2F; 5
 results[19].length; &#x2F;&#x2F; 4
@@ -8645,7 +8645,7 @@ results[20][0];     &#x2F;&#x2F; 100</pre>
     
     
     <div class="description">
-        <p>Finds the standard deviation of an Array</p>
+        <p>Finds the standard deviation of an Array (of numbers)</p>
     </div>
     
 
@@ -8749,7 +8749,7 @@ results[20][0];     &#x2F;&#x2F; 100</pre>
     
             
 <div class="param-desc">
-    <p>Standard deviation of the Array ( float or integer )</p>
+    <p>Standard deviation of the Array (float or integer)</p>
 </div>
 
 
@@ -8772,7 +8772,7 @@ results[20][0];     &#x2F;&#x2F; 100</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">array.stddev( [1, 3, 5] ); &#x2F;&#x2F; 1.632993161855452</pre>
+    <pre class="sunlight-highlight-javascript">array.stddev([1, 3, 5]); &#x2F;&#x2F; 1.632993161855452</pre>
 
 
     
@@ -8789,7 +8789,7 @@ results[20][0];     &#x2F;&#x2F; 100</pre>
     
     
     <div class="description">
-        <p>Gets the summation of an Array</p>
+        <p>Gets the summation of an Array of numbers</p>
     </div>
     
 
@@ -8916,7 +8916,7 @@ results[20][0];     &#x2F;&#x2F; 100</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">array.sum( [2, 4, 3, 1] ); &#x2F;&#x2F; 10</pre>
+    <pre class="sunlight-highlight-javascript">array.sum([2, 4, 3, 1]); &#x2F;&#x2F; 10</pre>
 
 
     
@@ -9083,7 +9083,7 @@ results[20][0];     &#x2F;&#x2F; 100</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">array.take( [1, 2, 3, 4], 2 ); &#x2F;&#x2F; [1, 2]</pre>
+    <pre class="sunlight-highlight-javascript">array.take([1, 2, 3, 4], 2); &#x2F;&#x2F; [1, 2]</pre>
 
 
     
@@ -9227,7 +9227,7 @@ results[20][0];     &#x2F;&#x2F; 100</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">array.toObject( [&quot;abc&quot;, &quot;def&quot;] ); &#x2F;&#x2F; {0: &quot;abc&quot;, 1: &quot;def&quot;}</pre>
+    <pre class="sunlight-highlight-javascript">array.toObject([&quot;abc&quot;, &quot;def&quot;]); &#x2F;&#x2F; {0: &quot;abc&quot;, 1: &quot;def&quot;}</pre>
 
 
     
@@ -9371,10 +9371,10 @@ results[20][0];     &#x2F;&#x2F; 100</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">var myArray = [true, true, false];
+    <pre class="sunlight-highlight-javascript">let myArray = [true, true, false];
 
-myarray.extra = true;
-array.total( myArray ); &#x2F;&#x2F; 4</pre>
+myArray.extra = true;
+array.total(myArray); &#x2F;&#x2F; 4</pre>
 
 
     
@@ -9518,7 +9518,7 @@ array.total( myArray ); &#x2F;&#x2F; 4</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">array.unique( [&quot;a&quot;, &quot;b&quot;, &quot;a&quot;, &quot;c&quot;, &quot;b&quot;, &quot;d&quot;] ); &#x2F;&#x2F; [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;]</pre>
+    <pre class="sunlight-highlight-javascript">array.unique([&quot;a&quot;, &quot;b&quot;, &quot;a&quot;, &quot;c&quot;, &quot;b&quot;, &quot;d&quot;]); &#x2F;&#x2F; [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;]</pre>
 
 
     
@@ -9535,7 +9535,7 @@ array.total( myArray ); &#x2F;&#x2F; 4</pre>
     
     
     <div class="description">
-        <p>Finds the variance of an Array ( of numbers )</p>
+        <p>Finds the variance of an Array (of numbers)</p>
     </div>
     
 
@@ -9639,7 +9639,7 @@ array.total( myArray ); &#x2F;&#x2F; 4</pre>
     
             
 <div class="param-desc">
-    <p>Variance of the Array ( float or integer )</p>
+    <p>Variance of the Array (float or integer)</p>
 </div>
 
 
@@ -9662,7 +9662,7 @@ array.total( myArray ); &#x2F;&#x2F; 4</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">array.variance( [1, 3, 5] ); &#x2F;&#x2F; 2.6666666666666665</pre>
+    <pre class="sunlight-highlight-javascript">array.variance([1, 3, 5]); &#x2F;&#x2F; 2.6666666666666665</pre>
 
 
     
@@ -9829,7 +9829,7 @@ array.total( myArray ); &#x2F;&#x2F; 4</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">array.zip( [0, 1], 1 ); &#x2F;&#x2F; [[0, 1], [1, null]]</pre>
+    <pre class="sunlight-highlight-javascript">array.zip([0, 1], 1); &#x2F;&#x2F; [[0, 1], [1, null]]</pre>
 
 
     
@@ -9861,7 +9861,7 @@ array.total( myArray ); &#x2F;&#x2F; 4</pre>
 					
 		<span class="jsdoc-message">
 		Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a>
-		on 2015-03-14T11:02:28-04:00 using the <a
+		on 2015-10-22T09:11:18-04:00 using the <a
 			href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
 		</span>
 				</footer>
