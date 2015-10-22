@@ -194,7 +194,7 @@ exports["eachReverse"] = {
 	}
 };
 
-exports["empty"] = {
+exports["isEmpty"] = {
 	setUp: function (done) {
 		this.full  = [0, 1, 2, 3, 4];
 		this.empty = [];
@@ -202,8 +202,8 @@ exports["empty"] = {
 	},
 	test: function (test) {
 		test.expect(2);
-		test.equal(retsu.empty(this.full),  false, "Should be 'false'");
-		test.equal(retsu.empty(this.empty), true,  "Should be 'true'");
+		test.equal(retsu.isEmpty(this.full),  false, "Should be 'false'");
+		test.equal(retsu.isEmpty(this.empty), true,  "Should be 'true'");
 		test.done();
 	}
 };

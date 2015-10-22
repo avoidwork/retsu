@@ -1,14 +1,24 @@
 module.exports = function (grunt) {
 	grunt.initConfig({
 		pkg : grunt.file.readJSON("package.json"),
+		babel: {
+			options: {
+				sourceMap: false
+			},
+			dist: {
+				files: {
+					"lib/<%= pkg.name %>.js": "lib/<%= pkg.name %>.es6.js"
+				}
+			}
+		},
 		concat : {
 			options : {
 				banner : "/**\n" +
 				         " * <%= pkg.description %>\n" +
 				         " *\n" +
-				         " * @author <%= pkg.author.name %> <<%= pkg.author.email %>>\n" +
+				         " * @author <%= pkg.author %>\n" +
 				         " * @copyright <%= grunt.template.today('yyyy') %> <%= pkg.author.name %>\n" +
-				         " * @license <%= pkg.licenses[0].type %> <<%= pkg.licenses[0].url %>>\n" +
+				         " * @license <%= pkg.license %>\n" +
 				         " * @link <%= pkg.homepage %>\n" +
 				         " * @module <%= pkg.name %>\n" +
 				         " * @version <%= pkg.version %>\n" +
@@ -18,18 +28,13 @@ module.exports = function (grunt) {
 				src : [
 					"src/intro.js",
 					"src/array.js",
-					"src/json.js",
-					"src/label.js",
-					"src/math.js",
-					"src/number.js",
-					"src/regex.js",
-					"src/string.js",
-					"src/utility.js",
-					"src/xml.js",
 					"src/outro.js"
 				],
-				dest : "lib/<%= pkg.name %>.js"
+				dest : "lib/<%= pkg.name %>.es6.js"
 			}
+		},
+		eslint: {
+			target: ["lib/*.es6.js"]
 		},
 		jsdoc : {
 			dist : {
@@ -60,19 +65,16 @@ module.exports = function (grunt) {
 		},
 		uglify: {
 			options: {
-				banner : "/*\n" +
-				" <%= grunt.template.today('yyyy') %> <%= pkg.author.name %>\n" +
-				" @version <%= pkg.version %>\n" +
-				" */",
+				banner: '/* <%= grunt.template.today("yyyy") %> <%= pkg.author %> */\n',
 				sourceMap: true,
 				sourceMapIncludeSources: true,
 				mangle: {
-					except: ["retsu", "define", "export", "process"]
+					except: ["retsu", "define", "export"]
 				}
 			},
 			target: {
 				files: {
-					"lib/retsu.min.js" : ["lib/retsu.js"]
+					"lib/<%= pkg.name %>.min.js" : ["lib/<%= pkg.name %>.js"]
 				}
 			}
 		},
@@ -96,10 +98,12 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks("grunt-contrib-jshint");
 	grunt.loadNpmTasks("grunt-contrib-watch");
 	grunt.loadNpmTasks("grunt-contrib-uglify");
+	grunt.loadNpmTasks("grunt-babel");
+	grunt.loadNpmTasks("grunt-eslint");
 
 	// aliases
-	grunt.registerTask("test", ["jshint", "nodeunit"]);
-	grunt.registerTask("build", ["concat", "sed", "test"]);
-	grunt.registerTask("default", ["build", "uglify"]);
+	grunt.registerTask("test", ["eslint", "nodeunit"]);
+	grunt.registerTask("build", ["concat", "sed", "eslint"]);
+	grunt.registerTask("default", ["build", "babel", "nodeunit", "uglify"]);
 	grunt.registerTask("package", ["default", "jsdoc"]);
 };
