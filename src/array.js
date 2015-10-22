@@ -54,6 +54,7 @@ const array = {
 				max = idx - 1;
 			} else {
 				result = idx;
+				break;
 			}
 		}
 
