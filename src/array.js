@@ -812,7 +812,8 @@ const array = {
 	mode: function (obj) {
 		let values = {},
 			count = 0,
-			mode = [];
+			mode = [],
+			nth, result;
 
 		// Counting values
 		array.each(obj, function (i) {
@@ -835,7 +836,14 @@ const array = {
 			}
 		});
 
-		return array.sorted(mode);
+		// Determining the result
+		nth = mode.length;
+
+		if (nth > 0) {
+			result = nth === 1 ? mode[0] : array.sorted(mode);
+		}
+
+		return result;
 	},
 
 	/**
