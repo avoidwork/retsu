@@ -1,5 +1,4 @@
 /.idea/
-/doc/
 /node_modules/
 /lib/retsu.min.js
 /lib/retsu.min.js.map
@@ -10,5 +9,4 @@
 .eslintrc
 .travis.yml
 bower.yml
-docstrap.json
 Gruntfile.js

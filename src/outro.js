@@ -1,11 +1,10 @@
 // Node, AMD & window supported
 if (typeof exports !== "undefined") {
-	module.exports = array;
-} else if (typeof define === "function") {
+	module.exports = new Retsu();
+} else if (typeof define === "function" && define.amd) {
 	define(function () {
-		return array;
+		return new Retsu();
 	});
 } else {
-	global.retsu = array;
-}
-}(typeof global !== "undefined" ? global : window));
+	global.retsu = new Retsu();
+}}(typeof window !== "undefined" ? window : global));

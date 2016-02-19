@@ -1,7 +1,7 @@
 {
   "name": "retsu",
   "description": "Array micro library focused on speed",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "homepage": "http://avoidwork.github.io/retsu",
   "author": "Jason Mulligan <jason.mulligan@avoidwork.com>",
   "repository": {
@@ -21,19 +21,17 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "babel": "^5.8.23",
-    "babel-eslint": "^4.1.3",
-    "grunt": "~0.4.5",
-    "grunt-babel": "^5.0.3",
-    "grunt-cli": "~0.1.13",
-    "grunt-contrib-concat": "~0.5.0",
+    "babel-eslint": "^4.1.4",
+    "babel-preset-es2015": "^6.1.2",
+    "grunt": "^0.4.5",
+    "grunt-babel": "^6.0.0",
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-concat": "^0.1.3",
+    "grunt-contrib-watch": "^0.2.0",
+    "grunt-eslint": "^17.3.1",
     "grunt-contrib-nodeunit": "~0.4.1",
     "grunt-contrib-uglify": "~0.7.0",
-    "grunt-contrib-watch": "~0.6.1",
-    "grunt-eslint": "^17.3.1",
-    "grunt-jsdoc": "~0.5.1",
-    "grunt-sed": "~0.1.1",
-    "ink-docstrap": "~0.4.0"
+    "grunt-sed": "~0.1.1"
   },
   "keywords": [
     "array",

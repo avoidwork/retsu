@@ -3,13 +3,17 @@ module.exports = function (grunt) {
 		pkg : grunt.file.readJSON("package.json"),
 		babel: {
 			options: {
-				sourceMap: false
+				sourceMap: false,
+				presets: ["babel-preset-es2015"]
 			},
 			dist: {
 				files: {
 					"lib/<%= pkg.name %>.js": "lib/<%= pkg.name %>.es6.js"
 				}
 			}
+		},
+		eslint: {
+			target: ["lib/*.es6.js"]
 		},
 		concat : {
 			options : {
@@ -19,38 +23,17 @@ module.exports = function (grunt) {
 				         " * @copyright <%= grunt.template.today('yyyy') %> <%= pkg.author %>\n" +
 				         " * @license <%= pkg.license %>\n" +
 				         " * @link <%= pkg.homepage %>\n" +
-				         " * @module <%= pkg.name %>\n" +
 				         " * @version <%= pkg.version %>\n" +
 				         " */\n"
 			},
 			dist : {
 				src : [
 					"src/intro.js",
-					"src/array.js",
+					"src/retsu.js",
 					"src/outro.js"
 				],
 				dest : "lib/<%= pkg.name %>.es6.js"
 			}
-		},
-		eslint: {
-			target: ["lib/*.es6.js"]
-		},
-		jsdoc : {
-			dist : {
-				src: ["lib/<%= pkg.name %>.js", "README.md"],
-				options: {
-				    destination : "doc",
-				    template    : "node_modules/ink-docstrap/template",
-				    configure   : "docstrap.json",
-				    "private"   : false
-				}
-			}
-		},
-		jshint : {
-			options : {
-				jshintrc : ".jshintrc"
-			},
-			src : "lib/<%= pkg.name %>.js"
 		},
 		nodeunit : {
 			all : ["test/*.js"]
@@ -68,7 +51,7 @@ module.exports = function (grunt) {
 				sourceMap: true,
 				sourceMapIncludeSources: true,
 				mangle: {
-					except: ["retsu", "define", "export"]
+					except: ["Retsu", "retsu", "define", "export"]
 				}
 			},
 			target: {
@@ -91,7 +74,6 @@ module.exports = function (grunt) {
 
 	// tasks
 	grunt.loadNpmTasks("grunt-sed");
-	grunt.loadNpmTasks("grunt-jsdoc");
 	grunt.loadNpmTasks("grunt-contrib-concat");
 	grunt.loadNpmTasks("grunt-contrib-nodeunit");
 	grunt.loadNpmTasks("grunt-contrib-watch");
@@ -103,5 +85,4 @@ module.exports = function (grunt) {
 	grunt.registerTask("test", ["eslint", "nodeunit"]);
 	grunt.registerTask("build", ["concat", "sed", "eslint"]);
 	grunt.registerTask("default", ["build", "babel", "nodeunit", "uglify"]);
-	grunt.registerTask("package", ["default", "jsdoc"]);
 };

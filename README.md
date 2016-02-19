@@ -1,13 +1,11 @@
 # retsu
 
-retsu is an Array library for Client or Server, focused on providing useful functions, and speed.
+Retsu is an Array library for Client or Server, focused on providing useful functions, and speed.
 It implements popular Array methods from Ruby.
 
 [![build status](https://secure.travis-ci.org/avoidwork/retsu.svg)](http://travis-ci.org/avoidwork/retsu)
 
 ## API
-Examples are provided with the included documentation, found in `./doc`.
-
 #### add(obj, arg)
 Adds `arg` to `obj` if it is not found in `obj`
 

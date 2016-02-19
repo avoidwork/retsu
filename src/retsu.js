@@ -1,16 +1,6 @@
-/**
- * Array micro library focused on speed
- *
- * @copyright 2016 Jason Mulligan <jason.mulligan@avoidwork.com>
- * @license BSD-3-Clause
- * @link http://avoidwork.github.io/retsu
- * @version 2.0.1
- */
-(function (global) {
-
 class Retsu {
 	constructor () {
-		this.version = "2.0.1";
+		this.version = "{{VERSION}}";
 	}
 
 	add (obj, arg) {
@@ -684,14 +674,3 @@ class Retsu {
 		return result;
 	}
 }
-
-// Node, AMD & window supported
-if (typeof exports !== "undefined") {
-	module.exports = new Retsu();
-} else if (typeof define === "function" && define.amd) {
-	define(function () {
-		return new Retsu();
-	});
-} else {
-	global.retsu = new Retsu();
-}}(typeof window !== "undefined" ? window : global));
