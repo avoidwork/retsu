@@ -648,13 +648,8 @@ class Retsu {
 		return result;
 	}
 
-	zip (obj, args) {
+	zip (obj, ...args) {
 		let result = [];
-
-		// Preparing args
-		if (!(args instanceof Array)) {
-			args = typeof args === "object" ? this.cast(args) : [args];
-		}
 
 		this.each(args, (i, idx) => {
 			if (!(i instanceof Array)) {
