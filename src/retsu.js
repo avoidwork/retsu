@@ -105,12 +105,12 @@ class Retsu {
 		}));
 	}
 
-	each (obj, fn, ctx = fn) {
+	each (obj, fn, ctx = obj) {
 		let nth = obj.length,
 			i = -1;
 
 		while (++i < nth) {
-			if (ctx.call(obj, obj[i], i) === false) {
+			if (fn.call(ctx, obj[i], i) === false) {
 				break;
 			}
 		}
@@ -155,11 +155,11 @@ class Retsu {
 		return obj;
 	}
 
-	eachReverse (obj, fn, ctx = fn) {
+	eachReverse (obj, fn, ctx = obj) {
 		let i = obj.length;
 
 		while (--i > -1) {
-			if (ctx.call(obj, obj[i], i) === false) {
+			if (fn.call(ctx, obj[i], i) === false) {
 				break;
 			}
 		}
@@ -304,15 +304,18 @@ class Retsu {
 	}
 
 	limit (obj, start = 0, range = 1) {
-		let result = [],
-			i = start - 1,
-			nth = start + range,
-			max = obj.length;
+		let nth = start + range,
+			max = obj.length,
+			result;
 
 		if (max > 0) {
-			while (++i < nth && i < max) {
-				result.push(obj[i]);
+			if (nth > max) {
+				nth = max;
 			}
+
+			result = obj.slice(start, nth);
+		} else {
+			result = [];
 		}
 
 		return result;
