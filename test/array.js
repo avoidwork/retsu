@@ -266,20 +266,6 @@ exports["index"] = {
 	}
 };
 
-exports["indexed"] = {
-	setUp: function (done) {
-		this.val = ["abc", "xyz"];
-		this.val.someProperty      = true;
-		this.val.someOtherProperty = true;
-		done();
-	},
-	test: function (test) {
-		test.expect(1);
-		test.equal(retsu.indexed(this.val).length, 4, "Should be 4");
-		test.done();
-	}
-};
-
 exports["intersect"] = {
 	setUp: function (done) {
 		this.a1 = ["abc", "def"];
@@ -667,20 +653,6 @@ exports["take"] = {
 		test.expect(2);
 		test.equal(retsu.take(this.val, 1)[0], 0, "Should be '0'");
 		test.equal(retsu.take(this.val, 3).length, 3, "Should be '3'");
-		test.done();
-	}
-};
-
-exports["total"] = {
-	setUp: function (done) {
-		this.val = ["abc", "xyz"];
-		this.val.someProperty      = true;
-		this.val.someOtherProperty = true;
-		done();
-	},
-	test: function (test) {
-		test.expect(1);
-		test.equal(retsu.total(this.val), 4, "Should be 4");
 		test.done();
 	}
 };

@@ -207,14 +207,34 @@ class Retsu {
 		return this.mingle(Object.keys(obj), this.cast(obj));
 	}
 
-	index (obj, arg) {
-		return obj.indexOf(arg);
+	frozen (obj) {
+		return Object.isFrozen(obj);
 	}
 
-	indexed (obj) {
-		return Object.keys(obj).map(key => {
-			return obj[key];
-		});
+	index (obj, arg) {
+		let result;
+
+		if (typeof arg === "function") {
+			this.each(obj, (i, idx) => {
+				if (arg(i) === true) {
+					result = idx;
+
+					return false;
+				}
+			});
+		} else {
+			result = obj.indexOf(arg);
+		}
+
+		return result;
+	}
+
+	insert (obj, idx, ...args) {
+		const start = idx >= 0 ? idx : obj.length + idx;
+
+		obj.splice(start, 0, ...args);
+
+		return obj;
 	}
 
 	intersect (obj1, obj2) {
@@ -601,10 +621,6 @@ class Retsu {
 		}
 
 		return obj;
-	}
-
-	total (obj) {
-		return this.indexed(obj).length;
 	}
 
 	unique (obj) {
