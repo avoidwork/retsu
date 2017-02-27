@@ -1,7 +1,7 @@
 {
   "name": "retsu",
   "description": "Array micro library focused on speed",
-  "version": "2.0.3",
+  "version": "3.0.0",
   "homepage": "http://avoidwork.github.io/retsu",
   "author": "Jason Mulligan <jason.mulligan@avoidwork.com>",
   "repository": {

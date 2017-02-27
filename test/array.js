@@ -173,27 +173,6 @@ exports["each"] = {
 	}
 };
 
-exports["eachReverse"] = {
-	setUp: function (done) {
-		this.val = ["abc", "def"];
-		done();
-	},
-	test: function (test) {
-		var result = [];
-
-		retsu.eachReverse(this.val, function (i, idx) {
-			result.push( {value: i, index: idx} );
-		} );
-
-		test.expect(4);
-		test.equal(result[0].value, "def", "Should be 'def'");
-		test.equal(result[0].index, 1, "Should be '1'");
-		test.equal(result[1].value, "abc", "Should be 'abc'");
-		test.equal(result[1].index, 0, "Should be '0'");
-		test.done();
-	}
-};
-
 exports["isEmpty"] = {
 	setUp: function (done) {
 		this.full  = [0, 1, 2, 3, 4];
@@ -212,7 +191,7 @@ exports["equal"] = {
 	setUp: function (done) {
 		this.a = [0];
 		this.b = [0];
-		this.c = []
+		this.c = [];
 		done();
 	},
 	test: function (test) {
@@ -249,14 +228,14 @@ exports["first"] = {
 	}
 };
 
-exports["flat"] = {
+exports["flatten"] = {
 	setUp: function (done) {
-		this.val = [[0, 1], [2, 3], [4, 5]];
+		this.val = [1,[2,3,[4,5,6]]];
 		done();
 	},
 	test: function (test) {
 		test.expect(1);
-		test.equal(retsu.flat(this.val).length, 6, "Should be an retsu of 6 indices");
+		test.equal(retsu.flatten(this.val).length, 6, "Should be an retsu of 6 indices");
 		test.done();
 	}
 };

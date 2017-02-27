@@ -11,6 +11,14 @@ class Retsu {
 		return obj;
 	}
 
+	assoc (obj, arg) {
+		return obj.filter(i => i[0] === arg)[0] || null;
+	}
+
+	at (obj, idx) {
+		return obj[idx >= 0 ? idx : obj.length + idx];
+	}
+
 	binIndex (obj, arg) {
 		let max = obj.length - 1,
 			min = 0,
@@ -43,9 +51,7 @@ class Retsu {
 		} else if (!isNaN(obj.length)) {
 			result = Array.from(obj);
 		} else {
-			result = Object.keys(obj).map(i => {
-				return obj[i];
-			});
+			result = Object.keys(obj).map(i => obj[i]);
 		}
 
 		return result;
@@ -72,7 +78,7 @@ class Retsu {
 	}
 
 	clone (obj) {
-		return JSON.parse(JSON.stringify(obj));
+		return JSON.parse(JSON.stringify(obj, null, 0));
 	}
 
 	contains (obj, arg) {
@@ -84,30 +90,60 @@ class Retsu {
 	}
 
 	compact (obj, diff = false) {
-		let result = obj.filter(i => {
-			return i !== null && i !== undefined;
-		});
+		const result = obj.filter(i => i !== null && i !== undefined);
 
-		return diff !== true ? result : result.length < obj.length ? result : null;
+		return diff === false ? result : result.length < obj.length ? result : [];
 	}
 
 	count (obj, value) {
-		return obj.filter(i => {
-			return i === value;
-		}).length;
+		return obj.filter(i => i === value).length;
+	}
+
+	cycle (obj, count = 0, fn) {
+		let i = 0;
+
+		if (obj.length > 0 && count > 0) {
+			while (++i <= count) {
+				this.each(obj, fn);
+			}
+		}
+	}
+
+	delete (obj, value) {
+		return this.removeIf(obj, i => i === value);
+	}
+
+	deleteAt (obj, idx) {
+		return obj.splice(idx, 1)[0] || null;
+	}
+
+	deleteIf (obj, fn) {
+		return this.removeIf(obj, fn);
 	}
 
 	diff (a, b) {
-		return a.filter(i => {
-			return !this.contains(b, i);
-		}).concat(b.filter(i => {
-			return !this.contains(a, i);
-		}));
+		return a.filter(i => !this.contains(b, i)).concat(b.filter(i => !this.contains(a, i)));
+	}
+
+	dig (obj, ...steps) {
+		let result;
+
+		this.each(steps, (x, idx) => {
+			result = idx === 0 ? obj[x] : result[x];
+		});
+
+		return result;
+	}
+
+	drop (obj, start = 1) {
+		obj.splice(0, start > 0 ? start : obj.length + start);
+
+		return obj;
 	}
 
 	each (obj, fn, ctx = obj) {
-		let nth = obj.length,
-			i = -1;
+		const nth = obj.length;
+		let i = -1;
 
 		while (++i < nth) {
 			if (fn.call(ctx, obj[i], i) === false) {
@@ -118,68 +154,22 @@ class Retsu {
 		return obj;
 	}
 
-	eachAsync (obj, fn, size = 10, ctx = fn) {
-		let lobj = this.clone(obj),
-			nth = lobj.length,
-			offset = 0;
-
-		if (size > nth) {
-			size = nth;
-		}
-
-		function repeat () {
-			let i = -1,
-				idx, result;
-
-			while (++i < size) {
-				idx = i + offset;
-
-				if (idx === nth || ctx.call(lobj, lobj[idx], idx) === false) {
-					result = false;
-				}
-			}
-
-			offset += size;
-
-			if (offset >= nth) {
-				result = false;
-			}
-
-			if (result !== false) {
-				setTimeout(repeat, 0);
-			}
-		}
-
-		repeat();
-
-		return obj;
-	}
-
-	eachReverse (obj, fn, ctx = obj) {
-		let i = obj.length;
-
-		while (--i > -1) {
-			if (fn.call(ctx, obj[i], i) === false) {
-				break;
-			}
-		}
-
-		return obj;
-	}
-
-	eachReverseAsync (obj, fn, size = 10, ctx = fn) {
-		this.eachAsync(this.clone(obj).reverse(), fn, size, ctx);
-
-		return obj;
+	empty (obj) {
+		return obj.length === 0;
 	}
 
 	equal (a, b) {
-		return JSON.stringify(a) === JSON.stringify(b);
+		return JSON.stringify(a, null, 0) === JSON.stringify(b, null, 0);
+	}
+
+	fetch (obj, idx, value) {
+		return obj[idx] || value;
 	}
 
 	fill (obj, arg, start, offset) {
-		let l = obj.length,
-			i = !isNaN(start) ? start : 0,
+		const l = obj.length;
+
+		let i = !isNaN(start) ? start : 0,
 			nth = !isNaN(offset) ? i + offset : l - 1;
 
 		if (nth > l - 1) {
@@ -201,14 +191,12 @@ class Retsu {
 		return obj;
 	}
 
-	first (obj) {
-		return obj[0];
+	first (obj, n = 1) {
+		return obj.slice(0, n);
 	}
 
-	flat (obj) {
-		return obj.reduce((a, b) => {
-			return a.concat(b);
-		}, []);
+	flatten (obj) {
+		return obj.reduce((a, b) => a.concat(b instanceof Array ? this.flatten(b) : b), []);
 	}
 
 	forEach (obj, fn, ctx = fn) {
@@ -463,9 +451,7 @@ class Retsu {
 
 	replace (a, b) {
 		this.clear(a);
-		this.each(b, i => {
-			a.push(i);
-		});
+		this.each(b, i => a.push(i));
 
 		return a;
 	}
