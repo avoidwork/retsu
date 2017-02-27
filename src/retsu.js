@@ -265,8 +265,8 @@ class Retsu {
 	}
 
 	iterate (obj, fn) {
-		let itr = this.iterator(obj),
-			i = -1,
+		const itr = this.iterator(obj);
+		let i = -1,
 			item, next;
 
 		do {
@@ -278,8 +278,8 @@ class Retsu {
 	}
 
 	iterator (obj) {
-		let nth = obj.length,
-			i = -1;
+		const nth = obj.length;
+		let i = -1;
 
 		return {
 			next () {
@@ -289,14 +289,10 @@ class Retsu {
 	}
 
 	keepIf (obj, fn) {
-		let result, remove;
+		const result = obj.filter(fn),
+			remove = this.diff(obj, result);
 
-		result = obj.filter(fn);
-		remove = this.diff(obj, result);
-
-		this.each(remove, i => {
-			this.remove(obj, this.index(obj, i));
-		});
+		this.each(remove, i => this.remove(obj, this.index(obj, i)));
 
 		return obj;
 	}

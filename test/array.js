@@ -1,4 +1,4 @@
-var retsu     = require("../lib/retsu.js"),
+var retsu     = require("../index.js"),
     arr       = [{abc: 123124, xyz: 5}, {abc: 123124, xyz: 6}, {abc: 2, xyz: 5}],
     arrNested = [{data:{abc: 123124, xyz: 5}}, {data:{abc: 123124, xyz: 6}}, {data:{abc: 2, xyz: 5}}];
 
