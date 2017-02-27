@@ -229,6 +229,13 @@ class Retsu {
 		return result;
 	}
 
+	initializeCopy (a, b) {
+		a.length = 0;
+		a.splice(0, 0, b.slice(0, b.length - 1));
+
+		return a;
+	}
+
 	insert (obj, idx, ...args) {
 		const start = idx >= 0 ? idx : obj.length + idx;
 
