@@ -90,10 +90,42 @@
 			return obj.map(fn);
 		}
 
-		combination (obj/*, n*/) {
-			// @todo implement
+		combination (obj, n) {
+			const result = [],
+				seen = {},
+				nth = obj.length;
 
-			return obj;
+			if (n === 0) {
+				result.push([]);
+			} else if (n < nth) {
+				this.each(obj, (i, idx) => {
+					this.each(obj, (b, bdx) => {
+						const o = [i];
+
+						let inspected;
+
+						if (idx !== bdx) {
+							o.push(b);
+						}
+
+						if (o.length === n) {
+							o.sort(this.sort);
+							inspected = this.inspect(o);
+
+							if (!seen[inspected]) {
+								seen[inspected] = 1;
+								result.push(o);
+							}
+
+							return false;
+						}
+
+						return undefined;
+					});
+				});
+			}
+
+			return result;
 		}
 
 		compact (obj, diff = false) {
