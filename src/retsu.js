@@ -1,6 +1,6 @@
 	class Retsu {
 		constructor () {
-			this.version = "{{VERSION}}";
+			this.version = "3.0.0";
 		}
 
 		add (obj, arg) {
@@ -58,9 +58,10 @@
 		}
 
 		chunk (obj, size) {
-			let result = [],
-				nth = Math.ceil(obj.length / size),
-				start = 0,
+			const result = [],
+				nth = Math.ceil(obj.length / size);
+
+			let start = 0,
 				i = -1;
 
 			while (++i < nth) {
@@ -78,7 +79,7 @@
 		}
 
 		clone (obj) {
-			return JSON.parse(JSON.stringify(obj, null, 0));
+			return JSON.parse(this.inspect(obj));
 		}
 
 		contains (obj, arg) {
@@ -87,6 +88,12 @@
 
 		collect (obj, fn) {
 			return obj.map(fn);
+		}
+
+		combination (obj/*, n*/) {
+			// @todo implement
+
+			return obj;
 		}
 
 		compact (obj, diff = false) {
@@ -141,6 +148,12 @@
 			return obj;
 		}
 
+		dropWhile (obj/*, fn*/) {
+			// @todo implement
+
+			return obj;
+		}
+
 		each (obj, fn, ctx = obj) {
 			const nth = obj.length;
 			let i = -1;
@@ -159,7 +172,7 @@
 		}
 
 		equal (a, b) {
-			return JSON.stringify(a, null, 0) === JSON.stringify(b, null, 0);
+			return this.inspect(a) === this.inspect(b);
 		}
 
 		fetch (obj, idx, value) {
@@ -247,6 +260,10 @@
 			return obj;
 		}
 
+		inspect (obj) {
+			return JSON.stringify(obj, null, 0);
+		}
+
 		intersect (obj1, obj2) {
 			let a, b;
 
@@ -258,17 +275,12 @@
 				b = obj1;
 			}
 
-			return a.filter(key => {
-				return this.contains(b, key);
-			});
-		}
-
-		isEmpty (obj) {
-			return obj.length === 0;
+			return a.filter(i => this.contains(b, i));
 		}
 
 		iterate (obj, fn) {
 			const itr = this.iterator(obj);
+
 			let i = -1,
 				item, next;
 
@@ -282,6 +294,7 @@
 
 		iterator (obj) {
 			const nth = obj.length;
+
 			let i = -1;
 
 			return {
@@ -352,9 +365,7 @@
 		}
 
 		merge (a, b) {
-			this.each(b, i => {
-				this.add(a, i);
-			});
+			this.each(b, i => this.add(a, i));
 
 			return a;
 		}
@@ -364,9 +375,7 @@
 		}
 
 		mingle (a, b) {
-			return a.map((i, idx) => {
-				return [i, b[idx]];
-			});
+			return a.map((i, idx) => [i, b[idx]]);
 		}
 
 		mode (obj) {
@@ -399,6 +408,20 @@
 
 			if (nth > 0) {
 				result = nth === 1 ? mode[0] : this.sorted(mode);
+			}
+
+			return result;
+		}
+
+		permutation (obj, n = obj.length) {
+			let result;
+
+			if (n === 0) {
+				result = [[]];
+			} else if (n > obj.length) {
+				result = [];
+			} else {
+				void 0; // @todo implement
 			}
 
 			return result;
@@ -569,10 +592,11 @@
 		}
 
 		split (obj, divisor) {
-			let result = [],
+			const result = [],
 				total = obj.length,
-				nth = Math.ceil(total / divisor),
-				low = Math.floor(total / divisor),
+				low = Math.floor(total / divisor);
+
+			let nth = Math.ceil(total / divisor),
 				lower = Math.ceil(total / nth),
 				lowered = false,
 				start = 0,
@@ -609,9 +633,7 @@
 			let result = 0;
 
 			if (obj.length > 0) {
-				result = obj.reduce((a, b) => {
-					return a + b;
-				}, 0);
+				result = obj.reduce((a, b) => a + b, 0);
 			}
 
 			return result;
@@ -622,12 +644,11 @@
 		}
 
 		toObject (ar) {
-			let obj = {},
-				i = ar.length;
+			const obj = {};
 
-			while (i--) {
-				obj[i.toString()] = ar[i];
-			}
+			this.each(ar, (i, idx) => {
+				obj[idx.toString()] = i;
+			});
 
 			return obj;
 		}
@@ -635,9 +656,7 @@
 		unique (obj) {
 			let result = [];
 
-			this.each(obj, i => {
-				this.add(result, i);
-			});
+			this.each(obj, i => this.add(result, i));
 
 			return result;
 		}
@@ -650,7 +669,7 @@
 			if (nth > 0) {
 				mean = this.mean(obj);
 
-				this.each(obj, function (i) {
+				this.each(obj, i => {
 					n += Math.pow(i - mean, 2);
 				});
 
@@ -666,7 +685,7 @@
 			let result = [];
 
 			this.each(args, (i, idx) => {
-				if (!(i instanceof Array)) {
+				if (!i instanceof Array) {
 					args[idx] = [i];
 				}
 			});
@@ -674,10 +693,7 @@
 			// Building result Array
 			this.each(obj, (i, idx) => {
 				result[idx] = [i];
-
-				this.each(args, x => {
-					result[idx].push(x[ idx] || null);
-				});
+				this.each(args, x => result[idx].push(x[ idx] || null));
 			});
 
 			return result;
