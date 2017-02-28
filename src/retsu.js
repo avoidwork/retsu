@@ -97,7 +97,7 @@
 
 			if (n === 0) {
 				result.push([]);
-			} else if (n <= nth) {
+			} else if (n < nth) {
 				this.each(obj, (i, idx) => {
 					this.each(obj, (b, bdx) => {
 						const o = [i];
@@ -119,6 +119,8 @@
 						}
 					});
 				});
+			} else if (n === nth) {
+				result.push(obj);
 			}
 
 			return result;
