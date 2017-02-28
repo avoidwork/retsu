@@ -1,7 +1,27 @@
-module.exports = function (grunt) {
+module.exports = function(grunt) {
 	grunt.initConfig({
 		pkg : grunt.file.readJSON("package.json"),
-		babel: {
+		concat: {
+			options : {
+				banner : "/**\n" +
+				" * <%= pkg.name %>\n" +
+				" *\n" +
+				" * @copyright <%= grunt.template.today('yyyy') %> <%= pkg.author %>\n" +
+				" * @license <%= pkg.license %>\n" +
+				" * @version <%= pkg.version %>\n" +
+				" */\n"
+			},
+			dist: {
+				src : [
+					"<banner>",
+					"src/intro.js",
+					"src/retsu.js",
+					"src/outro.js"
+				],
+				dest : "lib/<%= pkg.name %>.es6.js"
+			}
+		},
+		"babel": {
 			options: {
 				sourceMap: false,
 				presets: ["babel-preset-es2015"]
@@ -13,46 +33,32 @@ module.exports = function (grunt) {
 			}
 		},
 		eslint: {
-			target: ["lib/*.es6.js"]
-		},
-		concat : {
-			options : {
-				banner : "/**\n" +
-				         " * <%= pkg.description %>\n" +
-				         " *\n" +
-				         " * @copyright <%= grunt.template.today('yyyy') %> <%= pkg.author %>\n" +
-				         " * @license <%= pkg.license %>\n" +
-				         " * @link <%= pkg.homepage %>\n" +
-				         " * @version <%= pkg.version %>\n" +
-				         " */\n"
-			},
-			dist : {
-				src : [
-					"src/intro.js",
-					"src/retsu.js",
-					"src/outro.js"
-				],
-				dest : "lib/<%= pkg.name %>.es6.js"
-			}
+			target: ["lib/<%= pkg.name %>.es6.js"]
 		},
 		nodeunit : {
 			all : ["test/*.js"]
 		},
-		sed : {
-			version : {
-				pattern : "{{VERSION}}",
-				replacement : "<%= pkg.version %>",
-				path : ["<%= concat.dist.dest %>"]
+		"string-replace": {
+			dist: {
+				files: {
+					"lib/": "lib/<%= pkg.name %>.es6.js"
+				},
+				options: {
+					replacements: [{
+						pattern: /\{\{VERSION}}/,
+						replacement: "<%= pkg.version %>"
+					}]
+				}
 			}
 		},
 		uglify: {
 			options: {
-				banner: '/* <%= grunt.template.today("yyyy") %> <%= pkg.author %> */\n',
+				banner : "/*\n" +
+				" <%= grunt.template.today('yyyy') %> <%= pkg.author.name %>\n" +
+				" @version <%= pkg.version %>\n" +
+				" */",
 				sourceMap: true,
-				sourceMapIncludeSources: true,
-				mangle: {
-					except: ["Retsu", "retsu", "define", "export"]
-				}
+				sourceMapIncludeSources: true
 			},
 			target: {
 				files: {
@@ -63,26 +69,26 @@ module.exports = function (grunt) {
 		watch : {
 			js : {
 				files : "<%= concat.dist.src %>",
-				tasks : "default"
+				tasks : "build"
 			},
 			pkg: {
 				files : "package.json",
-				tasks : "default"
+				tasks : "build"
 			}
 		}
 	});
 
 	// tasks
-	grunt.loadNpmTasks("grunt-sed");
 	grunt.loadNpmTasks("grunt-contrib-concat");
 	grunt.loadNpmTasks("grunt-contrib-nodeunit");
-	grunt.loadNpmTasks("grunt-contrib-watch");
+	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks("grunt-contrib-uglify");
 	grunt.loadNpmTasks("grunt-babel");
 	grunt.loadNpmTasks("grunt-eslint");
+	grunt.loadNpmTasks("grunt-string-replace");
 
 	// aliases
 	grunt.registerTask("test", ["eslint", "nodeunit"]);
-	grunt.registerTask("build", ["concat", "sed", "eslint"]);
-	grunt.registerTask("default", ["build", "babel", "nodeunit", "uglify"]);
+	grunt.registerTask("build", ["concat", "string-replace", "babel"]);
+	grunt.registerTask("default", ["build", "test", "uglify"]);
 };
