@@ -1,9 +1,9 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 	grunt.initConfig({
-		pkg : grunt.file.readJSON("package.json"),
+		pkg: grunt.file.readJSON("package.json"),
 		concat: {
-			options : {
-				banner : "/**\n" +
+			options: {
+				banner: "/**\n" +
 				" * <%= pkg.name %>\n" +
 				" *\n" +
 				" * @copyright <%= grunt.template.today('yyyy') %> <%= pkg.author %>\n" +
@@ -12,13 +12,13 @@ module.exports = function(grunt) {
 				" */\n"
 			},
 			dist: {
-				src : [
+				src: [
 					"<banner>",
 					"src/intro.js",
 					"src/retsu.js",
 					"src/outro.js"
 				],
-				dest : "lib/<%= pkg.name %>.es6.js"
+				dest: "lib/<%= pkg.name %>.es6.js"
 			}
 		},
 		"babel": {
@@ -33,10 +33,13 @@ module.exports = function(grunt) {
 			}
 		},
 		eslint: {
-			target: ["lib/<%= pkg.name %>.es6.js"]
+			target: [
+				"Gruntfile.js",
+				"lib/<%= pkg.name %>.es6.js"
+			]
 		},
-		nodeunit : {
-			all : ["test/*.js"]
+		nodeunit: {
+			all: ["test/*.js"]
 		},
 		"string-replace": {
 			dist: {
@@ -53,7 +56,7 @@ module.exports = function(grunt) {
 		},
 		uglify: {
 			options: {
-				banner : "/*\n" +
+				banner: "/*\n" +
 				" <%= grunt.template.today('yyyy') %> <%= pkg.author.name %>\n" +
 				" @version <%= pkg.version %>\n" +
 				" */",
@@ -62,18 +65,18 @@ module.exports = function(grunt) {
 			},
 			target: {
 				files: {
-					"lib/<%= pkg.name %>.min.js" : ["lib/<%= pkg.name %>.js"]
+					"lib/<%= pkg.name %>.min.js": ["lib/<%= pkg.name %>.js"]
 				}
 			}
 		},
-		watch : {
-			js : {
-				files : "<%= concat.dist.src %>",
-				tasks : "build"
+		watch: {
+			js: {
+				files: "<%= concat.dist.src %>",
+				tasks: "build"
 			},
 			pkg: {
-				files : "package.json",
-				tasks : "build"
+				files: "package.json",
+				tasks: "build"
 			}
 		}
 	});
@@ -81,7 +84,7 @@ module.exports = function(grunt) {
 	// tasks
 	grunt.loadNpmTasks("grunt-contrib-concat");
 	grunt.loadNpmTasks("grunt-contrib-nodeunit");
-	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks("grunt-contrib-watch");
 	grunt.loadNpmTasks("grunt-contrib-uglify");
 	grunt.loadNpmTasks("grunt-babel");
 	grunt.loadNpmTasks("grunt-eslint");
