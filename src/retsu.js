@@ -98,13 +98,15 @@
 				result.push([]);
 			} else if (n < nth) {
 				this.each(obj, (i, idx) => {
-					let x = 0;
+					let x = -1;
 
 					const o = [i];
 
-					while (++x <= n) {
-						if (x > idx) {
-							o.push(obj[x]);
+					if (n > 1) {
+						while (++x < n) {
+							if (x > idx) {
+								o.push(obj[x]);
+							}
 						}
 					}
 
