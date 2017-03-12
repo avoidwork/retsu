@@ -320,16 +320,13 @@
 			return obj;
 		}
 
-		iterator (obj) {
+		* iterator (obj) {
 			const nth = obj.length;
-
 			let i = -1;
 
-			return {
-				next () {
-					return ++i < nth ? {done: false, value: obj[i]} : {done: true};
-				}
-			};
+			while (++i < nth) {
+				yield obj[i];
+			}
 		}
 
 		keepIf (obj, fn) {
