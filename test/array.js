@@ -1,14 +1,4 @@
-var retsu     = require("../index.js"),
-    arr       = [{abc: 123124, xyz: 5}, {abc: 123124, xyz: 6}, {abc: 2, xyz: 5}],
-    arrNested = [{data:{abc: 123124, xyz: 5}}, {data:{abc: 123124, xyz: 6}}, {data:{abc: 2, xyz: 5}}];
-
-function odd ( arg ) {
-	return arg % 2 !== 0;
-}
-
-function even ( arg ) {
-	return !odd( arg );
-}
+const retsu = require("../index.js");
 
 exports["add"] = {
 	setUp: function (done) {
@@ -30,11 +20,11 @@ exports["binIndex"] = {
 	},
 	test: function (test) {
 		test.expect(6);
-		test.equal(retsu.binIndex(this.val, 0),  0, "Should be 0");
-		test.equal(retsu.binIndex(this.val, 1),  1, "Should be 1");
-		test.equal(retsu.binIndex(this.val, 2),  2, "Should be 2");
-		test.equal(retsu.binIndex(this.val, 3),  3, "Should be 3");
-		test.equal(retsu.binIndex(this.val, 4),  4, "Should be 4");
+		test.equal(retsu.binIndex(this.val, 0), 0, "Should be 0");
+		test.equal(retsu.binIndex(this.val, 1), 1, "Should be 1");
+		test.equal(retsu.binIndex(this.val, 2), 2, "Should be 2");
+		test.equal(retsu.binIndex(this.val, 3), 3, "Should be 3");
+		test.equal(retsu.binIndex(this.val, 4), 4, "Should be 4");
 		test.equal(retsu.binIndex(this.val, 5), -1, "Should be -1");
 		test.done();
 	}
@@ -86,7 +76,7 @@ exports["clear"] = {
 
 exports["clone"] = {
 	setUp: function (done) {
-		this.val   = [true, false];
+		this.val = [true, false];
 		this.clone = undefined;
 		done();
 	},
@@ -97,19 +87,6 @@ exports["clone"] = {
 		test.equal(this.clone = retsu.clone(this.val), this.clone, "Should be a clone");
 		test.equal(this.clone.push(true), 3, "Should be 3");
 		test.equal(this.val.length, 2, "Should be 2");
-		test.done();
-	}
-};
-
-exports["collect"] = {
-	setUp: function (done) {
-		this.val = [0, 1, 2];
-		this.fn  = function (i) { return i + "!"; };
-		done();
-	},
-	test: function (test) {
-		test.expect(1);
-		test.equal(retsu.collect(this.val, this.fn)[0], "0!", "Should be '0!'");
 		test.done();
 	}
 };
@@ -158,11 +135,11 @@ exports["each"] = {
 		done();
 	},
 	test: function (test) {
-		var result = [];
+		let result = [];
 
 		retsu.each(this.val, function (i, idx) {
-			result.push( {value: i, index: idx} );
-		} );
+			result.push({value: i, index: idx});
+		});
 
 		test.expect(4);
 		test.equal(result[0].value, "abc", "Should be 'abc'");
@@ -183,7 +160,7 @@ exports["equal"] = {
 	test: function (test) {
 		test.expect(2);
 		test.equal(retsu.equal(this.a, this.b), true, "Should be 'true'");
-		test.equal(retsu.equal(this.a, this.c), false,  "Should be 'false'");
+		test.equal(retsu.equal(this.a, this.c), false, "Should be 'false'");
 		test.done();
 	}
 };
@@ -202,52 +179,14 @@ exports["fill"] = {
 	}
 };
 
-exports["first"] = {
-	setUp: function (done) {
-		this.val = ["abc"];
-		done();
-	},
-	test: function (test) {
-		test.expect(1);
-		test.equal(retsu.first(this.val), "abc", "Should be 'abc'");
-		test.done();
-	}
-};
-
 exports["flatten"] = {
 	setUp: function (done) {
-		this.val = [1,[2,3,[4,5,6]]];
+		this.val = [1, [2, 3, [4, 5, 6]]];
 		done();
 	},
 	test: function (test) {
 		test.expect(1);
 		test.equal(retsu.flatten(this.val).length, 6, "Should be an retsu of 6 indices");
-		test.done();
-	}
-};
-
-exports["fromObject"] = {
-	setUp: function (done) {
-		this.val = {abc: true, xyz: false};
-		done();
-	},
-	direct: function (test) {
-		test.expect(2);
-		test.equal(retsu.fromObject(this.val).length, 2, "Should be an retsu of 2 indices");
-		test.equal(retsu.fromObject(this.val)[0].length, 2, "Should be an retsu of 2 indices");
-		test.done();
-	}
-};
-
-exports["index"] = {
-	setUp: function (done) {
-		this.val = ["abc", "xyz"];
-		done();
-	},
-	test: function (test) {
-		test.expect(2);
-		test.equal(retsu.index(this.val, "abc"), 0, "Should be 0");
-		test.equal(retsu.index(this.val, "xyz"), 1, "Should be 1");
 		test.done();
 	}
 };
@@ -261,19 +200,6 @@ exports["intersect"] = {
 	test: function (test) {
 		test.expect(1);
 		test.equal(retsu.intersect(this.a1, this.a2).length, 1, "Should be 1 match");
-		test.done();
-	}
-};
-
-exports["keepIf"] = {
-	setUp: function (done) {
-		this.val = [0, 1, 2, 3, 4];
-		this.fn  = function (i) { return odd(i); };
-		done();
-	},
-	test: function (test) {
-		test.expect(1);
-		test.equal(retsu.keepIf(this.val, this.fn).length, 2, "Should be '2'");
 		test.done();
 	}
 };
@@ -321,7 +247,7 @@ exports["max"] = {
 
 exports["mean"] = {
 	setUp: function (done) {
-		this.val     = [1, 3, 5];
+		this.val = [1, 3, 5];
 		this.invalid = [];
 		done();
 	},
@@ -336,7 +262,7 @@ exports["mean"] = {
 exports["median"] = {
 	setUp: function (done) {
 		this.even = [5, 1, 3, 8];
-		this.odd  = [5, 1, 3];
+		this.odd = [5, 1, 3];
 		done();
 	},
 	test: function (test) {
@@ -377,7 +303,7 @@ exports["min"] = {
 
 exports["mingle"] = {
 	setUp: function (done) {
-		this.val    = [["a", "b", "c", "d"], [0, 1, 2, 3]];
+		this.val = [["a", "b", "c", "d"], [0, 1, 2, 3]];
 		this.result = [["a", 0], ["b", 1], ["c", 2], ["d", 3]];
 		done();
 	},
@@ -391,8 +317,8 @@ exports["mingle"] = {
 exports["mode"] = {
 	setUp: function (done) {
 		this.single = [1, 3, 7, 1, 2, 10, 7, 7, 3, 10];
-		this.many   = [1, 3, 7, 1, 2, 10, 7, 7, 3, 10, 10];
-		this.none   = [];
+		this.many = [1, 3, 7, 1, 2, 10, 7, 7, 3, 10, 10];
+		this.none = [];
 		done();
 	},
 	test: function (test) {
@@ -416,78 +342,6 @@ exports["range"] = {
 	}
 };
 
-exports["rassoc"] = {
-	setUp: function (done) {
-		this.val = [[1, 3], [7, 2]];
-		this.a   = 3;
-		this.b   = 2;
-		this.c   = 1;
-		this.d   = undefined;
-		done();
-	},
-	test: function (test) {
-		test.expect(3);
-		test.equal(retsu.rassoc(this.val, this.a)[1], this.a, "Should be '" + this.a + "'");
-		test.equal(retsu.rassoc(this.val, this.b)[1], this.b, "Should be '" + this.b + "'");
-		test.equal(retsu.rassoc(this.val, this.c), this.d, "Should be '" + this.d + "'");
-		test.done();
-	}
-};
-
-exports["reject"] = {
-	setUp: function (done) {
-		this.val = [0, 1, 2, 3, 4];
-		this.fn  = function (i) { return even(i); };
-		done();
-	},
-	test: function (test) {
-		test.expect(1);
-		test.equal(retsu.reject(this.val, this.fn).length, 2, "Should be '2'");
-		test.done();
-	}
-};
-
-exports["remove"] = {
-	setUp: function (done) {
-		this.val = ["abc", "xyz"];
-		done();
-	},
-	test: function (test) {
-		test.expect(4);
-		test.equal(retsu.remove(this.val.slice(), 0).length, 1, "Should be 1");
-		test.equal(retsu.remove(this.val.slice(), 1).length, 1, "Should be 1");
-		test.equal(retsu.remove(this.val.slice(), "abc").length, 1, "Should be 'xyz'");
-		test.equal(retsu.remove(this.val.slice(), "xyz").length, 1, "Should be 'abc'");
-		test.done();
-	}
-};
-
-exports["removeIf"] = {
-	setUp: function (done) {
-		this.val = [0, 1, 2, 3, 4];
-		this.fn  = function (i) { return even(i); };
-		done();
-	},
-	test: function (test) {
-		test.expect(1);
-		test.equal(retsu.removeIf(this.val, this.fn).length, 2, "Should be '2'");
-		test.done();
-	}
-};
-
-exports["removeWhile"] = {
-	setUp: function (done) {
-		this.val = [0, 1, 2, 3, 4];
-		this.fn  = function (i) { return i < 3; };
-		done();
-	},
-	test: function (test) {
-		test.expect(1);
-		test.equal(retsu.removeWhile(this.val, this.fn).length, 2, "Should be '2'");
-		test.done();
-	}
-};
-
 exports["replace"] = {
 	setUp: function (done) {
 		this.a = ["abc", "xyz"];
@@ -497,47 +351,6 @@ exports["replace"] = {
 	test: function (test) {
 		test.expect(1);
 		test.equal(retsu.replace(this.a.slice(), this.b).length, 3, "Should be 3");
-		test.done();
-	}
-};
-
-exports["rest"] = {
-	setUp: function (done) {
-		this.val = [0, 1, 2];
-		done();
-	},
-	test: function (test) {
-		test.expect(2);
-		test.equal(retsu.rest(this.val).length, 2, "Should be 2");
-		test.equal(retsu.rest(this.val, 2).length, 1, "Should be 1");
-		test.done();
-	}
-};
-
-exports["rindex"] = {
-	setUp: function (done) {
-		this.val = [0, 1, 1, 1, 2];
-		this.a   = 1;
-		this.b   = 3;
-		done();
-	},
-	test: function (test) {
-		test.expect(2);
-		test.equal(retsu.rindex(this.val, this.a), 3, "Should be '3'");
-		test.equal(retsu.rindex(this.val, this.b), -1, "Should be '-1'");
-		test.done();
-	}
-};
-
-exports["rotate"] = {
-	setUp: function (done) {
-		this.val = [0, 1, 2, 3, 4];
-		done();
-	},
-	test: function (test) {
-		test.expect(2);
-		test.equal(retsu.rotate(this.val, 3)[0], 2, "Should be '2'");
-		test.equal(retsu.rotate(this.val, -2)[0], 3, "Should be '3'");
 		test.done();
 	}
 };
@@ -556,36 +369,36 @@ exports["series"] = {
 	}
 };
 
-exports["split"] = {
+exports["spread"] = {
 	setUp: function (done) {
 		this.lower = 21;
 		this.upper = 100;
 		done();
 	},
 	lower: function (test) {
-		var i      = -1,
-		    ar     = [],
-		    result = this.lower - 1;
+		let i = -1,
+			ar = [],
+			result = this.lower - 1;
 
 		while (++i < this.lower) ar.push(i);
 
 		test.expect(3);
-		test.equal(retsu.split(ar, 3).length, 3, "Should be '3'");
-		test.equal(retsu.split(ar, 3)[0].length, 7, "Should be '7'");
-		test.equal(retsu.last(retsu.last(retsu.split(ar, 3))), result, "Should be '" + result + "'");
+		test.equal(retsu.spread(ar, 3).length, 3, "Should be '3'");
+		test.equal(retsu.spread(ar, 3)[0].length, 7, "Should be '7'");
+		test.equal(retsu.last(retsu.last(retsu.spread(ar, 3))), result, "Should be '" + result + "'");
 		test.done();
 	},
 	upper: function (test) {
-		var i      = -1,
-		    ar     = [],
-		    result = this.upper - 1;
+		let i = -1,
+			ar = [],
+			result = this.upper - 1;
 
 		while (++i < this.upper) ar.push(i);
 
 		test.expect(3);
-		test.equal(retsu.split(ar, 43).length, 43, "Should be '43'");
-		test.equal(retsu.split(ar, 43)[0].length, 3, "Should be '3'");
-		test.equal(retsu.last(retsu.last(retsu.split(ar, 43))), result, "Should be '" + result + "'");
+		test.equal(retsu.spread(ar, 43).length, 43, "Should be '43'");
+		test.equal(retsu.spread(ar, 43)[0].length, 3, "Should be '3'");
+		test.equal(retsu.last(retsu.last(retsu.spread(ar, 43))), result, "Should be '" + result + "'");
 		test.done();
 	}
 };
@@ -630,32 +443,6 @@ exports["stddev"] = {
 	}
 };
 
-exports["take"] = {
-	setUp: function (done) {
-		this.val = [0, 1, 2, 3, 4];
-		done();
-	},
-	test: function (test) {
-		test.expect(2);
-		test.equal(retsu.take(this.val, 1)[0], 0, "Should be '0'");
-		test.equal(retsu.take(this.val, 3).length, 3, "Should be '3'");
-		test.done();
-	}
-};
-
-exports["toObject"] = {
-	setUp: function (done) {
-		this.val = ["abc", "xyz", "A", "d", 123];
-		done();
-	},
-	test: function (test) {
-		test.expect(2);
-		test.equal(retsu.toObject(this.val) instanceof Object, true, "Should be true");
-		test.equal(this.val["0"], "abc", "Should be 'abc'");
-		test.done();
-	}
-};
-
 exports["unique"] = {
 	setUp: function (done) {
 		this.val = [0, 1, 1, 2, 2, 3];
@@ -668,30 +455,3 @@ exports["unique"] = {
 	}
 };
 
-exports["variance"] = {
-	setUp: function (done) {
-		this.val = [1, 3, 5];
-		done();
-	},
-	test: function (test) {
-		test.expect(1);
-		test.equal(retsu.variance(this.val), 2.6666666666666665, "Should be '2.6666666666666665'");
-		test.done();
-	}
- };
-
-exports["zip"] = {
-	setUp: function (done) {
-		this.val = [0, 1];
-		this.a   = 1;
-		done();
-	},
-	test: function (test) {
-		test.expect(4);
-		test.equal(retsu.zip(this.val, this.a).length, 2, "Should be 2");
-		test.equal(retsu.zip(this.val, this.a)[0].length, 2, "Should be 2");
-		test.equal(retsu.zip(this.val, this.a)[1].length, 2, "Should be 2");
-		test.equal(retsu.zip(this.val, this.a)[1][1], null, "Should be null");
-		test.done();
-	}
-};

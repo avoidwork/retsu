@@ -1,6 +1,6 @@
 	class Retsu {
 		constructor () {
-			this.version = "{{version}}";
+			this.version = "{{VERSION}}";
 		}
 
 		add (obj, arg) {
