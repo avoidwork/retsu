@@ -4,19 +4,11 @@
 		}
 
 		add (obj, arg) {
-			if (!this.contains(obj, arg)) {
+			if (obj.includes(arg) === false) {
 				obj.push(arg);
 			}
 
 			return obj;
-		}
-
-		assoc (obj, arg) {
-			return obj.filter(i => i[0] === arg)[0] || null;
-		}
-
-		at (obj, idx) {
-			return obj[idx >= 0 ? idx : obj.length + idx];
 		}
 
 		binIndex (obj, arg) {
@@ -60,7 +52,6 @@
 		chunk (obj, size) {
 			const result = [],
 				nth = Math.ceil(obj.length / size);
-
 			let start = 0,
 				i = -1;
 
@@ -79,15 +70,7 @@
 		}
 
 		clone (obj) {
-			return JSON.parse(this.inspect(obj));
-		}
-
-		contains (obj, arg) {
-			return obj.indexOf(arg) > -1;
-		}
-
-		collect (obj, fn) {
-			return obj.map(fn);
+			return JSON.parse(JSON.stringify(obj));
 		}
 
 		combination (obj, n) {
@@ -103,7 +86,6 @@
 					let sub;
 
 					if (n > 1) {
-						//console.log(obj.slice(idx, nth));
 						sub = obj.slice(idx, nth);
 						this.each(sub, x => {
 							o.push(x);
@@ -134,65 +116,12 @@
 			return obj.filter(i => i === value).length;
 		}
 
-		cycle (obj, count = 0, fn) {
-			let i = 0;
-
-			if (obj.length > 0 && count > 0) {
-				while (++i <= count) {
-					this.each(obj, fn);
-				}
-			}
-		}
-
-		delete (obj, value) {
-			return this.removeIf(obj, i => i === value);
-		}
-
-		deleteAt (obj, idx) {
-			return obj.splice(idx, 1)[0] || null;
-		}
-
-		deleteIf (obj, fn) {
-			return this.removeIf(obj, fn);
-		}
-
 		diff (a, b) {
-			return a.filter(i => !this.contains(b, i)).concat(b.filter(i => !this.contains(a, i)));
-		}
-
-		dig (obj, ...steps) {
-			let result;
-
-			this.each(steps, (x, idx) => {
-				result = idx === 0 ? obj[x] : result[x];
-			});
-
-			return result;
-		}
-
-		drop (obj, start = 1) {
-			obj.splice(0, start > 0 ? start : obj.length + start);
-
-			return obj;
-		}
-
-		dropWhile (obj/*, fn*/) {
-			// @todo implement
-
-			return obj;
+			return a.filter(i => b.includes(i) === false).concat(b.filter(i => a.includes(i) === false));
 		}
 
 		each (obj, fn, ctx = obj) {
-			const nth = obj.length;
-			let i = -1;
-
-			while (++i < nth) {
-				if (fn.call(ctx, obj[i], i) === false) {
-					break;
-				}
-			}
-
-			return obj;
+			return this.iterate(obj, fn, ctx);
 		}
 
 		empty (obj) {
@@ -200,16 +129,11 @@
 		}
 
 		equal (a, b) {
-			return this.inspect(a) === this.inspect(b);
-		}
-
-		fetch (obj, idx, value) {
-			return obj[idx] || value;
+			return JSON.stringify(a) === JSON.stringify(b);
 		}
 
 		fill (obj, arg, start, offset) {
 			const l = obj.length;
-
 			let i = !isNaN(start) ? start : 0,
 				nth = !isNaN(offset) ? i + offset : l - 1;
 
@@ -232,52 +156,8 @@
 			return obj;
 		}
 
-		first (obj, n = 1) {
-			return obj.slice(0, n);
-		}
-
 		flatten (obj) {
-			return obj.reduce((a, b) => a.concat(b instanceof Array ? this.flatten(b) : b), []);
-		}
-
-		forEach (obj, fn, ctx = fn) {
-			return this.each(obj, fn, ctx);
-		}
-
-		fromObject (obj) {
-			return this.mingle(Object.keys(obj), this.cast(obj));
-		}
-
-		frozen (obj) {
-			return Object.isFrozen(obj);
-		}
-
-		index (obj, arg) {
-			let result;
-
-			if (typeof arg === "function") {
-				this.each(obj, (i, idx) => {
-					let output;
-
-					if (arg(i) === true) {
-						result = idx;
-						output = false;
-					}
-
-					return output;
-				});
-			} else {
-				result = obj.indexOf(arg);
-			}
-
-			return result;
-		}
-
-		initializeCopy (a, b) {
-			a.length = 0;
-			this.each(b, i => a.push(i));
-
-			return a;
+			return obj.reduce((a, b) => a.concat(Array.isArray(b) ? this.flatten(b) : b), []);
 		}
 
 		insert (obj, idx, ...args) {
@@ -286,10 +166,6 @@
 			obj.splice(start, 0, ...args);
 
 			return obj;
-		}
-
-		inspect (obj) {
-			return JSON.stringify(obj, null, 0);
 		}
 
 		intersect (obj1, obj2) {
@@ -303,10 +179,10 @@
 				b = obj1;
 			}
 
-			return a.filter(i => this.contains(b, i));
+			return a.filter(i => b.includes(i));
 		}
 
-		iterate (obj, fn) {
+		iterate (obj, fn, ctx = obj) {
 			const itr = this.iterator(obj);
 
 			let i = -1,
@@ -314,7 +190,7 @@
 
 			do {
 				item = itr.next();
-				next = !item.done ? fn(item.value, ++i) : false;
+				next = !item.done ? fn.call(ctx, item.value, ++i) : false;
 			} while (next !== false);
 
 			return obj;
@@ -329,18 +205,9 @@
 			}
 		}
 
-		keepIf (obj, fn) {
-			const result = obj.filter(fn),
-				remove = this.diff(obj, result);
-
-			this.each(remove, i => this.remove(obj, this.index(obj, i)));
-
-			return obj;
-		}
-
 		last (obj, arg) {
-			let n = obj.length - 1,
-				larg = arg,
+			const n = obj.length - 1;
+			let larg = arg,
 				result;
 
 			if (larg >= n + 1) {
@@ -422,7 +289,7 @@
 			count = this.max(this.cast(values));
 
 			// Finding values that match the count
-			Object.keys(values).forEach(k => {
+			this.each(Object.keys(values), k => {
 				if (values[k] === count) {
 					mode.push(Number(k));
 				}
@@ -438,43 +305,8 @@
 			return result;
 		}
 
-		permutation (obj, n = obj.length) {
-			let result;
-
-			if (n === 0) {
-				result = [[]];
-			} else if (n > obj.length) {
-				result = [];
-			} else {
-				void 0; // @todo implement
-			}
-
-			return result;
-		}
-
 		range (obj) {
 			return this.max(obj) - this.min(obj);
-		}
-
-		rassoc (obj, arg) {
-			let result;
-
-			this.each(obj, i => {
-				let output;
-
-				if (i[1] === arg) {
-					result = this.clone(i);
-					output = false;
-				}
-
-				return output;
-			});
-
-			return result;
-		}
-
-		reject (obj, fn) {
-			return this.diff(obj, obj.filter(fn));
 		}
 
 		remove (obj, start, end) {
@@ -498,89 +330,15 @@
 			return obj;
 		}
 
-		removeIf (obj, fn) {
-			let remove = obj.filter(fn);
-
-			this.each(remove, i => this.remove(obj, this.index(obj, i)));
-
-			return obj;
-		}
-
-		removeWhile (obj, fn) {
-			let remove = [];
-
-			this.iterate(obj, i => {
-				let result;
-
-				if (fn(i) !== false) {
-					remove.push(i);
-				} else {
-					result = false;
-				}
-
-				return result;
-			});
-
-			this.iterate(remove, i => this.remove(obj, this.index(obj, i)));
-
-			return obj;
-		}
-
 		replace (a, b) {
 			this.clear(a);
 			this.each(b, i => a.push(i));
 
 			return a;
 		}
-
-		rest (obj, arg = 1) {
-			if (arg < 1) {
-				arg = 1;
-			}
-
-			return this.limit(obj, arg, obj.length);
-		}
-
-		rindex (obj, arg) {
-			let result = -1;
-
-			this.each(obj, (i, idx) => {
-				if (i === arg) {
-					result = idx;
-				}
-			});
-
-			return result;
-		}
-
-		rotate (obj, arg) {
-			let nth = obj.length,
-				result;
-
-			if (arg === 0) {
-				result = obj;
-			} else {
-				if (arg < 0) {
-					arg += nth;
-				} else {
-					arg--;
-				}
-
-				result = this.limit(obj, arg, nth).concat(this.limit(obj, 0, arg));
-			}
-
-			return result;
-		}
-
-		sample (obj/*, n*/) {
-			// @todo implement
-
-			return obj;
-		}
-
 		series (start = 0, end = start, offset = 1) {
-			let result = [],
-				n = -1,
+			const result = [];
+			let n = -1,
 				lstart = start,
 				nth = Math.max(0, Math.ceil((end - start) / offset));
 
@@ -618,11 +376,13 @@
 			return result;
 		}
 
-		sorted (obj) {
-			return obj.sort(this.sort);
+		sorted (obj, clone = false) {
+			let o = clone ? this.clone(obj) : obj;
+
+			return o.sort(this.sort);
 		}
 
-		split (obj, divisor) {
+		spread (obj, divisor) {
 			const result = [],
 				total = obj.length,
 				low = Math.floor(total / divisor);
@@ -661,52 +421,16 @@
 		}
 
 		sum (obj) {
-			let result = 0;
-
-			if (obj.length > 0) {
-				result = obj.reduce((a, b) => a + b, 0);
-			}
-
-			return result;
-		}
-
-		take (obj, n) {
-			return this.limit(obj, 0, n);
-		}
-
-		toObject (ar) {
-			const obj = {};
-
-			this.each(ar, (i, idx) => {
-				obj[idx.toString()] = i;
-			});
-
-			return obj;
-		}
-
-		transpose (obj) {
-			// @todo implement
-
-			return obj;
+			return obj.length > 0 ? obj.reduce((a, b) => a + b, 0) : 0;
 		}
 
 		unique (obj) {
-			let result = [];
-
-			this.each(obj, i => this.add(result, i));
-
-			return result;
-		}
-
-		valuesAt (obj/*, ...args*/) {
-			// @implement
-
-			return obj;
+			return Array.from(new Set(obj));
 		}
 
 		variance (obj) {
-			let nth = obj.length,
-				n = 0,
+			const nth = obj.length;
+			let n = 0,
 				mean, result;
 
 			if (nth > 0) {
@@ -720,24 +444,6 @@
 			} else {
 				result = n;
 			}
-
-			return result;
-		}
-
-		zip (obj, ...args) {
-			let result = [];
-
-			this.each(args, (i, idx) => {
-				if (!i instanceof Array) {
-					args[idx] = [i];
-				}
-			});
-
-			// Building result Array
-			this.each(obj, (i, idx) => {
-				result[idx] = [i];
-				this.each(args, x => result[idx].push(x[ idx] || null));
-			});
 
 			return result;
 		}
