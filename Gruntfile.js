@@ -16,6 +16,7 @@ module.exports = function (grunt) {
 					"<banner>",
 					"src/intro.js",
 					"src/retsu.js",
+					"src/factory.js",
 					"src/outro.js"
 				],
 				dest: "lib/<%= pkg.name %>.js"
