@@ -1,3 +1,5 @@
-var path = require("path");
+"use strict";
 
-module.exports = require(path.join(__dirname, "lib", Number(process.version.replace("v", "").split(".")[0]) >= 6 ? "retsu.es6" : "retsu"));
+const path = require("path");
+
+module.exports = require(path.join(__dirname, "lib", "retsu.js"));
