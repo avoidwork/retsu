@@ -62,38 +62,6 @@
 			return obj;
 		},
 		clone: obj => JSON.parse(JSON.stringify(obj)),
-		combination: (obj, n) => {
-			const result = [],
-				nth = obj.length;
-
-			if (n === 0) {
-				result.push([]);
-			} else if (n < nth) {
-				retsu.each(obj, (i, idx) => {
-					const o = [];
-
-					let sub;
-
-					if (n > 1) {
-						sub = obj.slice(idx, nth);
-						retsu.each(sub, x => {
-							o.push(x);
-
-							if (o.length === n) {
-								result.push(retsu.clone(o));
-								o.pop();
-							}
-						});
-					} else {
-						result.push([retsu.clone(i)]);
-					}
-				});
-			} else if (n === nth) {
-				result.push(retsu.clone(obj));
-			}
-
-			return result;
-		},
 		compact: (obj, diff = false) => {
 			const result = obj.filter(i => i !== null && i !== undefined);
 
@@ -128,13 +96,6 @@
 			return obj;
 		},
 		flatten: obj => obj.reduce((a, b) => a.concat(Array.isArray(b) ? retsu.flatten(b) : b), []),
-		insert: (obj, idx, ...args) => {
-			const start = idx >= 0 ? idx : obj.length + idx;
-
-			obj.splice(start, 0, ...args);
-
-			return obj;
-		},
 		intersect: (obj1, obj2) => {
 			let a, b;
 
