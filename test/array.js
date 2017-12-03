@@ -1,6 +1,6 @@
 const retsu = require("../index.js");
 
-exports["add"] = {
+exports.add = {
 	setUp: function (done) {
 		this.val = [0];
 		done();
@@ -13,7 +13,7 @@ exports["add"] = {
 	}
 };
 
-exports["binIndex"] = {
+exports.binIndex = {
 	setUp: function (done) {
 		this.val = [0, 1, 2, 3, 4];
 		done();
@@ -30,7 +30,7 @@ exports["binIndex"] = {
 	}
 };
 
-exports["cast"] = {
+exports.cast = {
 	setUp: function (done) {
 		this.val = {abc: true, xyz: false};
 		done();
@@ -49,7 +49,7 @@ exports["cast"] = {
 	}
 };
 
-exports["chunk"] = {
+exports.chunk = {
 	setUp: function (done) {
 		this.val = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 		done();
@@ -62,7 +62,7 @@ exports["chunk"] = {
 	}
 };
 
-exports["clear"] = {
+exports.clear = {
 	setUp: function (done) {
 		this.val = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 		done();
@@ -74,7 +74,7 @@ exports["clear"] = {
 	}
 };
 
-exports["clone"] = {
+exports.clone = {
 	setUp: function (done) {
 		this.val = [true, false];
 		this.clone = undefined;
@@ -91,7 +91,7 @@ exports["clone"] = {
 	}
 };
 
-exports["compact"] = {
+exports.compact = {
 	setUp: function (done) {
 		this.val = [0, null, 1];
 		done();
@@ -103,7 +103,7 @@ exports["compact"] = {
 	}
 };
 
-exports["count"] = {
+exports.count = {
 	setUp: function (done) {
 		this.val = [1, 3, 1, 3, 3];
 		done();
@@ -116,7 +116,7 @@ exports["count"] = {
 	}
 };
 
-exports["diff"] = {
+exports.diff = {
 	setUp: function (done) {
 		this.a1 = ["abc", "def"];
 		this.a2 = ["abc", "xyz"];
@@ -129,7 +129,7 @@ exports["diff"] = {
 	}
 };
 
-exports["each"] = {
+exports.each = {
 	setUp: function (done) {
 		this.val = ["abc", "def"];
 		done();
@@ -150,7 +150,7 @@ exports["each"] = {
 	}
 };
 
-exports["equal"] = {
+exports.equal = {
 	setUp: function (done) {
 		this.a = [0];
 		this.b = [0];
@@ -165,7 +165,7 @@ exports["equal"] = {
 	}
 };
 
-exports["fill"] = {
+exports.fill = {
 	setUp: function (done) {
 		this.val = ["a", "b"];
 		done();
@@ -179,7 +179,7 @@ exports["fill"] = {
 	}
 };
 
-exports["flatten"] = {
+exports.flatten = {
 	setUp: function (done) {
 		this.val = [1, [2, 3, [4, 5, 6]]];
 		done();
@@ -191,7 +191,7 @@ exports["flatten"] = {
 	}
 };
 
-exports["intersect"] = {
+exports.intersect = {
 	setUp: function (done) {
 		this.a1 = ["abc", "def"];
 		this.a2 = ["abc", "xyz"];
@@ -204,7 +204,7 @@ exports["intersect"] = {
 	}
 };
 
-exports["last"] = {
+exports.last = {
 	setUp: function (done) {
 		this.val = ["abc", "xyz", "def"];
 		done();
@@ -219,7 +219,7 @@ exports["last"] = {
 	}
 };
 
-exports["limit"] = {
+exports.limit = {
 	setUp: function (done) {
 		this.val = ["a", "b", "c", "d", "e"];
 		done();
@@ -233,7 +233,7 @@ exports["limit"] = {
 	}
 };
 
-exports["max"] = {
+exports.max = {
 	setUp: function (done) {
 		this.val = [1, 3, 7, 2, 10];
 		done();
@@ -245,7 +245,7 @@ exports["max"] = {
 	}
 };
 
-exports["mean"] = {
+exports.mean = {
 	setUp: function (done) {
 		this.val = [1, 3, 5];
 		this.invalid = [];
@@ -259,7 +259,7 @@ exports["mean"] = {
 	}
 };
 
-exports["median"] = {
+exports.median = {
 	setUp: function (done) {
 		this.even = [5, 1, 3, 8];
 		this.odd = [5, 1, 3];
@@ -273,7 +273,7 @@ exports["median"] = {
 	}
 };
 
-exports["merge"] = {
+exports.merge = {
 	setUp: function (done) {
 		this.a = [];
 		this.b = [];
@@ -289,7 +289,7 @@ exports["merge"] = {
 	}
 };
 
-exports["min"] = {
+exports.min = {
 	setUp: function (done) {
 		this.val = [1, 3, 7, 2, 10];
 		done();
@@ -301,7 +301,7 @@ exports["min"] = {
 	}
 };
 
-exports["mingle"] = {
+exports.mingle = {
 	setUp: function (done) {
 		this.val = [["a", "b", "c", "d"], [0, 1, 2, 3]];
 		this.result = [["a", 0], ["b", 1], ["c", 2], ["d", 3]];
@@ -314,7 +314,7 @@ exports["mingle"] = {
 	}
 };
 
-exports["mode"] = {
+exports.mode = {
 	setUp: function (done) {
 		this.single = [1, 3, 7, 1, 2, 10, 7, 7, 3, 10];
 		this.many = [1, 3, 7, 1, 2, 10, 7, 7, 3, 10, 10];
@@ -330,7 +330,7 @@ exports["mode"] = {
 	}
 };
 
-exports["range"] = {
+exports.range = {
 	setUp: function (done) {
 		this.val = [5, 1, 3, 8];
 		done();
@@ -342,7 +342,7 @@ exports["range"] = {
 	}
 };
 
-exports["replace"] = {
+exports.replace = {
 	setUp: function (done) {
 		this.a = ["abc", "xyz"];
 		this.b = [0, 1, 2];
@@ -355,7 +355,7 @@ exports["replace"] = {
 	}
 };
 
-exports["series"] = {
+exports.series = {
 	setUp: function (done) {
 		done();
 	},
@@ -369,7 +369,7 @@ exports["series"] = {
 	}
 };
 
-exports["spread"] = {
+exports.spread = {
 	setUp: function (done) {
 		this.lower = 21;
 		this.upper = 100;
@@ -403,7 +403,7 @@ exports["spread"] = {
 	}
 };
 
-exports["sort"] = {
+exports.sort = {
 	setUp: function (done) {
 		this.val = ["abc", "xyz", "A", "d", 123];
 		done();
@@ -419,7 +419,7 @@ exports["sort"] = {
 	}
 };
 
-exports["sum"] = {
+exports.sum = {
 	setUp: function (done) {
 		this.val = [1, 3, 5];
 		done();
@@ -431,7 +431,7 @@ exports["sum"] = {
 	}
 };
 
-exports["stddev"] = {
+exports.stddev = {
 	setUp: function (done) {
 		this.val = [1, 3, 5];
 		done();
@@ -443,7 +443,7 @@ exports["stddev"] = {
 	}
 };
 
-exports["unique"] = {
+exports.unique = {
 	setUp: function (done) {
 		this.val = [0, 1, 1, 2, 2, 3];
 		done();
