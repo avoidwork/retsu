@@ -69,7 +69,17 @@
 		},
 		count: (obj, value) => obj.filter(i => i === value).length,
 		diff: (a, b) => a.filter(i => b.includes(i) === false).concat(b.filter(i => a.includes(i) === false)),
-		each: (obj, fn, ctx = obj) => retsu.iterate(obj, fn, ctx),
+		each: (obj, fn, ctx = obj) => {
+			for (const item of obj.entries()) {
+				const result = fn.call(ctx, item[1], item[0]);
+
+				if (result === false) {
+					break;
+				}
+			}
+
+			return obj;
+		},
 		empty: obj => obj.length === 0,
 		equal: (a, b) => JSON.stringify(a) === JSON.stringify(b),
 		fill: (obj, arg, start, offset) => {

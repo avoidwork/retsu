@@ -150,6 +150,34 @@ exports.each = {
 	}
 };
 
+exports.eachHalt = {
+	setUp: function (done) {
+		this.val = ["abc", "def"];
+		done();
+	},
+	test: function (test) {
+		let result = [];
+
+		retsu.each(this.val, function (i, idx) {
+			let cont;
+
+			result.push({value: i, index: idx});
+
+			if (idx === 0) {
+				cont = false;
+			}
+
+			return cont;
+		});
+
+		test.expect(3);
+		test.equal(result.length, 1, "Should be '1'");
+		test.equal(result[0].value, "abc", "Should be 'abc'");
+		test.equal(result[0].index, 0, "Should be '0'");
+		test.done();
+	}
+};
+
 exports.equal = {
 	setUp: function (done) {
 		this.a = [0];
